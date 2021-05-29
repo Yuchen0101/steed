@@ -10,14 +10,12 @@ const TabsScreen = () => (
   <Tabs.Navigator
     tabBarOptions={{ 
       showLabel: false, 
-      inactiveTintColor: AppStyles.color.steedWhte,
-      activeTintColor: AppStyles.color.steedGreen,
-      inactiveBackgroundColor: AppStyles.color.steedBlue,
-      activeBackgroundColor: AppStyles.color.steedDarkBlue,
+      activeTintColor:AppStyles.color.steedWhite,
       style: {
-        backgroundColor: AppStyles.color.steedDarkBlue,
+        backgroundColor: AppStyles.color.steedBlue,
         position: 'absolute',
         borderTopWidth: 0,
+        shadowOpacity: 0.3,
       }
      }
     }

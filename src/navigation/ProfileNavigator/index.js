@@ -13,7 +13,7 @@ const ProfileStackScreen = () => (
         <MaterialCommunityIcons
           name="home"
           color={AppStyles.color.steedGreen}
-          size="30px"
+          size={30}
         />
       ),
       headerTitleAlign: "center",
