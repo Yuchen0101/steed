@@ -6,36 +6,10 @@ import SignUp from "../../screens/SignUp";
 import Hello from "../../screens/Hello";
 import Notification from "../../screens/Notification";
 import AppStyles from "../../AppStyles";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import Auth from "@aws-amplify/auth";
-import Loading from '../../components/Loading';
-
 
 const AuthStack = createStackNavigator();
 
-const AuthStackScreen = ({navigation}) => {
-  const [loading, setLoading] = useState(false)
-  useEffect(() => {
-    setLoading(true)
-    const key = async () => {
-      try {
-        const credentials = await AsyncStorage.getItem("auth")
-        if (credentials) {
-          const {username, password} = credentials;
-          const user = await Auth.signIn(username, password)
-          setLoading(false);
-          user && navigation.push("TabsScreen")
-        }
-      } catch (err) {
-        console.log('error', err);
-      } finally{
-        setLoading(false);
-      }
-    };
-    key();
-  }, []); // eslint-disable-line
-
-  if(loading) return <Loading/>
+const AuthStackScreen = () => {
   return (
     <AuthStack.Navigator
       screenOptions={{
@@ -51,11 +25,11 @@ const AuthStackScreen = ({navigation}) => {
         headerTintColor: AppStyles.color.steedGreen,
       }}
     >
-      {/* <AuthStack.Screen
+      <AuthStack.Screen
         name="Hello"
         component={Hello}
         options={{ headerShown: false }}
-      /> */}
+      />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="Notification" component={Notification} />

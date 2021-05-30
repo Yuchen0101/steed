@@ -1,11 +1,13 @@
 import React from "react";
-import {Text} from "react-native";
+import { Button } from "react-native";
 import ScreenContainer from "../../components/ScreenContainer";
+import { AuthContext } from "../../context";
 
-export default ({ navigation }) => {
+export default () => {
+  const { signOut } = React.useContext(AuthContext);
   return (
     <ScreenContainer>
-      <Text>Game</Text>
+      <Button title="logout" onPress={()=>signOut()}></Button>
     </ScreenContainer>
   );
 };
