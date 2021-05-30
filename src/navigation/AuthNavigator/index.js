@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { createStackNavigator } from "@react-navigation/stack";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import SignIn from "../../screens/SignIn";
@@ -25,6 +25,7 @@ const AuthStackScreen = () => {
         headerTransparent: true,
         headerTintColor: AppStyles.color.steedGreen,
       }}
+      initialRouteName="SignUp"
     >
       <AuthStack.Screen
         name="Hello"
