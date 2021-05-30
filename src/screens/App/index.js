@@ -39,8 +39,15 @@ export default () => {
       },
       buttonStyle: {
         borderColor: AppStyles.color.steedGreen,
+        borderRadius: 10
       },
     },
+    Text:{
+      style:{
+        color:  AppStyles.color.steedLigthGrey,
+        textAlign:"center"
+      }
+    }
   };
 
   const [isLoading, setIsLoading] = React.useState(true);
