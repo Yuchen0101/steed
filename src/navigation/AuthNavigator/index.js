@@ -20,6 +20,7 @@ const AuthStackScreen = () => {
             size={30}
           />
         ),
+        headerBackTitle:"Back",
         headerTitleAlign: "center",
         headerTransparent: true,
         headerTintColor: AppStyles.color.steedGreen,

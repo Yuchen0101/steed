@@ -15,8 +15,6 @@ Amplify.configure({
   userPoolWebClientId: "3rc1perp9ida931u347nt1tjcu",
 });
 
-
-
 const RootStack = createStackNavigator();
 const RootStackScreen = ({ user }) => (
   <RootStack.Navigator headerMode="none">
@@ -39,15 +37,15 @@ export default () => {
       },
       buttonStyle: {
         borderColor: AppStyles.color.steedGreen,
-        borderRadius: 10
+        borderRadius: 10,
       },
     },
-    Text:{
-      style:{
-        color:  AppStyles.color.steedLigthGrey,
-        textAlign:"center"
-      }
-    }
+    Text: {
+      style: {
+        color: AppStyles.color.steedLigthGrey,
+        textAlign: "center",
+      },
+    },
   };
 
   const [isLoading, setIsLoading] = React.useState(true);
@@ -61,6 +59,11 @@ export default () => {
           return user;
         }),
       signOut: () =>
+        Auth.signOut().then((data) => {
+          setUser(null);
+          return data;
+        }),
+      signUp: () =>
         Auth.signOut().then((data) => {
           setUser(null);
           return data;
