@@ -1,11 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import AppStyles from "../../AppStyles";
 import Notification from "../../screens/Notification";
 import SettingList from "../../screens/SettingList";
 import Profile from "../../screens/Profile";
 import Interest from "../../screens/Interest";
+import Logo from "../../components/Logo";
 
 const SettingStack = createStackNavigator();
 
@@ -13,13 +12,7 @@ const SettingStackScreen = () => (
   <SettingStack.Navigator
     initialRouteName="SettingList"
     screenOptions={{
-      headerTitle: () => (
-        <MaterialCommunityIcons
-          name="home"
-          color={AppStyles.color.steedGreen}
-          size={30}
-        />
-      ),
+      headerTitle: () => <Logo />,
       headerBackTitle: "Back",
       headerTitleAlign: "center",
     }}

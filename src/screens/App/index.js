@@ -8,7 +8,7 @@ import { ThemeProvider } from "react-native-elements";
 import AppStyles from "../../AppStyles";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../context";
-import AsyncStorage from "@react-native-async-storage/async-storage";
+
 
 Amplify.configure({
   region: "ap-southeast-2",
@@ -19,11 +19,12 @@ Amplify.configure({
 const RootStack = createStackNavigator();
 const RootStackScreen = ({ user }) => (
   <RootStack.Navigator headerMode="none">
-    {user ? (
+    {/* {user ? (
       <RootStack.Screen name="TabsScreen" component={TabsScreen} />
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
-    )}
+    )} */}
+    <RootStack.Screen name="TabsScreen" component={TabsScreen} />
   </RootStack.Navigator>
 );
 

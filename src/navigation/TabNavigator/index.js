@@ -31,7 +31,7 @@ const TabsScreen = () => {
         borderTopWidth: 0,
         shadowOpacity: 0.3,
       }}
-      initialRouteName="SettingStackScreen"
+      initialRouteName="DashboardStackScreen"
     >
       <Tabs.Screen
         name="GameStackScreen"

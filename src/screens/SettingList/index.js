@@ -12,7 +12,7 @@ export default ({ navigation }) => {
         "Manage your profile picture, personal details, privacy and account information",
       icon: "person-outline",
       color: AppStyles.color.steedDarkBlue,
-      route:"Profile"
+      route: "Profile",
     },
     {
       title: "Interests",
@@ -20,14 +20,14 @@ export default ({ navigation }) => {
         "Update your interests across the 17 UN sustainable development goals",
       icon: "favorite-border",
       color: AppStyles.color.steedBlue,
-      route:"Interest"
+      route: "Interest",
     },
     {
       title: "Notification",
       subtitle: "Manage your notification",
       icon: "notifications-none",
       color: AppStyles.color.steedDarkGrey,
-      route:"Notification"
+      route: "Notification",
     },
   ];
 
@@ -35,7 +35,7 @@ export default ({ navigation }) => {
     <ScreenContainer
       style={{ alignItems: "stretch", justifyContent: "flex-start" }}
     >
-      <View style={{ marginTop: 30}}>
+      <View style={{ marginTop: 30 }}>
         {list.map((item, i) => (
           <ListItem
             key={i}
@@ -43,7 +43,7 @@ export default ({ navigation }) => {
               backgroundColor: item.color,
               height: 150,
             }}
-            onPress={()=>navigation.push(item.route)}
+            onPress={() => navigation.push(item.route)}
           >
             <Icon
               name={item.icon}
@@ -56,12 +56,18 @@ export default ({ navigation }) => {
                   fontSize: 20,
                   fontWeight: "bold",
                   color: AppStyles.color.steedWhite,
-                  marginBottom:10
+                  marginBottom: 10,
                 }}
               >
                 {item.title}
               </ListItem.Title>
-              <ListItem.Subtitle style={{ textAlign: "left", fontSize: 15 ,color: AppStyles.color.steedWhite}}>
+              <ListItem.Subtitle
+                style={{
+                  textAlign: "left",
+                  fontSize: 15,
+                  color: AppStyles.color.steedWhite,
+                }}
+              >
                 {item.subtitle}
               </ListItem.Subtitle>
             </ListItem.Content>

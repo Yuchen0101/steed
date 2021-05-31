@@ -1,25 +1,19 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import AppStyles from "../../AppStyles";
+import Logo from "../../components/Logo";
 import Profile from "../../screens/Profile";
+import Dashboard from "../../screens/Dashboard";
 
 const DashboardStack = createStackNavigator();
 
 const DashboardStackScreen = () => (
   <DashboardStack.Navigator
     screenOptions={{
-      headerTitle: () => (
-        <MaterialCommunityIcons
-          name="home"
-          color={AppStyles.color.steedGreen}
-          size={30}
-        />
-      ),
+      headerTitle: () => <Logo />,
       headerTitleAlign: "center",
     }}
   >
-    <DashboardStack.Screen name="Profile" component={Profile} />
+    <DashboardStack.Screen name="Profile" component={Dashboard} />
   </DashboardStack.Navigator>
 );
 
