@@ -4,14 +4,14 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import SignIn from "../../screens/SignIn";
 import SignUp from "../../screens/SignUp";
 import Hello from "../../screens/Hello";
-import Notification from "../../screens/Notification";
 import AppStyles from "../../AppStyles";
+import { View } from 'react-native';
 
 const AuthStack = createStackNavigator();
 
 const AuthStackScreen = () => {
   return (
-    <AuthStack.Navigator
+      <AuthStack.Navigator
       screenOptions={{
         headerTitle: () => (
           <MaterialCommunityIcons
@@ -22,10 +22,7 @@ const AuthStackScreen = () => {
         ),
         headerBackTitle:"Back",
         headerTitleAlign: "center",
-        headerTransparent: true,
-        headerTintColor: AppStyles.color.steedGreen,
       }}
-      initialRouteName="SignUp"
     >
       <AuthStack.Screen
         name="Hello"
@@ -34,8 +31,7 @@ const AuthStackScreen = () => {
       />
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
-      <AuthStack.Screen name="Notification" component={Notification} />
-    </AuthStack.Navigator>
+    </AuthStack.Navigator>    
   );
 };
 

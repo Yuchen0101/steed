@@ -6,7 +6,7 @@ export default ({ navigation }) => {
 
   return (
     <ScreenContainer>
-      <Text>Notification</Text>
+      <Text>notification list</Text>
     </ScreenContainer>
   );
 };

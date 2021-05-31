@@ -18,8 +18,6 @@ const GameStackScreen = () => (
         />
       ),
       headerTitleAlign: "center",
-      headerTransparent: true,
-      headerTintColor: AppStyles.color.steedGreen,
     }}
   >
     <GameStack.Screen name="Game" component={Game} />

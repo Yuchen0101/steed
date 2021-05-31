@@ -4,10 +4,10 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import AppStyles from "../../AppStyles";
 import Profile from "../../screens/Profile";
 
-const ProfileStack = createStackNavigator();
+const DashboardStack = createStackNavigator();
 
-const ProfileStackScreen = () => (
-  <ProfileStack.Navigator
+const DashboardStackScreen = () => (
+  <DashboardStack.Navigator
     screenOptions={{
       headerTitle: () => (
         <MaterialCommunityIcons
@@ -17,12 +17,10 @@ const ProfileStackScreen = () => (
         />
       ),
       headerTitleAlign: "center",
-      headerTransparent: true,
-      headerTintColor: AppStyles.color.steedGreen,
     }}
   >
-    <ProfileStack.Screen name="Profile" component={Profile} />
-  </ProfileStack.Navigator>
+    <DashboardStack.Screen name="Profile" component={Profile} />
+  </DashboardStack.Navigator>
 );
 
-export default ProfileStackScreen;
+export default DashboardStackScreen;

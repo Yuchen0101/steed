@@ -5,7 +5,7 @@ import App from "./src/screens/App";
 export default () =>  {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle="light-content" />
       <App/>
     </>
   );

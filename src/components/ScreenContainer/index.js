@@ -1,18 +1,19 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-import AppStyles from "../../AppStyles";
+import { StyleSheet, SafeAreaView, ScrollView } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
+    // justifyContent: "center",
     alignItems: "center",
-    backgroundColor:AppStyles.color.steedDarkBlue
-  }
+    marginTop:30
+  },
 });
 
-const ScreenContainer = ({ children }) => (
-  <View style={styles.container}>{children}</View>
+const ScreenContainer = ({ children, style }) => (
+  <SafeAreaView style={{ ...styles.container, ...style }}>
+  {children}
+  </SafeAreaView>
 );
 
-export default ScreenContainer
+export default ScreenContainer;

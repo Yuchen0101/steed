@@ -1,6 +1,6 @@
 import React from "react";
 import Amplify, { Auth } from "aws-amplify";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import AuthStackScreen from "../../navigation/AuthNavigator";
 import TabsScreen from "../../navigation/TabNavigator";
@@ -8,6 +8,7 @@ import { ThemeProvider } from "react-native-elements";
 import AppStyles from "../../AppStyles";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 Amplify.configure({
   region: "ap-southeast-2",
@@ -74,7 +75,7 @@ export default () => {
   React.useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then((user) => {
-        setUser(user);
+        setUser({ user });
       })
       .catch(() => {
         setUser(null);
@@ -89,7 +90,16 @@ export default () => {
   return (
     <AuthContext.Provider value={authContext}>
       <ThemeProvider theme={theme}>
-        <NavigationContainer>
+        <NavigationContainer
+          theme={{
+            ...DarkTheme,
+            colors: {
+              background: AppStyles.color.steedDarkBlue,
+              text: AppStyles.color.steedGreen,
+              primary: AppStyles.color.steedGreen,
+            },
+          }}
+        >
           <RootStackScreen user={user} />
         </NavigationContainer>
       </ThemeProvider>

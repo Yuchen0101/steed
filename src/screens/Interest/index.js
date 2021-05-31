@@ -6,7 +6,7 @@ export default ({ navigation }) => {
 
   return (
     <ScreenContainer>
-      <Text>Interest</Text>
+      <Text>Interests</Text>
     </ScreenContainer>
   );
 };
