@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <ScrollView>
-      <View style={{ marginTop: 30 }}>
+      <View style={{ marginTop: 10 }}>
         {list.map((item, i) => (
           <ListItem
             key={i}

@@ -4,6 +4,8 @@ import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 import PersonalBadge from "./PersonalBadge";
 import PersonalMonthScore from "./PersonalMonthScore";
+import PersonalPoint from "./PersonalPoint";
+import PersonalImpact from "./PersonalImpact";
 
 const IconButton = ({ iconName, buttontitle }) => (
   <View style={{ height: 40 }}>
@@ -13,10 +15,10 @@ const IconButton = ({ iconName, buttontitle }) => (
 );
 
 const renderPersonal = (idx) => {
-  if (idx == 0) {
-    return <PersonalMonthScore />;
-  }
+  if (idx == 0) return <PersonalMonthScore />;
+  if (idx == 1) return <PersonalPoint />;
   if (idx == 2) return <PersonalBadge />;
+  if (idx == 3) return <PersonalImpact/>
 };
 
 export default () => {
@@ -79,9 +81,7 @@ export default () => {
         }}
         textStyle={{ color: AppStyles.color.steedGreen }}
       />
-      <View>
-        {renderPersonal(selectedIndex)}
-      </View>
+      <View>{renderPersonal(selectedIndex)}</View>
     </View>
   );
 };

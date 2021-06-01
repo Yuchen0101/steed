@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native-elements";
-import { View } from "react-native";
+import { ScrollView, View } from "react-native";
 import AppStyles from "../../AppStyles";
 
 const ScoreCard = ({ title, context }) => {
@@ -56,30 +56,32 @@ export default () => {
     },
   ]);
   return (
-    <View
-      style={{
-        backgroundColor: AppStyles.color.steedBlue,
-        margin: 10,
-        padding: 15,
-        paddingTop: 30,
-        paddingBottom: 30,
-        borderRadius: 10,
-        marginTop: 20,
-      }}
-    >
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        {monthScores.map((item, idx) => (
-          <ScoreCard key={idx} title={item.title} context={item.context} />
-        ))}
+    <ScrollView>
+      <View
+        style={{
+          backgroundColor: AppStyles.color.steedBlue,
+          margin: 5,
+          padding: 15,
+          paddingTop: 30,
+          paddingBottom: 30,
+          borderRadius: 10,
+          marginTop: 10,
+        }}
+      >
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          {monthScores.map((item, idx) => (
+            <ScoreCard key={idx} title={item.title} context={item.context} />
+          ))}
+        </View>
+        <Text style={{ marginTop: 30, marginBottom: 10, fontStyle: "italic" }}>
+          All Time
+        </Text>
+        <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          {monthScores.map((item, idx) => (
+            <ScoreCard key={idx} title={item.title} context={item.context} />
+          ))}
+        </View>
       </View>
-      <Text style={{ marginTop: 30, marginBottom: 10, fontStyle: "italic" }}>
-        All Time
-      </Text>
-      <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-        {monthScores.map((item, idx) => (
-          <ScoreCard key={idx} title={item.title} context={item.context} />
-        ))}
-      </View>
-    </View>
+    </ScrollView>
   );
 };
