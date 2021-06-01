@@ -97,10 +97,16 @@ export default () => {
             textDecorationLine: "underline",
           }}
         />
+        <View style={{ width: Dimensions.get("window").width - 30, marginBottom:10}}>
+        <Text style={{textAlign:"left"}}>
+        You will be given your accuracy result immediately and a consolidated score and leader board positioning on where you stand based on your past predictions.
+        </Text>
+        </View>
+
+
       </View>
       <View
         style={{
-          backgroundColor: AppStyles.color.steedBlue,
           marginVertical: 10,
           paddingVertical: 10,
           borderRadius: 20,
