@@ -4,8 +4,9 @@ import { Text, ButtonGroup } from "react-native-elements";
 import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 import Personal from "./Personal";
+import LeaderBoard from "./LeaderBoard";
 export default () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
   const buttons = ["Personal", "Leader Board"];
   return (
     <ScreenContainer>
@@ -33,7 +34,8 @@ export default () => {
         }}
         textStyle={{color:AppStyles.color.steedGreen}}
       />
-      <Personal/>
+      {selectedIndex==0?<Personal/>:<LeaderBoard/>}
+
     </ScreenContainer>
   );
 };

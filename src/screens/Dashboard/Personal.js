@@ -22,7 +22,7 @@ const renderPersonal = (idx) => {
 };
 
 export default () => {
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const component1 = () => (
     <IconButton buttontitle="Month" iconName="insights" />
