@@ -48,6 +48,9 @@ export default () => {
         textAlign: "center",
       },
     },
+    Icon:{
+      color: AppStyles.color.steedWhite
+    }
   };
 
   const [isLoading, setIsLoading] = React.useState(true);
