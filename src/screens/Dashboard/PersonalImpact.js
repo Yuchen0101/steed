@@ -24,19 +24,12 @@ const ScoreItem = ({ value, title }) => (
   </View>
 );
 
-export default () => {
-  const impact = {
-    house: 47,
-    townhouse: 9,
-    unit: 13,
-  };
-
+export default ({impact}) => {
   return (
     <ScrollView>
       <View
         style={{
           backgroundColor: AppStyles.color.steedBlue,
-          marginVertical: 10,
           paddingVertical: 10,
           borderRadius: 20,
         }}

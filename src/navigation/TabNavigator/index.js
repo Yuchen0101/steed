@@ -30,6 +30,7 @@ const TabsScreen = () => {
         position: "absolute",
         borderTopWidth: 0,
         shadowOpacity: 0.3,
+        height:60
       }}
       initialRouteName="GameStackScreen"
     >

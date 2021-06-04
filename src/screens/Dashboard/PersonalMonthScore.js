@@ -40,32 +40,46 @@ const ScoreCard = ({ title, context }) => {
   );
 };
 
-export default () => {
-  const [monthScores, setMonthScores] = React.useState([
+export default ({currentMonth, allTime}) => {
+  const monthScores = [
     {
-      title: "12,000",
+      title: currentMonth.points,
       context: "Total Points Earned",
     },
     {
-      title: "9th",
+      title: `${currentMonth.leadboard_position}th`,
       context: "Leader Board Position",
     },
     {
-      title: "91.4%",
+      title: `${currentMonth.accuracy * 100}%`,
       context: "Average Accuracy",
     },
-  ]);
+  ];
+
+  const allTimeScores= [
+    {
+      title: allTime.points,
+      context: "Total Points Earned",
+    },
+    {
+      title: `${allTime.leadboard_position}th`,
+      context: "Leader Board Position",
+    },
+    {
+      title: `${allTime.accuracy * 100}%`,
+      context: "Average Accuracy",
+    },
+  ];
+
   return (
     <ScrollView>
       <View
         style={{
           backgroundColor: AppStyles.color.steedBlue,
-          margin: 5,
           padding: 15,
           paddingTop: 30,
           paddingBottom: 30,
           borderRadius: 10,
-          marginTop: 10,
         }}
       >
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -77,7 +91,7 @@ export default () => {
           All Time
         </Text>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
-          {monthScores.map((item, idx) => (
+          {allTimeScores.map((item, idx) => (
             <ScoreCard key={idx} title={item.title} context={item.context} />
           ))}
         </View>

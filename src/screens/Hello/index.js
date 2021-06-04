@@ -4,6 +4,7 @@ import Carousel from "react-native-snap-carousel";
 import { Icon, Text, Button } from "react-native-elements";
 import AppStyles from "../../AppStyles";
 import ScreenContainer from "../../components/ScreenContainer";
+import Logo from "../../components/Logo";
 
 const CustomCarousel = () => {
   const exampleItems = [
@@ -73,21 +74,9 @@ const CustomCarousel = () => {
 };
 
 export default ({ navigation }) => {
-  // const instructions = [
-  //   "We create the challenges: The Steed Punt app creates challenges for you to participate in",
-  //   "You predict the sale price: You answer by predicting the last sold prices. \
-  //   The properties will be recently sold. Every challenge you pick will have a clock you play against. Submit your punt and get instant results",
-  //   "You get Rewarded: You will be given your result immediately with a consolidated score and leaderboard position vs other players. Earn mor points to win prizes.",
-  // ];
 
   return (
     <ScreenContainer>
-      <Icon
-        name="sc-telegram"
-        type="evilicon"
-        color={AppStyles.color.steedGreen}
-        size={100}
-      />
       <Text h3 style={{ marginTop: 10 }}>
         Welcome to Steed Punt
       </Text>

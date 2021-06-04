@@ -24,6 +24,7 @@ const RootStackScreen = ({ user }) => (
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
     )} */}
+     {/* <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} /> */}
     <RootStack.Screen name="TabsScreen" component={TabsScreen} />
   </RootStack.Navigator>
 );
@@ -60,6 +61,7 @@ export default () => {
     return {
       signIn: (username, password) =>
         Auth.signIn(username, password).then((user) => {
+          console.log(user)
           setUser(user);
           return user;
         }),

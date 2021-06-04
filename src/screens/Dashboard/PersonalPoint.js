@@ -12,17 +12,10 @@ const ScoreItem = ({ value, title }) => (
   </View>
 );
 
-export default () => {
-  const points_hist = {
-    highest_points: 509,
-    average_points: 300,
-    total_redeemed: 459,
-    hist: [345, 509, 102, 342, 230, 120, 349],
-  };
-
+export default ({points_hist}) => {
   return (
     <ScrollView>
-       <View style={{backgroundColor:AppStyles.color.steedBlue, marginVertical:10, paddingVertical:10, borderRadius:20}}>
+       <View style={{backgroundColor:AppStyles.color.steedBlue, paddingVertical:10, borderRadius:20}}>
       <BarChart
         data={{
           labels: ["M", "T", "W", "T", "F", "S", "S"],

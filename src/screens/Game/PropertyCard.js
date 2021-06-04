@@ -4,30 +4,41 @@ import { Icon, Text, Image } from "react-native-elements";
 import { Button } from "react-native-elements/dist/buttons/Button";
 import AppStyles from "../../AppStyles";
 
-export default () => {
+export default ({ property }) => {
   const propertySummary = [
     {
       icon: "king-bed",
-      text: "2",
+      text: property.bedrooms,
     },
     {
       icon: "bathtub",
-      text: "4",
+      text: property.bathrooms,
     },
     {
       icon: "directions-car",
-      text: "6",
+      text: property.carSpaces,
     },
     {
       icon: null,
-      text: "Apartment",
+      text: property.propertyType
     },
   ];
 
-  const iconNames = ["fireplace", "deck"];
+  const landSummary = [
+    {
+      icon: "crop-square",
+      title: "Land Size:",
+      text: property.bedrooms,
+    },
+    {
+      icon: "crop-square",
+      title: "Area Size:",
+      text: property.bathrooms,
+    },
+  ];
 
   return (
-    <View style={{ alignItems: "center"}}>
+    <View style={{ alignItems: "center" }}>
       <View
         style={{
           flexDirection: "row",
@@ -35,7 +46,7 @@ export default () => {
         }}
       >
         <Icon name="event" />
-        <Text>Sold on May 2020</Text>
+        <Text>{`Sold on ${property.short_sold_date}`}</Text>
       </View>
       <View
         style={{
@@ -44,17 +55,17 @@ export default () => {
       >
         <Image
           source={{
-            uri: "https://bucket-api.domain.com.au/v1/bucket/image/2016914242_1_1_210406_051501-w3901-h2600",
+            uri: property.photos[0].fullUrl,
           }}
           style={{ width: 200, height: 150 }}
           PlaceholderContent={<ActivityIndicator />}
+          containerStyle={{borderRadius:5, borderColor:AppStyles.color.steedDarkGrey, borderLeftWidth:1}}
         />
       </View>
       <View
         style={{
           flexDirection: "row",
           marginVertical: 10,
-          backgroundColor: AppStyles.color.steedWhite,
           paddingHorizontal: 5,
         }}
       >
@@ -62,7 +73,7 @@ export default () => {
           <IconWithText key={idx} icon={item.icon} text={item.text} />
         ))}
       </View>
-      <Text style={{ textAlign: "left" }}>Toorak, vic 3142</Text>
+      <Text style={{fontWeight:"600"}}>{property.short_address}</Text>
       <View
         style={{
           flexDirection: "row",
@@ -70,15 +81,15 @@ export default () => {
           paddingHorizontal: 5,
         }}
       >
-        {iconNames.map((item, key) => (
-          <Icon key={key} name={item} style={{ marginRight: 10 }} />
+        {landSummary.map((item, idx) => (
+          <IconWithText key={idx} {...item} />
         ))}
       </View>
     </View>
   );
 };
 
-const IconWithText = ({ icon, text }) => {
+const IconWithText = ({ icon, text, title }) => {
   return (
     <View
       style={{
@@ -89,11 +100,30 @@ const IconWithText = ({ icon, text }) => {
       {icon && (
         <Icon name={icon} size={18} color={AppStyles.color.steedDarkGrey} />
       )}
+      {!icon && (
+        <Text
+          style={{
+            marginRight: 6,
+          }}
+        >
+          |
+        </Text>
+      )}
+      {title && (
+        <Text
+          style={{
+            marginRight: 2,
+            color: AppStyles.color.steedDarkGrey,
+          }}
+        >
+          {title}
+        </Text>
+      )}
       <Text
         style={{
           marginLeft: 2,
-          marginRight: 10,
-          color: AppStyles.color.steedDarkGrey,
+          marginRight: 8,
+          fontWeight:"600"
         }}
       >
         {text}

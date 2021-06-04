@@ -43,6 +43,8 @@ export default ({ navigation }) => {
         title="Forgot password? Click Here"
         type="clear"
         buttonStyle={{ marginTop: 0 }}
+        titleStyle={{textDecorationLine:"underline", fontSize:15}}
+        onPress={()=>navigation.push("ForgetPassword")}
       />
 
       <Button

@@ -13,6 +13,7 @@ const ScoreItem = ({ rank, title, value }) => (
 );
 
 export default () => {
+
   const rankingMonth = [
     {
       name: "Warren HuanM",
