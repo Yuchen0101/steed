@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Input, Button, Avatar } from "react-native-elements";
+import { Input, Button, Avatar, Text } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import ScreenContainer from "../../components/ScreenContainer";
 import { AuthContext } from "../../context";
@@ -20,6 +20,7 @@ export default ({ navigation }) => {
   const [loading, setLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [image, setImage] = React.useState(null);
+  const [showConfirmMessage, setShowConfirmMessage] = React.useState(false);
 
   React.useEffect(() => {
     getImage();
@@ -79,15 +80,31 @@ export default ({ navigation }) => {
     try {
       checkUserInfo(userInfo);
     } catch (error) {
-      console.log(error);
       setErrorMessage(error.message);
+      return;
     }
 
-    console.log(userInfo);
-    navigation.push("Hello");
-    // setLoading(true);
-    // signUp(userInfo).then(navigation.push("SignIn")).catch(setErrorMessage(err.message)).finally(setLoading(false))
+    setLoading(true);
+    signUp(userInfo)
+      .then(setShowConfirmMessage(true))
+      .catch((err) => setErrorMessage(err.message))
+      .finally(setLoading(false));
   };
+
+  if (showConfirmMessage)
+    return (
+      <ScreenContainer style={{ flex: 1, justifyContent: "center" }}>
+        <Text
+          style={{
+            padding: 20,
+            fontSize: 20,
+          }}
+        >
+          A verification link has been sent to your email, please have a check
+        </Text>
+        <Button title="Go to Login" type="outline" onPress={()=>navigation.goBack()}></Button>
+      </ScreenContainer>
+    );
   return (
     <ScreenContainer>
       <Avatar

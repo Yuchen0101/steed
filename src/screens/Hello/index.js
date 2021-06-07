@@ -9,15 +9,15 @@ import Logo from "../../components/Logo";
 const CustomCarousel = () => {
   const exampleItems = [
     {
-      title: "1. we create the challenges:",
+      title: "we create the challenges",
       text: "The Steed Punt app creates challenges for you to participate in",
     },
     {
-      title: "2. You predict the sale price:",
+      title: "You predict the sale price",
       text: "You answer by predicting the last sold prices. The properties will be recently sold. Every challenge you pick will have a clock you play against. Submit your punt and get instant results",
     },
     {
-      title: "3. You get Rewarded:",
+      title: "You get Rewarded",
       text: "You will be given your result immediately with a consolidated score and leaderboard position vs other players. Earn mor points to win prizes.",
     },
   ];
@@ -33,11 +33,21 @@ const CustomCarousel = () => {
           backgroundColor: AppStyles.color.steedBlue,
           borderRadius: 15,
           height: 300,
-          padding: 40,
+          padding: 30,
           marginLeft: 25,
           marginRight: 25,
         }}
       >
+        <Text
+          h3
+          style={{
+            textAlign: "left",
+            color: AppStyles.color.steedGreen,
+            marginBottom:10
+          }}
+        >
+          {index + 1}
+        </Text>
         <Text
           h4
           style={{
@@ -74,7 +84,6 @@ const CustomCarousel = () => {
 };
 
 export default ({ navigation }) => {
-
   return (
     <ScreenContainer>
       <Text h3 style={{ marginTop: 10 }}>
@@ -106,7 +115,12 @@ export default ({ navigation }) => {
         }}
       >
         <Button
-          buttonStyle={{ width: 170, margin: 5, backgroundColor:"#d53035", color:AppStyles.color.steedWhite}}
+          buttonStyle={{
+            width: 170,
+            margin: 5,
+            backgroundColor: "#d53035",
+            color: AppStyles.color.steedWhite,
+          }}
           titleStyle={{ fontSize: 10 }}
           icon={
             <Icon
@@ -119,7 +133,11 @@ export default ({ navigation }) => {
           title="continue with Google"
         />
         <Button
-          buttonStyle={{ width: 170, margin: 5, color:AppStyles.color.steedWhite}}
+          buttonStyle={{
+            width: 170,
+            margin: 5,
+            color: AppStyles.color.steedWhite,
+          }}
           titleStyle={{ fontSize: 10 }}
           title="continue with Facebook"
           icon={
@@ -140,7 +158,7 @@ export default ({ navigation }) => {
           backgroundColor: AppStyles.color.steedBlue,
           shadowOpacity: 1,
           marginTop: 10,
-          width: 350
+          width: 350,
         }}
         titleStyle={{ color: AppStyles.color.steedLigthGrey }}
       />

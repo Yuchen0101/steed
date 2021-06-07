@@ -9,11 +9,10 @@ import AppStyles from "../../AppStyles";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../context";
 
-
 Amplify.configure({
   region: "ap-southeast-2",
-  userPoolId: "ap-southeast-2_sXiWBvAxg",
-  userPoolWebClientId: "3rc1perp9ida931u347nt1tjcu",
+  userPoolId: "ap-southeast-2_tMJyw9ZPr",
+  userPoolWebClientId: "23k2csb3d6c4u51e66nd2kus4o",
 });
 
 const RootStack = createStackNavigator();
@@ -24,7 +23,7 @@ const RootStackScreen = ({ user }) => (
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
     )} */}
-     {/* <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} /> */}
+    {/* <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} /> */}
     <RootStack.Screen name="TabsScreen" component={TabsScreen} />
   </RootStack.Navigator>
 );
@@ -49,9 +48,9 @@ export default () => {
         textAlign: "center",
       },
     },
-    Icon:{
-      color: AppStyles.color.steedWhite
-    }
+    Icon: {
+      color: AppStyles.color.steedWhite,
+    },
   };
 
   const [isLoading, setIsLoading] = React.useState(true);
@@ -61,7 +60,6 @@ export default () => {
     return {
       signIn: (username, password) =>
         Auth.signIn(username, password).then((user) => {
-          console.log(user)
           setUser(user);
           return user;
         }),
@@ -70,11 +68,15 @@ export default () => {
           setUser(null);
           return data;
         }),
-      signUp: () =>
-        Auth.signOut().then((data) => {
-          setUser(null);
-          return data;
-        }),
+      signUp: (userInfo) =>
+        Auth.signUp({
+          username: userInfo.username,
+          password: userInfo.password,
+          attributes: {
+            email: userInfo.email,
+            'custom:display_name': userInfo.displayName,
+          },
+        }).then((res) => console.log(res)),
     };
   }, []);
 

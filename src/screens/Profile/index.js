@@ -2,20 +2,17 @@ import React from "react";
 import { Input, Button, Avatar } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
 import ScreenContainer from "../../components/ScreenContainer";
-import { AuthContext } from "../../context";
 import AppStyles from "../../AppStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { ScrollView } from "react-native-gesture-handler";
 import Auth from "@aws-amplify/auth";
+import { Alert } from "react-native";
 
-export default ({ navigation }) => {
-  const { signUp } = React.useContext(AuthContext);
+export default () => {
   const [userInfo, setUserInfo] = React.useState({
     displayName: "",
     username: "",
     email: "",
   });
-  const [showPassword, setShowPassword] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
   const [image, setImage] = React.useState(null);
@@ -35,9 +32,7 @@ export default ({ navigation }) => {
   const getUser = async () => {
     const user = await Auth.currentUserInfo();
     setUserInfo({
-      displayName: user?.attributes.displayName
-        ? user?.attributes.displayName
-        : user.username,
+      displayName: user.attributes["custom:display_name"],
       username: user.username,
       email: user.attributes.email,
     });
@@ -59,6 +54,26 @@ export default ({ navigation }) => {
       AsyncStorage.setItem("profilePicUrl", result.uri);
       setImage(result.uri);
     }
+  };
+
+  const handleOnChangeText = (value, key) => {
+    setUserInfo((preState) => ({
+      ...preState,
+      [key]: value,
+    }));
+  };
+
+  const handleLoginOnPress = () => {
+    setLoading(true);
+    Auth.currentAuthenticatedUser()
+      .then((user) => {
+        return Auth.updateUserAttributes(user, {
+          'custom:display_name': userInfo.displayName,
+        });
+      })
+      .then(Alert.alert("Success","Change Saved"))
+      .catch((err) => setErrorMessage(err.message))
+      .finally(setLoading(false));
   };
 
   return (
@@ -93,16 +108,15 @@ export default ({ navigation }) => {
       <Input
         placeholder={userInfo.email}
         label="email"
-        onChangeText={(value) => handleOnChangeText(value, "email")}
         disabled
+        errorMessage={errorMessage}
       />
       <Button
-        title="Create Account"
+        title="Save Change"
         type="outline"
         buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
         onPress={() => handleLoginOnPress()}
         loading={loading}
-        disabled
       />
     </ScreenContainer>
   );

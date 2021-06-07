@@ -3,6 +3,8 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Input, Button } from "react-native-elements";
 import ScreenContainer from "../../components/ScreenContainer";
 import { AuthContext } from "../../context";
+import Logo from "../../components/Logo";
+import { View } from "react-native";
 
 
 
@@ -17,13 +19,20 @@ export default ({ navigation }) => {
     try {
       await signIn(username, password);
     } catch (err) {
-      setErrorMessage("Invalid usernmae or password")
+      if(err?.message){
+        setErrorMessage(err?.message)
+      }else{
+        setErrorMessage("Invalid usernmae or password")
+      }
     } finally {
       setLoading(false);
     }
   };
   return (
     <ScreenContainer>
+      <View style={{marginVertical:40}}>
+        <Logo width={200} height={200}/>
+      </View>
       <Input
         placeholder="Enter Email or Username... "
         leftIcon={

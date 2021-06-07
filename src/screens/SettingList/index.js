@@ -2,7 +2,8 @@ import React from "react";
 import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 import ScreenContainer from "../../components/ScreenContainer";
-import { ListItem, Icon } from "react-native-elements";
+import { ListItem, Icon, Button } from "react-native-elements";
+
 
 export default ({ navigation }) => {
   const list = [
@@ -29,6 +30,13 @@ export default ({ navigation }) => {
       color: AppStyles.color.steedDarkGrey,
       route: "Notification",
     },
+    {
+      title: "Change Password",
+      subtitle: "Change you password",
+      icon: "lock",
+      color: AppStyles.color.steedBlue,
+      route: "ChangePassword",
+    },
   ];
 
   return (
@@ -41,7 +49,7 @@ export default ({ navigation }) => {
             key={i}
             containerStyle={{
               backgroundColor: item.color,
-              height: 150,
+              height: 120,
             }}
             onPress={() => navigation.push(item.route)}
           >
