@@ -18,13 +18,13 @@ Amplify.configure({
 const RootStack = createStackNavigator();
 const RootStackScreen = ({ user }) => (
   <RootStack.Navigator headerMode="none">
-    {/* {user ? (
-      <RootStack.Screen name="TabsScreen" component={TabsScreen} />
+    {user ? (
+      <RootStack.Screen name="TabsScreen" component={TabsScreen}/>
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
-    )} */}
+    )}
     {/* <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} /> */}
-    <RootStack.Screen name="TabsScreen" component={TabsScreen} />
+    {/* <RootStack.Screen name="TabsScreen" component={TabsScreen} /> */}
   </RootStack.Navigator>
 );
 

@@ -4,22 +4,10 @@ import AppStyles from "../../AppStyles";
 import GameStackScreen from "../../navigation/GameNavigator";
 import DashboardStackScreen from "../DashboardNavigator";
 import SettingStackScreen from "../SettingNavigator";
-import AsyncStorage from "@react-native-async-storage/async-storage";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 const Tabs = createMaterialBottomTabNavigator();
-const TabsScreen = () => {
-  const [image, setImage] = React.useState(null);
-
-  React.useEffect(() => {
-    getImage();
-  }, []);
-
-  const getImage = async () => {
-    const profilePic = await AsyncStorage.getItem("profilePicUrl");
-    setImage(profilePic);
-  };
-
+const TabsScreen = ({user}) => {
   return (
     <Tabs.Navigator
       shifting={true}

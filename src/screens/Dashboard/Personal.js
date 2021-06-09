@@ -6,6 +6,7 @@ import PersonalBadge from "./PersonalBadge";
 import PersonalMonthScore from "./PersonalMonthScore";
 import PersonalPoint from "./PersonalPoint";
 import PersonalImpact from "./PersonalImpact";
+import Auth from "@aws-amplify/auth";
 
 const IconButton = ({ iconName, buttontitle }) => (
   <View style={{ height: 40 }}>
@@ -18,6 +19,7 @@ export default () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [userProfile, setUserProfile] = React.useState(null);
   const [loading, setLoading] = React.useState(true);
+  const [userInfo, setUserInfo] = React.useState(null);
 
   React.useEffect(() => {
     const testData = {
@@ -89,6 +91,7 @@ export default () => {
         unit: 13,
       },
     };
+    
     setUserProfile(testData);
     setLoading(false);
   }, []);
