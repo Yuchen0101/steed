@@ -6,7 +6,7 @@ import ScreenContainer from "../../components/ScreenContainer";
 import Carousel from "react-native-snap-carousel";
 import PropertyCard from "./PropertyCard";
 
-const CustomCarousel = () => {
+const CustomCarousel = ({ navigation }) => {
   const exampleItems = [
     {
       propertyType: "House",
@@ -122,6 +122,8 @@ const CustomCarousel = () => {
 };
 
 export default ({ navigation }) => {
+
+
   const welTitle = "Welcome";
   const welContent =
     "We have curated a list of properties that may be of high interest to you. Swipe through the cards to see which one catches your interest and then click to predict the last sold price";

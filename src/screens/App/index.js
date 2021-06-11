@@ -19,7 +19,7 @@ const RootStack = createStackNavigator();
 const RootStackScreen = ({ user }) => (
   <RootStack.Navigator headerMode="none">
     {user ? (
-      <RootStack.Screen name="TabsScreen" component={TabsScreen}/>
+      <RootStack.Screen name="TabsScreen" component={TabsScreen} />
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
     )}
@@ -74,9 +74,22 @@ export default () => {
           password: userInfo.password,
           attributes: {
             email: userInfo.email,
-            'custom:display_name': userInfo.displayName,
+            "custom:display_name": userInfo.displayName,
           },
-        }).then((res) => console.log(res)),
+        }),
+      authFetch: (method, url) =>
+        Auth.currentSession()
+          .then((session) => {
+            return session?.idToken?.jwtToken
+          })
+          .then((token) =>
+            fetch(`http://192.168.1.15:2333${url}`, {
+              method: method,
+              headers: {
+                Authorization: token,
+              },
+            }).then((response) => response.json())
+          )
     };
   }, []);
 

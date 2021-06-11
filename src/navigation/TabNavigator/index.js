@@ -7,7 +7,7 @@ import SettingStackScreen from "../SettingNavigator";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 const Tabs = createMaterialBottomTabNavigator();
-const TabsScreen = ({user}) => {
+const TabsScreen = () => {
   return (
     <Tabs.Navigator
       shifting={true}
@@ -20,7 +20,7 @@ const TabsScreen = ({user}) => {
         shadowOpacity: 0.3,
         height:60
       }}
-      initialRouteName="GameStackScreen"
+      initialRouteName="GameStackScreen"      
     >
       <Tabs.Screen
         name="GameStackScreen"
@@ -29,7 +29,7 @@ const TabsScreen = ({user}) => {
           tabBarLabel: "Game",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="rhombus" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tabs.Screen
@@ -39,7 +39,7 @@ const TabsScreen = ({user}) => {
           tabBarLabel: "Dashboard",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="poll" color={color} size={26} />
-          ),
+          )
         }}
       />
       <Tabs.Screen
