@@ -2,7 +2,7 @@ import React from "react";
 import { Text } from "react-native-elements";
 import { Dimensions, ScrollView, View } from "react-native";
 import AppStyles from "../../AppStyles";
-import { BarChart, PieChart } from "react-native-chart-kit";
+import { PieChart } from "react-native-chart-kit";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 
 const ScoreItem = ({ value, title }) => (
@@ -26,7 +26,7 @@ const ScoreItem = ({ value, title }) => (
 
 export default ({impact}) => {
   return (
-    <ScrollView>
+    <View>
       <View
         style={{
           backgroundColor: AppStyles.color.steedBlue,
@@ -86,6 +86,6 @@ export default ({impact}) => {
           <ScoreItem value={impact.unit} title="Unit" />
         </View>
       </View>
-    </ScrollView>
+    </View>
   );
 };

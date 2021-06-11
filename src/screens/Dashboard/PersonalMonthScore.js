@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native-elements";
-import { ScrollView, View } from "react-native";
+import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 
 const ScoreCard = ({ title, context }) => {
@@ -72,7 +72,7 @@ export default ({currentMonth, allTime}) => {
   ];
 
   return (
-    <ScrollView>
+
       <View
         style={{
           backgroundColor: AppStyles.color.steedBlue,
@@ -96,6 +96,5 @@ export default ({currentMonth, allTime}) => {
           ))}
         </View>
       </View>
-    </ScrollView>
   );
 };

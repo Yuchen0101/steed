@@ -6,7 +6,6 @@ import PersonalBadge from "./PersonalBadge";
 import PersonalMonthScore from "./PersonalMonthScore";
 import PersonalPoint from "./PersonalPoint";
 import PersonalImpact from "./PersonalImpact";
-import { AuthContext } from "../../context";
 import { ActivityIndicator } from "react-native";
 
 const IconButton = ({ iconName, buttontitle }) => (
@@ -16,18 +15,8 @@ const IconButton = ({ iconName, buttontitle }) => (
   </View>
 );
 
-export default () => {
-  const { authFetch } = React.useContext(AuthContext);
-
-  const [userProfile, setUserProfile] = React.useState(null);
+export default ({userProfile}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
-
-  React.useEffect(() => {
-    // fetch user profile
-    authFetch("GET", "/api/fetch_user_profile").then((res) =>
-      setUserProfile(res)
-    );
-  }, []);
 
   const component1 = () => (
     <IconButton buttontitle="Month" iconName="insights" />

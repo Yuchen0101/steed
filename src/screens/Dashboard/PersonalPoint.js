@@ -1,6 +1,6 @@
 import React from "react";
 import { Text } from "react-native-elements";
-import { Dimensions, ScrollView, View } from "react-native";
+import { Dimensions, View } from "react-native";
 import AppStyles from "../../AppStyles";
 import { BarChart } from "react-native-chart-kit";
 
@@ -14,7 +14,7 @@ const ScoreItem = ({ value, title }) => (
 
 export default ({points_hist}) => {
   return (
-    <ScrollView>
+
        <View style={{backgroundColor:AppStyles.color.steedBlue, paddingVertical:10, borderRadius:20}}>
       <BarChart
         data={{
@@ -52,6 +52,6 @@ export default ({points_hist}) => {
       <ScoreItem value={points_hist.average_points} title="Average Points per Day" />
     </View>
 
-    </ScrollView>
+
   );
 };

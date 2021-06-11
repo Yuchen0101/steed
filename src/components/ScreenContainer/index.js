@@ -9,9 +9,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const ScreenContainer = ({ children, style }) => (
+const ScreenContainer = ({ children, style = {} }) => (
   <SafeAreaView style={{ ...styles.container, ...style }}>
-  {children}
+    {children}
   </SafeAreaView>
 );
 

@@ -12,60 +12,9 @@ const ScoreItem = ({ rank, title, value }) => (
   </View>
 );
 
-export default () => {
-
-  const rankingMonth = [
-    {
-      name: "Warren HuanM",
-      score: "11,980",
-    },
-    {
-      name: "Joe Blogsn",
-      score: "9,810",
-    },
-    {
-      name: "Eddy MerckY",
-      score: "9,918",
-    },
-    {
-      name: "Peter Sagaj",
-      score: "78,120",
-    },
-    {
-      name: "Dinesh Krishnaj",
-      score: "15,919",
-    },
-    {
-      name: "Jayden Vef",
-      score: "19.927",
-    },
-  ];
-  const rankingAll = [
-    {
-      name: "Peter Sagaj",
-      score: "78,120",
-    },
-    {
-      name: "Dinesh Krishnaj",
-      score: "15,919",
-    },
-    {
-      name: "Jayden Vef",
-      score: "19.927",
-    },
-    {
-      name: "Warren HuanM",
-      score: "11,980",
-    },
-    {
-      name: "Joe Blogsn",
-      score: "9,810",
-    },
-    {
-      name: "Eddy MerckY",
-      score: "9,918",
-    },
-  ];
+export default ({leaderboard}) => {
+  const rankingMonth = leaderboard.current_month
+  const rankingAll = leaderboard.overall
 
   const buttons = ["Month", "All Time"];
   const [selectedIndex, setSelectedIndex] = React.useState(0);

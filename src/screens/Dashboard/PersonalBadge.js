@@ -2,7 +2,6 @@ import React from "react";
 import { LinearProgress, Icon, ListItem } from "react-native-elements";
 import { View } from "react-native";
 import AppStyles from "../../AppStyles";
-import { ScrollView } from "react-native-gesture-handler";
 
 export default ({ badges }) => {
   const list = badges.map((item) => ({
@@ -16,7 +15,7 @@ export default ({ badges }) => {
   }));
 
   return (
-      <ScrollView>
+      <View>
         {list.map((item, i) => (
           <ListItem
             key={i}
@@ -73,6 +72,6 @@ export default ({ badges }) => {
             </ListItem.Content>
           </ListItem>
         ))}
-      </ScrollView>
+      </View>
   );
 };
