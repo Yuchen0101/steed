@@ -15,7 +15,7 @@ const SettingStackScreen = () => (
     screenOptions={{
       headerTitle: () => <Logo />,
       headerBackTitle: "Back",
-      headerTitleAlign: "center",
+      headerTitleAlign: "center"
     }}
   >
     <SettingStack.Screen name="SettingList" component={SettingList} />

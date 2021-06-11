@@ -3,9 +3,12 @@ import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 import ScreenContainer from "../../components/ScreenContainer";
 import { ListItem, Icon, Button } from "react-native-elements";
-
+import { ScrollView } from "react-native";
+import { Dimensions } from "react-native";
+import { AuthContext } from "../../context";
 
 export default ({ navigation }) => {
+  const {signOut} = React.useContext(AuthContext)
   const list = [
     {
       title: "Profile",
@@ -34,27 +37,65 @@ export default ({ navigation }) => {
       title: "Change Password",
       subtitle: "Change you password",
       icon: "lock",
-      color: AppStyles.color.steedBlue,
+      color: "#aab2ce",
       route: "ChangePassword",
-    },
+    }
   ];
 
+  const scrollHeight = Dimensions.get("window").height - 60 - 120;
+
   return (
-    <ScreenContainer
-      style={{ alignItems: "stretch", justifyContent: "flex-start" }}
-    >
-      <View style={{ marginTop: 30 }}>
-        {list.map((item, i) => (
+    <ScreenContainer style={{ alignItems: "stretch" }}>
+      <View style={{height:scrollHeight}}>
+        <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+          {list.map((item, i) => (
+            <ListItem
+              key={i}
+              containerStyle={{
+                backgroundColor: item.color,
+                height: 120,
+              }}
+              onPress={() => navigation.push(item.route)}
+            >
+              <Icon
+                name={item.icon}
+                iconStyle={{ color: AppStyles.color.steedWhite }}
+              />
+              <ListItem.Content>
+                <ListItem.Title
+                  style={{
+                    textAlign: "left",
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    color: AppStyles.color.steedWhite,
+                    marginBottom: 10,
+                  }}
+                >
+                  {item.title}
+                </ListItem.Title>
+                <ListItem.Subtitle
+                  style={{
+                    textAlign: "left",
+                    fontSize: 15,
+                    color: AppStyles.color.steedWhite,
+                  }}
+                >
+                  {item.subtitle}
+                </ListItem.Subtitle>
+              </ListItem.Content>
+              <ListItem.Chevron color="white"/>
+            </ListItem>
+          ))}
+
           <ListItem
-            key={i}
             containerStyle={{
-              backgroundColor: item.color,
+              backgroundColor: "#ced6f3",
               height: 120,
             }}
-            onPress={() => navigation.push(item.route)}
+            onPress={()=>signOut()}
           >
             <Icon
-              name={item.icon}
+              name="logout"
               iconStyle={{ color: AppStyles.color.steedWhite }}
             />
             <ListItem.Content>
@@ -67,7 +108,7 @@ export default ({ navigation }) => {
                   marginBottom: 10,
                 }}
               >
-                {item.title}
+                Logout
               </ListItem.Title>
               <ListItem.Subtitle
                 style={{
@@ -76,12 +117,12 @@ export default ({ navigation }) => {
                   color: AppStyles.color.steedWhite,
                 }}
               >
-                {item.subtitle}
+                Logout and go back to Login page
               </ListItem.Subtitle>
             </ListItem.Content>
-            <ListItem.Chevron />
+            <ListItem.Chevron color="white"/>
           </ListItem>
-        ))}
+        </ScrollView>
       </View>
     </ScreenContainer>
   );

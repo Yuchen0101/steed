@@ -27,11 +27,6 @@ export default () => {
   const [refreshing, setRefreshing] = React.useState(false);
 
   React.useEffect(() => {
-    Auth.currentUserInfo().then(user=>{
-      if (user?.attributes["custom:display_name"]) {
-        setDisplayName(user?.attributes["custom:display_name"]);
-      }
-    })
     fetchData();
   }, []);
 
@@ -42,7 +37,13 @@ export default () => {
     const p2 = authFetch("GET", "/api/leaderboard").then((res) =>
       setLeaderboard(res)
     );
-    return Promise.all([p1, p2]).then(() => "success");
+    const p3 = Auth.currentUserInfo().then(user=>{
+      if (user?.attributes["custom:display_name"]) {
+        setDisplayName(user?.attributes["custom:display_name"]);
+      }
+    })
+
+    return Promise.all([p1, p2, p3]).then(() => "success");
   };
 
   const onRefresh = React.useCallback(() => {
