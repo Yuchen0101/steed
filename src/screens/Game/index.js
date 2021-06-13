@@ -1,9 +1,11 @@
 import React, { useEffect } from "react";
 import { Dimensions, View } from "react-native";
 import { Text, Button } from "react-native-elements";
+import { ActivityIndicator } from "react-native-paper";
 import Carousel from "react-native-snap-carousel";
 import AppStyles from "../../AppStyles";
 import ScreenContainer from "../../components/ScreenContainer";
+import { AuthContext } from "../../context";
 import { HouseContext, useHouseContext } from './houseContext';
 import PropertyCard from "./PropertyCard";
 
@@ -92,14 +94,29 @@ export const exampleItems = [
 ];
 
 const CustomCarousel = () => {
+  const { authFetch } = React.useContext(AuthContext);
+
   const [activeIndex, setActiveIndex] = React.useState(0);
-  const [carouselItems, setCarouselItems] = React.useState(exampleItems);
+  const [carouselItems, setCarouselItems] = React.useState(null);
   const ref = React.useRef(null);
+
+  const fetchItems = ()=>{
+    authFetch("GET", "/api/get_properties").then((res) =>{
+      console.log(res.matched)
+      setCarouselItems(res.matched)
+    }
+    );
+  }
+  React.useEffect(()=>{
+    fetchItems()
+  },[]);
 
   const renderItem = React.useCallback(
     ({ item, index }) => <PropertyCard property={item} />,
     []
   );
+
+  if(!carouselItems) return <View style={{height:350, justifyContent:"center"}}><ActivityIndicator/></View>
 
   return (
     <View style={{ marginTop: 10, marginBottom: 10, height: 350 }}>
