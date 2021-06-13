@@ -6,6 +6,12 @@ import AppStyles from "../../AppStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Auth from "@aws-amplify/auth";
 import { Alert } from "react-native";
+import {
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+  View
+} from "react-native";
 
 export default () => {
   const [userInfo, setUserInfo] = React.useState({
@@ -68,56 +74,60 @@ export default () => {
     Auth.currentAuthenticatedUser()
       .then((user) => {
         return Auth.updateUserAttributes(user, {
-          'custom:display_name': userInfo.displayName,
+          "custom:display_name": userInfo.displayName,
         });
       })
-      .then(Alert.alert("Success","Change Saved"))
+      .then(Alert.alert("Success", "Change Saved"))
       .catch((err) => setErrorMessage(err.message))
       .finally(setLoading(false));
   };
 
   return (
-    <ScreenContainer>
-      <Avatar
-        size="xlarge"
-        rounded
-        icon={
-          !image && {
-            name: "plus",
-            type: "font-awesome",
-            color: AppStyles.color.steedWhite,
-          }
-        }
-        onPress={() => pickImage()}
-        containerStyle={{
-          backgroundColor: AppStyles.color.steedDarkGrey,
-          marginBottom: 30,
-        }}
-        source={
-          image && {
-            uri: image,
-          }
-        }
-      />
-      <Input
-        placeholder={userInfo.displayName}
-        label="displayName"
-        onChangeText={(value) => handleOnChangeText(value, "displayName")}
-      />
-      <Input placeholder={userInfo.username} label="username" disabled />
-      <Input
-        placeholder={userInfo.email}
-        label="email"
-        disabled
-        errorMessage={errorMessage}
-      />
-      <Button
-        title="Save Change"
-        type="outline"
-        buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
-        onPress={() => handleLoginOnPress()}
-        loading={loading}
-      />
-    </ScreenContainer>
+    <KeyboardAvoidingView behavior="position" containerStyle={{ flex: 1 }}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{alignItems:"center", paddingTop:20}}>
+          <Avatar
+            size="xlarge"
+            rounded
+            icon={
+              !image && {
+                name: "plus",
+                type: "font-awesome",
+                color: AppStyles.color.steedWhite,
+              }
+            }
+            onPress={() => pickImage()}
+            containerStyle={{
+              backgroundColor: AppStyles.color.steedDarkGrey,
+              marginBottom: 30,
+            }}
+            source={
+              image && {
+                uri: image,
+              }
+            }
+          />
+          <Input
+            placeholder={userInfo.displayName}
+            label="displayName"
+            onChangeText={(value) => handleOnChangeText(value, "displayName")}
+          />
+          <Input placeholder={userInfo.username} label="username" disabled />
+          <Input
+            placeholder={userInfo.email}
+            label="email"
+            disabled
+            errorMessage={errorMessage}
+          />
+          <Button
+            title="Save Change"
+            type="outline"
+            buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
+            onPress={() => handleLoginOnPress()}
+            loading={loading}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };

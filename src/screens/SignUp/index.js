@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Input, Button, Avatar, Text } from "react-native-elements";
 import * as ImagePicker from "expo-image-picker";
@@ -6,6 +6,12 @@ import ScreenContainer from "../../components/ScreenContainer";
 import { AuthContext } from "../../context";
 import AppStyles from "../../AppStyles";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import {
+  KeyboardAvoidingView,
+  TouchableWithoutFeedback,
+  Keyboard,
+} from "react-native";
+import { View } from "react-native";
 
 export default ({ navigation }) => {
   const { signUp } = React.useContext(AuthContext);
@@ -102,93 +108,112 @@ export default ({ navigation }) => {
         >
           A verification link has been sent to your email, please have a check
         </Text>
-        <Button title="Go to Login" type="outline" onPress={()=>navigation.goBack()}></Button>
+        <Button
+          title="Go to Login"
+          type="outline"
+          onPress={() => navigation.goBack()}
+        ></Button>
       </ScreenContainer>
     );
   return (
-    <ScreenContainer>
-      <Avatar
-        size="xlarge"
-        rounded
-        icon={
-          !image && {
-            name: "plus",
-            type: "font-awesome",
-            color: AppStyles.color.steedWhite,
-          }
-        }
-        onPress={() => pickImage()}
-        containerStyle={{
-          backgroundColor: AppStyles.color.steedDarkGrey,
-          marginBottom: 30,
-        }}
-        source={
-          image && {
-            uri: image,
-          }
-        }
-      />
-      <Input
-        placeholder="Enter Display Name... "
-        leftIcon={
-          <MaterialCommunityIcons name="account-star" color="white" size={20} />
-        }
-        onChangeText={(value) => handleOnChangeText(value, "displayName")}
-      />
-      <Input
-        placeholder="Enter Username... "
-        leftIcon={
-          <MaterialCommunityIcons name="account" color="white" size={20} />
-        }
-        onChangeText={(value) => handleOnChangeText(value, "username")}
-      />
-      <Input
-        placeholder="Enter Email... "
-        leftIcon={
-          <MaterialCommunityIcons name="email" color="white" size={20} />
-        }
-        onChangeText={(value) => handleOnChangeText(value, "email")}
-      />
-      <Input
-        placeholder="Enter Password... "
-        leftIcon={<MaterialCommunityIcons name="key" color="white" size={20} />}
-        rightIcon={
-          <MaterialCommunityIcons
-            name={showPassword ? "eye-off" : "eye"}
-            color="white"
-            size={20}
-            onPress={() => {
-              setShowPassword((pre) => !pre);
+    <KeyboardAvoidingView behavior="position" containerStyle={{ flex: 1 }}>
+      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+        <View style={{alignItems:"center", paddingTop:20}}>
+          <Avatar
+            size="xlarge"
+            rounded
+            icon={
+              !image && {
+                name: "plus",
+                type: "font-awesome",
+                color: AppStyles.color.steedWhite,
+              }
+            }
+            onPress={() => pickImage()}
+            containerStyle={{
+              backgroundColor: AppStyles.color.steedDarkGrey,
+              marginBottom: 20,
             }}
+            source={
+              image && {
+                uri: image,
+              }
+            }
           />
-        }
-        secureTextEntry={!showPassword}
-        onChangeText={(value) => handleOnChangeText(value, "password")}
-      />
-      <Input
-        placeholder="Confirm Password... "
-        leftIcon={<MaterialCommunityIcons name="key" color="white" size={20} />}
-        rightIcon={
-          <MaterialCommunityIcons
-            name={showPassword ? "eye-off" : "eye"}
-            color="white"
-            size={20}
-            onPress={() => {
-              setShowPassword((pre) => !pre);
-            }}
+          <Input
+            placeholder="Enter Display Name... "
+            leftIcon={
+              <MaterialCommunityIcons
+                name="account-star"
+                color="white"
+                size={20}
+              />
+            }
+            onChangeText={(value) => handleOnChangeText(value, "displayName")}
           />
-        }
-        secureTextEntry={!showPassword}
-        onChangeText={(value) => handleOnChangeText(value, "confirmPassword")}
-        errorMessage={errorMessage}
-      />
-      <Button
-        title="Create Account"
-        type="outline"
-        buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
-        onPress={() => handleLoginOnPress()}
-        loading={loading}
-      />
-    </ScreenContainer>
+          <Input
+            placeholder="Enter Username... "
+            leftIcon={
+              <MaterialCommunityIcons name="account" color="white" size={20} />
+            }
+            onChangeText={(value) => handleOnChangeText(value, "username")}
+          />
+          <Input
+            placeholder="Enter Email... "
+            leftIcon={
+              <MaterialCommunityIcons name="email" color="white" size={20} />
+            }
+            onChangeText={(value) => handleOnChangeText(value, "email")}
+          />
+          <Input
+            placeholder="Enter Password... "
+            leftIcon={
+              <MaterialCommunityIcons name="key" color="white" size={20} />
+            }
+            rightIcon={
+              <MaterialCommunityIcons
+                name={showPassword ? "eye-off" : "eye"}
+                color="white"
+                size={20}
+                onPress={() => {
+                  setShowPassword((pre) => !pre);
+                }}
+              />
+            }
+            secureTextEntry={!showPassword}
+            onChangeText={(value) => handleOnChangeText(value, "password")}
+          />
+          <Input
+            placeholder="Confirm Password... "
+            leftIcon={
+              <MaterialCommunityIcons name="key" color="white" size={20} />
+            }
+            rightIcon={
+              <MaterialCommunityIcons
+                name={showPassword ? "eye-off" : "eye"}
+                color="white"
+                size={20}
+                onPress={() => {
+                  setShowPassword((pre) => !pre);
+                }}
+              />
+            }
+            secureTextEntry={!showPassword}
+            onChangeText={(value) =>
+              handleOnChangeText(value, "confirmPassword")
+            }
+            errorMessage={errorMessage}
+          />
+
+          <Button
+            title="Create Account"
+            type="outline"
+            buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
+            onPress={() => handleLoginOnPress()}
+            loading={loading}
+          />
+        </View>
+      </TouchableWithoutFeedback>
+    </KeyboardAvoidingView>
   );
 };
