@@ -13,7 +13,7 @@ export default ({ property }) => {
 
   const navigation = useNavigation();
   const onPress = useCallback(() => {
-    navigation.navigate('GameDetail', {id: property.propertyType});
+    navigation.navigate('GameDetail', {id: property._id});
   }, []);
 
   return (

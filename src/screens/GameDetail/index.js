@@ -1,17 +1,17 @@
-import React, { useState, useMemo } from "react";
-import { View, Animated, StyleSheet } from "react-native";
+import React, { useState, useMemo, useCallback } from "react";
+import { View, Animated, Alert, StyleSheet } from "react-native";
+import Swiper from 'react-native-swiper';
 import { Button, Text, Image } from "react-native-elements";
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { Slider } from "@miblanchard/react-native-slider";
-import Swiper from 'react-native-swiper';
+
+import { useAuthContext } from "../../context";
 import ScreenContainer from "../../components/ScreenContainer";
 import { useHouseContext } from '../Game/houseContext';
-import { exampleItems } from '../Game';
 import { IconWithText, getPropertySummary } from '../Game/IconWithText';
 
 import AppStyles from "../../AppStyles";
 
-const data = exampleItems[0];
 const styles = StyleSheet.create({
   container: {
     padding: 15,
@@ -114,7 +114,7 @@ const guessStyles = StyleSheet.create({
   },
 });
 
-const UrgeWithPleasureComponent = () => (
+const UrgeWithPleasureComponent = ({onGuessPress}) => (
   <CountdownCircleTimer
     isPlaying
     duration={20}
@@ -125,6 +125,7 @@ const UrgeWithPleasureComponent = () => (
       ['#F7B801', 0.4],
       ['#A30000', 0.2],
     ]}
+    onComplete={() => onGuessPress()}
   >
     {({ remainingTime, animatedColor }) => (
       <Animated.View style={{ color: animatedColor }}>
@@ -138,30 +139,57 @@ const UrgeWithPleasureComponent = () => (
   </CountdownCircleTimer>
 )
 
-const CustomThumb = () => (
-  <View style={guessStyles.thumb}></View>
-);
-
 export default ({ navigation, route }) => {
-  const houseContext = useHouseContext();
-  const propertySummary = useMemo(() => getPropertySummary(data), []);
+
+  const { id } = route.params;
+  const { carouselItems } = useHouseContext();
+  const { authFetch } = useAuthContext();
+  const houseDetail = carouselItems.filter(item => item._id === id)[0];
+
+  // price
   const [value, setValue] = useState(5);
+  const propertySummary = useMemo(() => getPropertySummary(houseDetail), []);
+
+  const CustomThumb = useCallback(() => {
+    return <View style={guessStyles.thumb}></View>
+  }, []);
+
+  const onGuessPress = () => {
+    authFetch("POST", "/api/make_prediction", {
+      'prop_id': id,
+      'prediction': value,
+    }).then((res) => {
+      // TODO: 要把guess的结果传下去，要么放在url里传下去，要么放在context里，可以考虑用useReducer管理状态了
+      navigation.replace("GameResult");
+    }).catch(() => {
+      Alert.alert(
+        "Error",
+        "Make predication failed",
+        [
+          {
+            text: "Try later",
+            onPress: () => console.log("Try later pressed")
+          }
+        ]
+      );
+    });
+  }
 
   return (
     <ScreenContainer style={styles.container}>
       <View style={styles.infoContainer}>
-        <Text style={styles.address}>{data.address}</Text>
+        <Text style={styles.address}>{houseDetail.address}</Text>
         <View style={styles.swiper}>
           <Swiper loop={false}>
             <View style={styles.image}>
               <Image
-                source={{uri: data.photos[0].fullUrl}}
+                source={{uri: houseDetail.photos[0].fullUrl}}
                 style={styles.image}
               />
             </View>
             <View style={styles.image}>
               <Image
-                source={{uri: data.photos[0].fullUrl}}
+                source={{uri: houseDetail.photos[0].fullUrl}}
                 style={styles.image}
               />
             </View>
@@ -179,11 +207,11 @@ export default ({ navigation, route }) => {
         </View>
       </View>
       <View style={styles.descContainer}>
-        <Text style={styles.headline}>{data.headline}</Text>
-        <Text style={styles.description}>{data.summaryDescription}</Text>
+        <Text style={styles.headline}>{houseDetail.headline}</Text>
+        <Text style={styles.description}>{houseDetail.summaryDescription}</Text>
       </View>
       <View style={styles.guessContainer}>
-        <View style={styles.countdown}><UrgeWithPleasureComponent /></View>
+        <View style={styles.countdown}><UrgeWithPleasureComponent onComplete={onGuessPress} /></View>
         <View>
           <View style={{marginBottom: 15}}>
             <Text style={{...styles.tipText, fontSize: 12}}>Enter House Sold Price</Text>
@@ -214,7 +242,7 @@ export default ({ navigation, route }) => {
           title="PUNT!"
           buttonStyle={styles.button}
           titleStyle={styles.buttonTitle}
-          onPress={() => {navigation.replace("GameResult")}}
+          onPress={onGuessPress}
           />
       </View>
     </ScreenContainer>

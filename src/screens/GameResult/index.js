@@ -110,7 +110,7 @@ const textStyle = StyleSheet.create({
 })
 
 
-export default ({navigation}) => {
+export default ({ navigation }) => {
     return (
         <ScreenContainer style={styles.container}>
             <View style={styles.header}>
