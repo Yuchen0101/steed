@@ -114,30 +114,40 @@ const guessStyles = StyleSheet.create({
   },
 });
 
-const UrgeWithPleasureComponent = ({onGuessPress}) => (
-  <CountdownCircleTimer
-    isPlaying
-    duration={20}
-    size={80}
-    strokeWidth={2}
-    colors={[
-      [AppStyles.color.steedGreen, 0.4],
-      ['#F7B801', 0.4],
-      ['#A30000', 0.2],
-    ]}
-    onComplete={() => onGuessPress()}
-  >
-    {({ remainingTime, animatedColor }) => (
-      <Animated.View style={{ color: animatedColor }}>
-        <View>
-          {/* <Text style={{marginBottom: 3}}>Remaining</Text> */}
-          <Text>{remainingTime}s</Text>
-          {/* <Text style={{marginTop: 3}}>seconds</Text> */}
-        </View>
-      </Animated.View>
-    )}
-  </CountdownCircleTimer>
-)
+// timeElapsed
+let pre = -1;
+const UrgeWithPleasureComponent = ({ onComplete }) => {
+  return (
+    <CountdownCircleTimer
+      isPlaying
+      duration={20}
+      size={80}
+      strokeWidth={2}
+      colors={[
+        [AppStyles.color.steedGreen, 0.4],
+        ['#F7B801', 0.4],
+        ['#A30000', 0.2],
+      ]}
+      onComplete={() => onComplete()}
+      renderAriaTime={({ elapsedTime }) => {
+        const time = parseInt(elapsedTime);
+        if (time !== pre) {
+          pre = time;
+        }
+      }}
+    >
+      {({ remainingTime, animatedColor }) => (
+        <Animated.View style={{ color: animatedColor }}>
+          <View>
+            {/* <Text style={{marginBottom: 3}}>Remaining</Text> */}
+            <Text>{remainingTime}s</Text>
+            {/* <Text style={{marginTop: 3}}>seconds</Text> */}
+          </View>
+        </Animated.View>
+      )}
+    </CountdownCircleTimer>
+  );
+}
 
 export default ({ navigation, route }) => {
 
@@ -159,8 +169,7 @@ export default ({ navigation, route }) => {
       'prop_id': id,
       'prediction': value,
     }).then((res) => {
-      // TODO: 要把guess的结果传下去，要么放在url里传下去，要么放在context里，可以考虑用useReducer管理状态了
-      navigation.replace("GameResult");
+      navigation.replace("GameResult", {...res, duration: pre});
     }).catch(() => {
       Alert.alert(
         "Error",
@@ -211,7 +220,9 @@ export default ({ navigation, route }) => {
         <Text style={styles.description}>{houseDetail.summaryDescription}</Text>
       </View>
       <View style={styles.guessContainer}>
-        <View style={styles.countdown}><UrgeWithPleasureComponent onComplete={onGuessPress} /></View>
+        <View style={styles.countdown}>
+          <UrgeWithPleasureComponent onComplete={onGuessPress} />
+        </View>
         <View>
           <View style={{marginBottom: 15}}>
             <Text style={{...styles.tipText, fontSize: 12}}>Enter House Sold Price</Text>

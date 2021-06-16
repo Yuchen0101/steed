@@ -2,6 +2,7 @@ import React from 'react';
 import { View, ScrollView, Text, StyleSheet} from 'react-native';
 import { Button } from 'react-native-elements';
 import ScreenContainer from "../../components/ScreenContainer";
+import { toPercent, toPrice, toRank, formatNumber } from '../../utils';
 
 import AppStyles from "../../AppStyles";
 
@@ -110,7 +111,18 @@ const textStyle = StyleSheet.create({
 })
 
 
-export default ({ navigation }) => {
+export default ({ navigation, route }) => {
+    const {
+        accuracy,
+        points,
+        sold_price,
+        sold_date,
+        description,
+        total_points,
+        rank,
+        avg_accuracy,
+        duration,
+    } = route.params;
     return (
         <ScreenContainer style={styles.container}>
             <View style={styles.header}>
@@ -118,40 +130,40 @@ export default ({ navigation }) => {
             </View>
             <View style={styles.accuracy}>
                 <Text style={textStyle.accuracy}>Your Accuracy</Text>
-                <Text style={textStyle.accuracyResult}>98.3%</Text>
+                <Text style={textStyle.accuracyResult}>{toPercent(accuracy)}</Text>
             </View>
             <View style={styles.info}>
                 <View style={{marginRight: 12}}>
-                    <Text style={textStyle.price}>$1.34m</Text>
+                    <Text style={textStyle.price}>${toPrice(sold_price)}</Text>
                     <Text style={textStyle.soldDate}>House last sold price</Text>
-                    <Text style={textStyle.soldDate}>21-5-2020</Text>
+                    <Text style={textStyle.soldDate}>{sold_date}</Text>
                 </View>
                 <View>
-                    <Text style={textStyle.price}>+230</Text>
+                    <Text style={textStyle.price}>{points}</Text>
                     <Text style={textStyle.soldDate}>Your Punt in</Text>
-                    <Text style={textStyle.soldDate}>14 secs</Text>
+                    <Text style={textStyle.soldDate}>{duration} secs</Text>
                 </View>
             </View>
             <View style={styles.performance}>
                 <Text style={textStyle.performance}>
-                    Setellar performance again Warren. You are one of the top predictors in this category. Kudos!
+                    {description}
                 </Text>
             </View>
             <View style={styles.stats}>
                 <Text style={textStyle.stats}>Your stats</Text>
                 <View style={styles.cardContainer}>
                     <View style={styles.card}>
-                        <Text style={textStyle.cardValue}>12000</Text>
+                        <Text style={textStyle.cardValue}>{formatNumber(total_points)}</Text>
                         <Text style={textStyle.indicator}>Total Points</Text>
                         <Text style={textStyle.indicator}>Earned</Text>
                     </View>
                     <View style={{...styles.card, ...styles.middleCard}}>
-                        <Text style={textStyle.cardValue}>9th</Text>
+                        <Text style={textStyle.cardValue}>{toRank(rank)}</Text>
                         <Text style={textStyle.indicator}>Leader board</Text>
                         <Text style={textStyle.indicator}>Position</Text>
                     </View>
                     <View style={styles.card}>
-                        <Text style={textStyle.cardValue}>84%</Text>
+                        <Text style={textStyle.cardValue}>{toPercent(avg_accuracy)}</Text>
                         <Text style={textStyle.indicator}>Average</Text>
                         <Text style={textStyle.indicator}>Accuracy</Text>
                     </View>

@@ -327,7 +327,7 @@ app.post("/api/make_prediction", (req, res) => {
   const resp = {
     accuracy: Math.random(),
     points: 230,
-    sold_price: 1340000,
+    sold_price: 145670,
     sold_date: "21-05-2020",
     description:
       "Setellar performance again Warren. You are one of the top predictors in this category. Kudos!",

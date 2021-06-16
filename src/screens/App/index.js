@@ -18,12 +18,12 @@ Amplify.configure({
 const RootStack = createStackNavigator();
 const RootStackScreen = ({ user }) => (
   <RootStack.Navigator headerMode="none">
-    <RootStack.Screen name="TabsScreen" component={TabsScreen} />
-    {/* {user ? (
+    {/* <RootStack.Screen name="TabsScreen" component={TabsScreen} /> */}
+    {user ? (
       <RootStack.Screen name="TabsScreen" component={TabsScreen} />
     ) : (
       <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} />
-    )} */}
+    )}
     {/* <RootStack.Screen name="AuthStackScreen" component={AuthStackScreen} /> */}
     {/* <RootStack.Screen name="TabsScreen" component={TabsScreen} /> */}
   </RootStack.Navigator>
@@ -84,7 +84,7 @@ export default () => {
             return session?.idToken?.jwtToken
           })
           .then((token) =>
-            fetch(`http://192.168.1.15:2333${url}`, {
+            fetch(`http://192.168.0.103:2333${url}`, {
               method: method,
               headers: {
                 Authorization: token,
