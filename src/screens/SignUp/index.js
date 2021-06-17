@@ -11,7 +11,8 @@ import {
   TouchableWithoutFeedback,
   Keyboard,
 } from "react-native";
-import { View } from "react-native";
+import { View, ScrollView } from "react-native";
+import { Dimensions } from "react-native";
 
 export default ({ navigation }) => {
   const { signUp } = React.useContext(AuthContext);
@@ -115,104 +116,113 @@ export default ({ navigation }) => {
         ></Button>
       </ScreenContainer>
     );
+
+  const scrollHeight = Dimensions.get("window").height - 80;
+
   return (
     <KeyboardAvoidingView behavior="position" containerStyle={{ flex: 1 }}>
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        <View style={{alignItems:"center", paddingTop:20}}>
-          <Avatar
-            size="xlarge"
-            rounded
-            icon={
-              !image && {
-                name: "plus",
-                type: "font-awesome",
-                color: AppStyles.color.steedWhite,
+        <ScrollView>
+          <View style={{ alignItems: "center", paddingTop: 20 }}>
+            <Avatar
+              size="xlarge"
+              rounded
+              icon={
+                !image && {
+                  name: "plus",
+                  type: "font-awesome",
+                  color: AppStyles.color.steedWhite,
+                }
               }
-            }
-            onPress={() => pickImage()}
-            containerStyle={{
-              backgroundColor: AppStyles.color.steedDarkGrey,
-              marginBottom: 20,
-            }}
-            source={
-              image && {
-                uri: image,
+              onPress={() => pickImage()}
+              containerStyle={{
+                backgroundColor: AppStyles.color.steedDarkGrey,
+                marginBottom: 10,
+              }}
+              source={
+                image && {
+                  uri: image,
+                }
               }
-            }
-          />
-          <Input
-            placeholder="Enter Display Name... "
-            leftIcon={
-              <MaterialCommunityIcons
-                name="account-star"
-                color="white"
-                size={20}
-              />
-            }
-            onChangeText={(value) => handleOnChangeText(value, "displayName")}
-          />
-          <Input
-            placeholder="Enter Username... "
-            leftIcon={
-              <MaterialCommunityIcons name="account" color="white" size={20} />
-            }
-            onChangeText={(value) => handleOnChangeText(value, "username")}
-          />
-          <Input
-            placeholder="Enter Email... "
-            leftIcon={
-              <MaterialCommunityIcons name="email" color="white" size={20} />
-            }
-            onChangeText={(value) => handleOnChangeText(value, "email")}
-          />
-          <Input
-            placeholder="Enter Password... "
-            leftIcon={
-              <MaterialCommunityIcons name="key" color="white" size={20} />
-            }
-            rightIcon={
-              <MaterialCommunityIcons
-                name={showPassword ? "eye-off" : "eye"}
-                color="white"
-                size={20}
-                onPress={() => {
-                  setShowPassword((pre) => !pre);
-                }}
-              />
-            }
-            secureTextEntry={!showPassword}
-            onChangeText={(value) => handleOnChangeText(value, "password")}
-          />
-          <Input
-            placeholder="Confirm Password... "
-            leftIcon={
-              <MaterialCommunityIcons name="key" color="white" size={20} />
-            }
-            rightIcon={
-              <MaterialCommunityIcons
-                name={showPassword ? "eye-off" : "eye"}
-                color="white"
-                size={20}
-                onPress={() => {
-                  setShowPassword((pre) => !pre);
-                }}
-              />
-            }
-            secureTextEntry={!showPassword}
-            onChangeText={(value) =>
-              handleOnChangeText(value, "confirmPassword")
-            }
-            errorMessage={errorMessage}
-          />
+            />
+            <Input
+              placeholder="Enter Display Name... "
+              leftIcon={
+                <MaterialCommunityIcons
+                  name="account-star"
+                  color="white"
+                  size={20}
+                />
+              }
+              onChangeText={(value) => handleOnChangeText(value, "displayName")}
+            />
+            <Input
+              placeholder="Enter Username... "
+              leftIcon={
+                <MaterialCommunityIcons
+                  name="account"
+                  color="white"
+                  size={20}
+                />
+              }
+              onChangeText={(value) => handleOnChangeText(value, "username")}
+            />
+            <Input
+              placeholder="Enter Email... "
+              leftIcon={
+                <MaterialCommunityIcons name="email" color="white" size={20} />
+              }
+              onChangeText={(value) => handleOnChangeText(value, "email")}
+            />
+            <Input
+              placeholder="Enter Password... "
+              leftIcon={
+                <MaterialCommunityIcons name="key" color="white" size={20} />
+              }
+              rightIcon={
+                <MaterialCommunityIcons
+                  name={showPassword ? "eye-off" : "eye"}
+                  color="white"
+                  size={20}
+                  onPress={() => {
+                    setShowPassword((pre) => !pre);
+                  }}
+                />
+              }
+              secureTextEntry={!showPassword}
+              onChangeText={(value) => handleOnChangeText(value, "password")}
+            />
+            <Input
+              placeholder="Confirm Password... "
+              leftIcon={
+                <MaterialCommunityIcons name="key" color="white" size={20} />
+              }
+              rightIcon={
+                <MaterialCommunityIcons
+                  name={showPassword ? "eye-off" : "eye"}
+                  color="white"
+                  size={20}
+                  onPress={() => {
+                    setShowPassword((pre) => !pre);
+                  }}
+                />
+              }
+              secureTextEntry={!showPassword}
+              onChangeText={(value) =>
+                handleOnChangeText(value, "confirmPassword")
+              }
+              errorMessage={errorMessage}
+            />
 
-          <Button
-            title="Create Account"
-            type="outline"
-            buttonStyle={{ marginTop: 30, paddingLeft: 30, paddingRight: 30 }}
-            onPress={() => handleLoginOnPress()}
-            loading={loading}
-          />
-        </View>
+            <Button
+              title="Create Account"
+              type="outline"
+              buttonStyle={{ paddingHorizontal:30 }}
+              onPress={() => handleLoginOnPress()}
+              loading={loading}
+            />
+          </View>
+        </ScrollView>
       </TouchableWithoutFeedback>
     </KeyboardAvoidingView>
   );

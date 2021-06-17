@@ -1,10 +1,9 @@
 import React from "react";
-import { View } from "react-native";
+import { View,ScrollView } from "react-native";
 import Carousel from "react-native-snap-carousel";
 import { Icon, Text, Button } from "react-native-elements";
 import AppStyles from "../../AppStyles";
-import ScreenContainer from "../../components/ScreenContainer";
-import Logo from "../../components/Logo";
+import { Dimensions } from "react-native";
 
 const CustomCarousel = () => {
   const exampleItems = [
@@ -84,8 +83,11 @@ const CustomCarousel = () => {
 };
 
 export default ({ navigation }) => {
+  const scrollHeight = Dimensions.get("window").height-80;
+
   return (
-    <ScreenContainer>
+    <View style={{height:scrollHeight}}>
+      <ScrollView contentContainerStyle={{ alignItems: "center"}}>
       <Text h3 style={{ marginTop: 10 }}>
         Welcome to Steed Punt
       </Text>
@@ -162,6 +164,7 @@ export default ({ navigation }) => {
         }}
         titleStyle={{ color: AppStyles.color.steedLigthGrey }}
       />
-    </ScreenContainer>
+      </ScrollView>
+    </View>
   );
 };
