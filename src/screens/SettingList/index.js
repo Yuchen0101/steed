@@ -19,25 +19,17 @@ export default ({ navigation }) => {
       route: "Profile",
     },
     {
-      title: "Interests",
-      subtitle:
-        "Update your interests across the 17 UN sustainable development goals",
-      icon: "favorite-border",
-      color: AppStyles.color.steedBlue,
-      route: "Interest",
-    },
-    {
       title: "Notification",
       subtitle: "Manage your notification",
       icon: "notifications-none",
-      color: AppStyles.color.steedDarkGrey,
+      color: AppStyles.color.steedBlue,
       route: "Notification",
     },
     {
       title: "Change Password",
       subtitle: "Change you password",
       icon: "lock",
-      color: "#aab2ce",
+      color: AppStyles.color.steedDarkGrey,
       route: "ChangePassword",
     }
   ];

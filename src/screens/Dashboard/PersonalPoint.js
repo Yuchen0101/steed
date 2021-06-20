@@ -47,7 +47,6 @@ export default ({points_hist}) => {
           paddingRight: 5,
         }}
       />
-      <ScoreItem value={points_hist.total_redeemed} title="Total Challenges Joined" />
       <ScoreItem value={points_hist.highest_points} title="Highest Points per Day" />
       <ScoreItem value={points_hist.average_points} title="Average Points per Day" />
     </View>

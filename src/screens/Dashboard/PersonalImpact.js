@@ -24,7 +24,22 @@ const ScoreItem = ({ value, title }) => (
   </View>
 );
 
-export default ({impact}) => {
+export default ({ impact }) => {
+  const colors = ["#83a7ea", "#8892b0", "#ffffff","#1ee665","#eae783","#f352c1"];
+  const pieData = Object.keys(impact).map((k, i) => {
+    return {
+      name: k,
+      population: impact[k],
+      color: colors[i],
+      legendFontColor: "#7F7F7F",
+      legendFontSize: 15,
+    };
+  });
+
+  if(pieData.length == 0){
+
+    return <Text style={{marginVertical:20}}>No Impact yet</Text>
+  }
   return (
     <View>
       <View
@@ -36,29 +51,7 @@ export default ({impact}) => {
       >
         <Text>Your Challenges</Text>
         <PieChart
-          data={[
-            {
-              name: "House",
-              population: impact.house,
-              color: "rgba(131, 167, 234, 1)",
-              legendFontColor: "#7F7F7F",
-              legendFontSize: 15,
-            },
-            {
-              name: "Townhouse",
-              population: impact.townhouse,
-              color: "#8892b0",
-              legendFontColor: "#7F7F7F",
-              legendFontSize: 15,
-            },
-            {
-              name: "Unit",
-              population: impact.unit,
-              color: "#ffffff",
-              legendFontColor: "#7F7F7F",
-              legendFontSize: 15,
-            },
-          ]}
+          data={pieData}
           width={Dimensions.get("window").width - 16}
           height={220}
           chartConfig={{
@@ -81,9 +74,9 @@ export default ({impact}) => {
           }}
         />
         <View>
-          <ScoreItem value={impact.house} title="House" />
-          <ScoreItem value={impact.townhouse} title="Townhouse" />
-          <ScoreItem value={impact.unit} title="Unit" />
+          {pieData.map((el, idx) => (
+            <ScoreItem ksy={idx} value={el.population} title={el.name} />
+          ))}
         </View>
       </View>
     </View>

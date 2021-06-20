@@ -1,5 +1,5 @@
 import React from "react";
-import { LinearProgress, Icon, ListItem } from "react-native-elements";
+import { LinearProgress, Icon, ListItem,Text } from "react-native-elements";
 import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 
@@ -14,6 +14,9 @@ export default ({ badges }) => {
     date: item.date,
   }));
 
+  if(list.length == 0) {
+    return <Text style={{marginVertical:20}}>No badges yet!</Text>
+  }
   return (
       <View>
         {list.map((item, i) => (

@@ -58,12 +58,9 @@ export default () => {
   const [user, setUser] = React.useState(null);
 
   const authContext = React.useMemo(() => {
+
     return {
-      signIn: (username, password) =>
-        Auth.signIn(username, password).then((user) => {
-          setUser(user);
-          return user;
-        }),
+      setUser: (user)=>setUser(user),
       signOut: () =>
         Auth.signOut().then((data) => {
           setUser(null);
@@ -81,17 +78,20 @@ export default () => {
       authFetch: (method, url, body) =>
         Auth.currentSession()
           .then((session) => {
-            return session?.idToken?.jwtToken
+            return session?.idToken?.jwtToken;
           })
           .then((token) =>
             fetch(`https://steed-api.steed-intel.com${url}`, {
               method: method,
               headers: {
                 Authorization: token,
+                'Content-Type': 'application/json'
               },
-              body: JSON.stringify(body)
-            }).then((response) => response.json()).catch(error => console.log(error))
-          )
+              body: JSON.stringify(body),
+            })
+              .then((response) => response.json())
+              .catch((error) => console.log(error))
+          ),
     };
   }, []);
 
