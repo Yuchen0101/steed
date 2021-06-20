@@ -8,7 +8,7 @@ import { Dimensions } from "react-native";
 const CustomCarousel = () => {
   const exampleItems = [
     {
-      title: "we create the challenges",
+      title: "We create the challenges",
       text: "The Steed Punt app creates challenges for you to participate in",
     },
     {

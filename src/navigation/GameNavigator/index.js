@@ -20,7 +20,7 @@ const GameStackScreen = () => {
   const fetchItems = useCallback(() => {
     setIsFetching(true);
     authFetch("GET", "/api/get_properties").then((res) => {
-        // console.log('12345', res.matched);
+        console.log('12345', res.matched);
         setIsFetching(false);
         // TODO: 给每个卡片增加一个disabled属性
         setCarouselItems(res.matched);

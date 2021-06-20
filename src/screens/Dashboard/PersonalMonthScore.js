@@ -47,7 +47,7 @@ export default ({currentMonth, allTime}) => {
       context: "Total Points Earned",
     },
     {
-      title: `${currentMonth.leadboard_position}th`,
+      title: `${currentMonth.leaderboard_position}th`,
       context: "Leader Board Position",
     },
     {
@@ -62,7 +62,7 @@ export default ({currentMonth, allTime}) => {
       context: "Total Points Earned",
     },
     {
-      title: `${allTime.leadboard_position}th`,
+      title: `${allTime.leaderboard_position}th`,
       context: "Leader Board Position",
     },
     {

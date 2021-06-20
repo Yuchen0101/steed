@@ -32,7 +32,8 @@ export default () => {
 
   const fetchData = () => {
     const p1 = authFetch("GET", "/api/fetch_user_profile").then((res) =>
-      setUserProfile(res)
+    {  console.log(res)
+      setUserProfile(res)}
     );
     const p2 = authFetch("GET", "/api/leaderboard").then((res) =>
       setLeaderboard(res)

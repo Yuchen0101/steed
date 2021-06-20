@@ -66,11 +66,11 @@ export const getLandSummary = (property) => ([
     {
         icon: "crop-square",
         title: "Land Size:",
-        text: property.bedrooms,
+        text: property.landSize,
     },
     {
         icon: "crop-square",
         title: "Area Size:",
-        text: property.bathrooms,
+        text: property.areaSize,
     },
 ]);

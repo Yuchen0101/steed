@@ -84,13 +84,13 @@ export default () => {
             return session?.idToken?.jwtToken
           })
           .then((token) =>
-            fetch(`http://192.168.0.103:2333${url}`, {
+            fetch(`https://steed-api.steed-intel.com${url}`, {
               method: method,
               headers: {
                 Authorization: token,
               },
               body: JSON.stringify(body)
-            }).then((response) => response.json())
+            }).then((response) => response.json()).catch(error => console.log(error))
           )
     };
   }, []);

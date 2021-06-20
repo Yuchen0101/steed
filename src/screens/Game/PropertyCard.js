@@ -35,7 +35,7 @@ export default ({ property }) => {
         >
           <Image
             source={{
-              uri: property.photos[0].fullUrl,
+              uri: property.media[0].url,
             }}
             style={{ width: 200, height: 150 }}
             PlaceholderContent={<ActivityIndicator />}

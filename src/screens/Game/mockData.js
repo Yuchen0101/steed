@@ -1,6 +1,6 @@
 export const exampleItems = [
     {
-      '_id': 'YI-0097-WU',
+      '_id': '2016567325',
       propertyType: "House",
       bathrooms: 2,
       bedrooms: 4,
@@ -16,19 +16,19 @@ export const exampleItems = [
         "On approximately 800 sqm, this welcoming period home, beautifully maintained and set in mature gardens, offers relaxed family living in a tightly-held precinct close to the Yarra, walking paths and primary and secondary schools.",
       min_price: 1000000,
       max_price: 1200000,
-      photos: [
+      media: [
         {
           imageType: "Property",
           advertId: 2016914242,
           date: "2021-04-21T00:35:22.05Z",
-          fullUrl:
+          url:
             "https://bucket-api.domain.com.au/v1/bucket/image/2016914242_1_1_210406_051501-w3901-h2600",
           rank: 1,
         },
       ],
     },
     {
-      '_id': 'YI-0098-WU',
+      '_id': '2016567325',
       propertyType: "House",
       bathrooms: 2,
       bedrooms: 4,
@@ -44,19 +44,19 @@ export const exampleItems = [
         "On approximately 800 sqm, this welcoming period home, beautifully maintained and set in mature gardens, offers relaxed family living in a tightly-held precinct close to the Yarra, walking paths and primary and secondary schools.",
       min_price: 1000000,
       max_price: 1200000,
-      photos: [
+      media: [
         {
           imageType: "Property",
           advertId: 2016914242,
           date: "2021-04-21T00:35:22.05Z",
-          fullUrl:
+          url:
             "https://bucket-api.domain.com.au/v1/bucket/image/2016914242_1_1_210406_051501-w3901-h2600",
           rank: 1,
         },
       ],
     },
     {
-      '_id': 'YI-0099-WU',
+      '_id': '2016567325',
       propertyType: "House",
       bathrooms: 2,
       bedrooms: 4,
@@ -72,12 +72,12 @@ export const exampleItems = [
         "On approximately 800 sqm, this welcoming period home, beautifully maintained and set in mature gardens, offers relaxed family living in a tightly-held precinct close to the Yarra, walking paths and primary and secondary schools.",
       min_price: 1000000,
       max_price: 1200000,
-      photos: [
+      media: [
         {
           imageType: "Property",
           advertId: 2016914242,
           date: "2021-04-21T00:35:22.05Z",
-          fullUrl:
+          url:
             "https://bucket-api.domain.com.au/v1/bucket/image/2016914242_1_1_210406_051501-w3901-h2600",
           rank: 1,
         },

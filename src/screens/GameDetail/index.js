@@ -192,13 +192,13 @@ export default ({ navigation, route }) => {
           <Swiper loop={false}>
             <View style={styles.image}>
               <Image
-                source={{uri: houseDetail.photos[0].fullUrl}}
+                source={{uri: houseDetail.media[0].url}}
                 style={styles.image}
               />
             </View>
             <View style={styles.image}>
               <Image
-                source={{uri: houseDetail.photos[0].fullUrl}}
+                source={{uri: houseDetail.media[0].url}}
                 style={styles.image}
               />
             </View>

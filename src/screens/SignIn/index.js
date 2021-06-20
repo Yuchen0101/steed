@@ -27,7 +27,7 @@ export default ({ navigation }) => {
       if (err?.message) {
         setErrorMessage(err?.message);
       } else {
-        setErrorMessage("Invalid usernmae or password");
+        setErrorMessage("Invalid username or password");
       }
     } finally {
       setLoading(false);
