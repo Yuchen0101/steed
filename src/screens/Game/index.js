@@ -1,9 +1,9 @@
-import React from "react";
-import { View } from "react-native";
+import React, { useMemo } from "react";
+import { View, ScrollView, Dimensions } from "react-native";
 import { Text, Button } from "react-native-elements";
+import { ActivityIndicator } from "react-native-paper";
 
 import AppStyles from "../../AppStyles";
-import ScreenContainer from "../../components/ScreenContainer";
 import { useHouseContext } from './houseContext';
 import CustomCarousel from './CustomCarousel';
 
@@ -21,32 +21,43 @@ export default ({
     carouselItems,
     fetchItems
   } = useHouseContext();
+  const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
+
+  if(isFetching) {
+    return (
+      <View style={{height:scrollHeight, justifyContent:"center"}}>
+        <ActivityIndicator/>
+      </View>
+    );
+  }
 
   return (
-    <ScreenContainer>
-      <View>
-        <Text h3>{WELCOME_TITLE}</Text>
-        <Text
-          style={{
-            color: AppStyles.color.steedDarkGrey,
-            textAlign: "justify",
-            paddingHorizontal: 20,
+    <View style={{height: scrollHeight}}>
+      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        <View>
+          <Text h3>{WELCOME_TITLE}</Text>
+          <Text
+            style={{
+              color: AppStyles.color.steedDarkGrey,
+              textAlign: "justify",
+              paddingHorizontal: 20,
+            }}
+          >
+            {WELCOME_CONTENT}
+          </Text>
+        </View>
+        <CustomCarousel carouselItems={carouselItems} showLoading={isFetching} />
+        <Button
+          title="Redeal"
+          buttonStyle={{
+            backgroundColor: AppStyles.color.steedGreen,
+            width: 120,
           }}
-        >
-          {WELCOME_CONTENT}
-        </Text>
-      </View>
-      <CustomCarousel carouselItems={carouselItems} showLoading={isFetching} />
-      <Button
-        title="Redeal"
-        buttonStyle={{
-          backgroundColor: AppStyles.color.steedGreen,
-          width: 120,
-        }}
-        titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
-        containerStyle={{ marginTop: 15 }}
-        onPress={() => fetchItems()}
-      ></Button>
-    </ScreenContainer>
+          titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
+          containerStyle={{ marginTop: 15 }}
+          onPress={() => fetchItems()}
+        ></Button>
+      </ScrollView>
+    </View>
   );
 };

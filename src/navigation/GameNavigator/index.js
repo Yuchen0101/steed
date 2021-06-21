@@ -16,27 +16,45 @@ const GameStackScreen = () => {
 
   const [isFetching, setIsFetching] = useState(false);
   const [carouselItems, setCarouselItems] = useState(exampleItems);
+  const [removedList, setRemovedList] = useState([]);
 
   const fetchItems = useCallback(() => {
     setIsFetching(true);
     authFetch("GET", "/api/get_properties").then((res) => {
-        console.log('12345', res.matched);
-        setIsFetching(false);
-        // TODO: 给每个卡片增加一个disabled属性
-        setCarouselItems(res.matched);
+        // console.log('12345', res.matched);
+        const list = res.matched;
+        const filteredList = list.filter(item => !removedList.includes(item._id));
+        setCarouselItems(filteredList);
       }
-    );
+    ).catch(() => {
+      console.log('fetch failed');
+    }).finally(() => {
+      setIsFetching(false);
+    });
   }, []);
+
+  useEffect(() => {
+    const filteredList = carouselItems.filter(item => !removedList.includes(item._id));
+    setCarouselItems(filteredList);
+  }, [removedList]);
 
   useEffect(() => {
     fetchItems();
   }, []);
 
+  useEffect(() => {
+    if (carouselItems.length === 0) {
+      fetchItems();
+    }
+  }, [carouselItems]);
+
   const houseContext = useMemo(() => ({
     isFetching,
     carouselItems,
-    fetchItems
-  }), [isFetching, carouselItems, fetchItems]);
+    fetchItems,
+    removedList,
+    setRemovedList,
+  }), [isFetching, carouselItems, fetchItems, removedList, setRemovedList]);
 
   return (
     <HouseContext.Provider value={houseContext}>

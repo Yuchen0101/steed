@@ -1,7 +1,7 @@
-import React from 'react';
-import { View, ScrollView, Text, StyleSheet} from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, ScrollView, Text, StyleSheet, Dimensions} from 'react-native';
 import { Button } from 'react-native-elements';
-import ScreenContainer from "../../components/ScreenContainer";
+import { useHouseContext } from '../Game/houseContext';
 import { toPercent, toPrice, toRank, formatNumber } from '../../utils';
 
 import AppStyles from "../../AppStyles";
@@ -122,61 +122,80 @@ export default ({ navigation, route }) => {
         rank,
         avg_accuracy,
         duration,
+        id
     } = route.params;
+
+    const {
+        removedList,
+        setRemovedList,
+    } = useHouseContext();
+
+    const onClick = useCallback(
+        () => {
+            setRemovedList([...removedList, id]);
+            navigation.navigate('Game');
+        },
+        []
+    );
+
+    const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
+
     return (
-        <ScreenContainer style={styles.container}>
-            <View style={styles.header}>
-                <Text style={textStyle.headerText}>Results!</Text>
-            </View>
-            <View style={styles.accuracy}>
-                <Text style={textStyle.accuracy}>Your Accuracy</Text>
-                <Text style={textStyle.accuracyResult}>{toPercent(accuracy)}</Text>
-            </View>
-            <View style={styles.info}>
-                <View style={{marginRight: 12}}>
-                    <Text style={textStyle.price}>${toPrice(sold_price)}</Text>
-                    <Text style={textStyle.soldDate}>House last sold price</Text>
-                    <Text style={textStyle.soldDate}>{sold_date}</Text>
+        <View style={{...styles.container, height: scrollHeight}}>
+            <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+                <View style={styles.header}>
+                    <Text style={textStyle.headerText}>Results!</Text>
+                </View>
+                <View style={styles.accuracy}>
+                    <Text style={textStyle.accuracy}>Your Accuracy</Text>
+                    <Text style={textStyle.accuracyResult}>{toPercent(accuracy)}</Text>
+                </View>
+                <View style={styles.info}>
+                    <View style={{marginRight: 12}}>
+                        <Text style={textStyle.price}>${toPrice(sold_price)}</Text>
+                        <Text style={textStyle.soldDate}>House last sold price</Text>
+                        <Text style={textStyle.soldDate}>{sold_date}</Text>
+                    </View>
+                    <View>
+                        <Text style={textStyle.price}>{points}</Text>
+                        <Text style={textStyle.soldDate}>Your Punt in</Text>
+                        <Text style={textStyle.soldDate}>{duration} secs</Text>
+                    </View>
+                </View>
+                <View style={styles.performance}>
+                    <Text style={textStyle.performance}>
+                        {description}
+                    </Text>
+                </View>
+                <View style={styles.stats}>
+                    <Text style={textStyle.stats}>Your stats</Text>
+                    <View style={styles.cardContainer}>
+                        <View style={styles.card}>
+                            <Text style={textStyle.cardValue}>{formatNumber(total_points)}</Text>
+                            <Text style={textStyle.indicator}>Total Points</Text>
+                            <Text style={textStyle.indicator}>Earned</Text>
+                        </View>
+                        <View style={{...styles.card, ...styles.middleCard}}>
+                            <Text style={textStyle.cardValue}>{toRank(rank)}</Text>
+                            <Text style={textStyle.indicator}>Leader board</Text>
+                            <Text style={textStyle.indicator}>Position</Text>
+                        </View>
+                        <View style={styles.card}>
+                            <Text style={textStyle.cardValue}>{toPercent(avg_accuracy)}</Text>
+                            <Text style={textStyle.indicator}>Average</Text>
+                            <Text style={textStyle.indicator}>Accuracy</Text>
+                        </View>
+                    </View>
                 </View>
                 <View>
-                    <Text style={textStyle.price}>{points}</Text>
-                    <Text style={textStyle.soldDate}>Your Punt in</Text>
-                    <Text style={textStyle.soldDate}>{duration} secs</Text>
+                    <Button
+                        title="Play Again"
+                        type="outline"
+                        buttonStyle={styles.button}
+                        onPress={onClick}
+                    />
                 </View>
-            </View>
-            <View style={styles.performance}>
-                <Text style={textStyle.performance}>
-                    {description}
-                </Text>
-            </View>
-            <View style={styles.stats}>
-                <Text style={textStyle.stats}>Your stats</Text>
-                <View style={styles.cardContainer}>
-                    <View style={styles.card}>
-                        <Text style={textStyle.cardValue}>{formatNumber(total_points)}</Text>
-                        <Text style={textStyle.indicator}>Total Points</Text>
-                        <Text style={textStyle.indicator}>Earned</Text>
-                    </View>
-                    <View style={{...styles.card, ...styles.middleCard}}>
-                        <Text style={textStyle.cardValue}>{toRank(rank)}</Text>
-                        <Text style={textStyle.indicator}>Leader board</Text>
-                        <Text style={textStyle.indicator}>Position</Text>
-                    </View>
-                    <View style={styles.card}>
-                        <Text style={textStyle.cardValue}>{toPercent(avg_accuracy)}</Text>
-                        <Text style={textStyle.indicator}>Average</Text>
-                        <Text style={textStyle.indicator}>Accuracy</Text>
-                    </View>
-                </View>
-            </View>
-            <View>
-                <Button
-                    title="Play Again"
-                    type="outline"
-                    buttonStyle={styles.button}
-                    onPress={() => navigation.navigate('Game')}
-                />
-            </View>
-        </ScreenContainer>
+            </ScrollView>
+        </View>
     )
 }

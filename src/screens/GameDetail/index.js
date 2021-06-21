@@ -1,12 +1,11 @@
 import React, { useState, useMemo, useCallback } from "react";
-import { View, Animated, Alert, StyleSheet } from "react-native";
+import { View, Animated, Alert, StyleSheet, Dimensions, ScrollView } from "react-native";
 import Swiper from 'react-native-swiper';
 import { Button, Text, Image } from "react-native-elements";
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 import { Slider } from "@miblanchard/react-native-slider";
 
 import { useAuthContext } from "../../context";
-import ScreenContainer from "../../components/ScreenContainer";
 import { useHouseContext } from '../Game/houseContext';
 import { IconWithText, getPropertySummary } from '../Game/IconWithText';
 
@@ -159,6 +158,7 @@ export default ({ navigation, route }) => {
   // price
   const [value, setValue] = useState(5);
   const propertySummary = useMemo(() => getPropertySummary(houseDetail), []);
+  const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
 
   const CustomThumb = useCallback(() => {
     return <View style={guessStyles.thumb}></View>
@@ -169,7 +169,7 @@ export default ({ navigation, route }) => {
       'prop_id': id,
       'prediction': value,
     }).then((res) => {
-      navigation.replace("GameResult", {...res, duration: pre});
+      navigation.replace("GameResult", {...res, duration: pre, id});
     }).catch(() => {
       Alert.alert(
         "Error",
@@ -185,77 +185,79 @@ export default ({ navigation, route }) => {
   }
 
   return (
-    <ScreenContainer style={styles.container}>
-      <View style={styles.infoContainer}>
-        <Text style={styles.address}>{houseDetail.address}</Text>
-        <View style={styles.swiper}>
-          <Swiper loop={false}>
-            <View style={styles.image}>
-              <Image
-                source={{uri: houseDetail.media[0].url}}
-                style={styles.image}
-              />
-            </View>
-            <View style={styles.image}>
-              <Image
-                source={{uri: houseDetail.media[0].url}}
-                style={styles.image}
-              />
-            </View>
-          </Swiper>
+    <View style={{...styles.container, height: scrollHeight}}>
+      <ScrollView contentContainerStyle={{alignItems: 'center'}}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.address}>{houseDetail.address}</Text>
+          <View style={styles.swiper}>
+            <Swiper loop={false}>
+              <View style={styles.image}>
+                <Image
+                  source={{uri: houseDetail.media[0].url}}
+                  style={styles.image}
+                />
+              </View>
+              <View style={styles.image}>
+                <Image
+                  source={{uri: houseDetail.media[0].url}}
+                  style={styles.image}
+                />
+              </View>
+            </Swiper>
+          </View>
+          <View
+            style={{
+              flexDirection: "row",
+              paddingHorizontal: 5,
+            }}
+          >
+            {propertySummary.map((item, idx) => (
+              <IconWithText key={idx} icon={item.icon} text={item.text} />
+            ))}
+          </View>
         </View>
-        <View
-          style={{
-            flexDirection: "row",
-            paddingHorizontal: 5,
-          }}
-        >
-          {propertySummary.map((item, idx) => (
-            <IconWithText key={idx} icon={item.icon} text={item.text} />
-          ))}
+        <View style={styles.descContainer}>
+          <Text style={styles.headline}>{houseDetail.headline}</Text>
+          <Text style={styles.description}>{houseDetail.summaryDescription}</Text>
         </View>
-      </View>
-      <View style={styles.descContainer}>
-        <Text style={styles.headline}>{houseDetail.headline}</Text>
-        <Text style={styles.description}>{houseDetail.summaryDescription}</Text>
-      </View>
-      <View style={styles.guessContainer}>
-        <View style={styles.countdown}>
-          <UrgeWithPleasureComponent onComplete={onGuessPress} />
+        <View style={styles.guessContainer}>
+          <View style={styles.countdown}>
+            <UrgeWithPleasureComponent onComplete={onGuessPress} />
+          </View>
+          <View>
+            <View style={{marginBottom: 15}}>
+              <Text style={{...styles.tipText, fontSize: 12}}>Enter House Sold Price</Text>
+              <Text style={{...styles.tipText, fontSize: 10, fontStyle: 'italic'}}>(slide left-right)</Text>
+            </View>
+            <Slider
+              animateTransition
+              containerStyle={guessStyles.container}
+              renderThumbComponent={CustomThumb}
+              trackStyle={guessStyles.track}
+              maximumTrackTintColor={AppStyles.color.steedDarkBlue}
+              minimumTrackTintColor={AppStyles.color.transparentGreen}
+              maximumValue={10}
+              minimumValue={1}
+              step={1}
+              value={value}
+              onValueChange={value => setValue(value)}
+            />
+          </View>
+          <View style={styles.range}>
+            <Text style={styles.rangeValue}>1</Text>
+            <Text style={styles.rangeValue}>{value}</Text>
+            <Text style={styles.rangeValue}>10</Text>
+          </View>
         </View>
         <View>
-          <View style={{marginBottom: 15}}>
-            <Text style={{...styles.tipText, fontSize: 12}}>Enter House Sold Price</Text>
-            <Text style={{...styles.tipText, fontSize: 10, fontStyle: 'italic'}}>(slide left-right)</Text>
-          </View>
-          <Slider
-            animateTransition
-            containerStyle={guessStyles.container}
-            renderThumbComponent={CustomThumb}
-            trackStyle={guessStyles.track}
-            maximumTrackTintColor={AppStyles.color.steedDarkBlue}
-            minimumTrackTintColor={AppStyles.color.transparentGreen}
-            maximumValue={10}
-            minimumValue={1}
-            step={1}
-            value={value}
-            onValueChange={value => setValue(value)}
-          />
+          <Button
+            title="PUNT!"
+            buttonStyle={styles.button}
+            titleStyle={styles.buttonTitle}
+            onPress={onGuessPress}
+            />
         </View>
-        <View style={styles.range}>
-          <Text style={styles.rangeValue}>1</Text>
-          <Text style={styles.rangeValue}>{value}</Text>
-          <Text style={styles.rangeValue}>10</Text>
-        </View>
-      </View>
-      <View>
-        <Button
-          title="PUNT!"
-          buttonStyle={styles.button}
-          titleStyle={styles.buttonTitle}
-          onPress={onGuessPress}
-          />
-      </View>
-    </ScreenContainer>
+      </ScrollView>
+    </View>
   );
 };
