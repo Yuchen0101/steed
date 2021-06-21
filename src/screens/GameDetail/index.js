@@ -191,18 +191,18 @@ export default ({ navigation, route }) => {
           <Text style={styles.address}>{houseDetail.address}</Text>
           <View style={styles.swiper}>
             <Swiper loop={false}>
-              <View style={styles.image}>
-                <Image
-                  source={{uri: houseDetail.media[0].url}}
-                  style={styles.image}
-                />
-              </View>
-              <View style={styles.image}>
-                <Image
-                  source={{uri: houseDetail.media[0].url}}
-                  style={styles.image}
-                />
-              </View>
+              {
+                houseDetail.media.map(item => {
+                  return (
+                    <View style={styles.image}>
+                      <Image
+                        source={{uri: item.url}}
+                        style={styles.image}
+                      />
+                    </View>
+                  )
+                })
+              }
             </Swiper>
           </View>
           <View
