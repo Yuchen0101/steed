@@ -156,7 +156,7 @@ export default ({ navigation, route }) => {
   const houseDetail = carouselItems.filter(item => item._id === id)[0];
 
   // price
-  const [value, setValue] = useState(5);
+  const [value, setValue] = useState(parseInt((houseDetail.min_price + houseDetail.max_price)/2));
   const propertySummary = useMemo(() => getPropertySummary(houseDetail), []);
   const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
 
