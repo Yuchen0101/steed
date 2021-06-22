@@ -15,13 +15,12 @@ const GameStackScreen = () => {
   const { authFetch } = useContext(AuthContext);
 
   const [isFetching, setIsFetching] = useState(false);
-  const [carouselItems, setCarouselItems] = useState(exampleItems);
+  const [carouselItems, setCarouselItems] = useState([]);
   const [removedList, setRemovedList] = useState([]);
 
   const fetchItems = useCallback(() => {
     setIsFetching(true);
     authFetch("GET", "/api/get_properties").then((res) => {
-        // console.log('12345', res.matched);
         const list = res.matched;
         const filteredList = list.filter(item => !removedList.includes(item._id));
         setCarouselItems(filteredList);
@@ -34,8 +33,10 @@ const GameStackScreen = () => {
   }, []);
 
   useEffect(() => {
+    setIsFetching(true);
     const filteredList = carouselItems.filter(item => !removedList.includes(item._id));
     setCarouselItems(filteredList);
+    setIsFetching(false);
   }, [removedList]);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ const GameStackScreen = () => {
         screenOptions={{
           headerTitle: () => <Logo />,
           headerTitleAlign: "center",
+          headerLeft: ()=> null
         }}
       >
         <GameStack.Screen name="Game" component={Game} />

@@ -7,18 +7,17 @@ import { IconWithText, getPropertySummary, getLandSummary } from './IconWithText
 import AppStyles from "../../AppStyles";
 
 export default ({ property }) => {
-
   const propertySummary = useMemo(() => getPropertySummary(property), [property]);
   const landSummary = useMemo(() => getLandSummary(property), [property]);
 
   const navigation = useNavigation();
-  const onPress = useCallback(() => {
+  const onPress = () => {
     navigation.navigate('GameDetail', {id: property._id});
-  }, []);
+  }
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", paddingTop:30 }}>
         <View
           style={{
             flexDirection: "row",
@@ -39,7 +38,7 @@ export default ({ property }) => {
             }}
             style={{ width: 200, height: 150 }}
             PlaceholderContent={<ActivityIndicator />}
-            containerStyle={{borderRadius:5, borderColor:AppStyles.color.steedDarkGrey, borderLeftWidth:1}}
+            containerStyle={{borderRadius:5, borderColor:AppStyles.color.steedDarkGrey}}
           />
         </View>
         <View

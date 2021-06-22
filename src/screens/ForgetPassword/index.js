@@ -53,11 +53,9 @@ const ResetPassword = ({ navigation, email }) => {
   const handleOnPress = () => {
     checkPassword();
     setLoading(true);
-    console.log(email, code, password);
     Auth.forgotPasswordSubmit(email, code, password)
       .then((data) => {
         navigation.push("SignIn")
-        console.log(data)
       })
       .catch((err) => console.log(err))
       .finally(setLoading(false));

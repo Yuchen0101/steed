@@ -54,7 +54,7 @@ export const getPropertySummary = (property) => ([
     },
     {
       icon: "directions-car",
-      text: property.carSpaces,
+      text: property.carspaces,
     },
     {
       icon: null,
@@ -66,11 +66,11 @@ export const getLandSummary = (property) => ([
     {
         icon: "crop-square",
         title: "Land Size:",
-        text: property.landSize,
+        text: property.landArea?property.landArea:"N/A",
     },
     {
         icon: "crop-square",
         title: "Area Size:",
-        text: property.areaSize,
+        text: property.buildingArea?property.buildingArea:"N/A",
     },
 ]);

@@ -34,13 +34,14 @@ export default ({
   return (
     <View style={{height: scrollHeight}}>
       <ScrollView contentContainerStyle={{alignItems: 'center'}}>
-        <View>
+        <View style={{marginVertical:20}}>
           <Text h3>{WELCOME_TITLE}</Text>
           <Text
             style={{
               color: AppStyles.color.steedDarkGrey,
               textAlign: "justify",
               paddingHorizontal: 20,
+              marginTop:10
             }}
           >
             {WELCOME_CONTENT}
@@ -54,7 +55,7 @@ export default ({
             width: 120,
           }}
           titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
-          containerStyle={{ marginTop: 15 }}
+          containerStyle={{ marginTop: 20 }}
           onPress={() => fetchItems()}
         ></Button>
       </ScrollView>

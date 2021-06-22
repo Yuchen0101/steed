@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
         width: "100%",
         // height: "100%",
         paddingHorizontal: 30,
-        paddingTop: 40,
+        paddingTop: 20,
         display: 'flex',
         alignItems: 'center',
     },
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
         marginBottom: 60,
     },
     stats: {
-        marginBottom: 100
+        marginBottom: 60
     },
     cardContainer: {
         display: 'flex',
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
     button: {
         width: 160,
         height: 48,
-        borderWidth: 1
+        borderWidth: 1,
     }
 })
 
