@@ -165,6 +165,7 @@ export default ({ navigation, route }) => {
   }, []);
 
   const onGuessPress = () => {
+    console.log(value), 
     authFetch("POST", "/api/make_prediction", {
       'prop_id': id,
       'prediction': value,
@@ -236,17 +237,17 @@ export default ({ navigation, route }) => {
               trackStyle={guessStyles.track}
               maximumTrackTintColor={AppStyles.color.steedDarkBlue}
               minimumTrackTintColor={AppStyles.color.transparentGreen}
-              maximumValue={10}
-              minimumValue={1}
-              step={1}
+              maximumValue={parseInt(houseDetail.max_price)}
+              minimumValue={parseInt(houseDetail.min_price)}
+              step={10}
               value={value}
               onValueChange={value => setValue(value)}
             />
           </View>
           <View style={styles.range}>
-            <Text style={styles.rangeValue}>1</Text>
+            <Text style={styles.rangeValue}>{parseInt(houseDetail.min_price)}</Text>
             <Text style={styles.rangeValue}>{value}</Text>
-            <Text style={styles.rangeValue}>10</Text>
+            <Text style={styles.rangeValue}>{parseInt(houseDetail.max_price)}</Text>
           </View>
         </View>
         <View>
