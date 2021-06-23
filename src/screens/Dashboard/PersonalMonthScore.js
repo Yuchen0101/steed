@@ -51,7 +51,7 @@ export default ({currentMonth, allTime}) => {
       context: "Leader Board Position",
     },
     {
-      title: `${currentMonth.accuracy * 100}%`,
+      title: `${parseFloat(currentMonth.accuracy * 100).toFixed(2)}%`,
       context: "Average Accuracy",
     },
   ];
@@ -66,7 +66,7 @@ export default ({currentMonth, allTime}) => {
       context: "Leader Board Position",
     },
     {
-      title: `${allTime.accuracy * 100}%`,
+      title: `${parseFloat(allTime.accuracy * 100).toFixed(2)}%`,
       context: "Average Accuracy",
     },
   ];

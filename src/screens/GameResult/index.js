@@ -157,7 +157,7 @@ export default ({ navigation, route }) => {
                         <Text style={textStyle.soldDate}>{sold_date}</Text>
                     </View>
                     <View>
-                        <Text style={textStyle.price}>{points}</Text>
+                        <Text style={textStyle.price}>+{points} Points</Text>
                         <Text style={textStyle.soldDate}>Your Punt in</Text>
                         <Text style={textStyle.soldDate}>{duration} secs</Text>
                     </View>

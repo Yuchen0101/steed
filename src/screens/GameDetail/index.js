@@ -21,7 +21,7 @@ import {
 } from "../Game/IconWithText";
 
 import AppStyles from "../../AppStyles";
-import { ActivityIndicator } from "react-native-paper";
+import { ActivityIndicator } from "react-native";
 
 const styles = StyleSheet.create({
   container: {
@@ -200,7 +200,7 @@ export default ({ navigation, route }) => {
         <View style={styles.infoContainer}>
           <Text style={styles.address}>{houseDetail.address}</Text>
           <View style={styles.swiper}>
-            <Swiper loop={false}>
+            <Swiper loop={true}>
               {houseDetail.media.map((item, idx) => {
                 return (
                   <View style={styles.image} key={idx}>
@@ -262,7 +262,7 @@ export default ({ navigation, route }) => {
               minimumTrackTintColor={AppStyles.color.transparentGreen}
               maximumValue={parseInt(houseDetail.max_price)}
               minimumValue={parseInt(houseDetail.min_price)}
-              step={10}
+              step={1}
               value={value}
               onValueChange={(value) => {
                 setValue(value[0]);
