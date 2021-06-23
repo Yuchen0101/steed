@@ -67,7 +67,7 @@ export default ({ impact }) => {
         />
         <Divider
           style={{
-            backgroundColor: AppStyles.color.steedLigthGrey,
+            backgroundColor: AppStyles.color.steedLightGrey,
             height: 1,
             marginHorizontal: 30,
             marginVertical: 15,

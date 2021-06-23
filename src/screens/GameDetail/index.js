@@ -22,6 +22,7 @@ import {
 
 import AppStyles from "../../AppStyles";
 import { ActivityIndicator } from "react-native";
+import { numberWithCommas } from '../../utils';
 
 const styles = StyleSheet.create({
   container: {
@@ -81,15 +82,15 @@ const styles = StyleSheet.create({
   tipText: {
     alignSelf: "flex-start",
   },
+  rangeValue: {
+    fontSize: 12,
+  },
   range: {
     width: "100%",
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
-  },
-  rangeValue: {
-    fontSize: 10,
   },
   button: {
     width: 120,
@@ -252,6 +253,7 @@ export default ({ navigation, route }) => {
               >
                 (slide left-right)
               </Text>
+              <Text style={{fontSize:15, fontWeight:"bold"}}>{numberWithCommas(value)}</Text>
             </View>
             <Slider
               animateTransition
@@ -270,13 +272,13 @@ export default ({ navigation, route }) => {
             />
           </View>
           <View style={styles.range}>
-            <Text style={styles.rangeValue}>
-              {parseInt(houseDetail.min_price)}
-            </Text>
-            <Text style={styles.rangeValue}>{value}</Text>
-            <Text style={styles.rangeValue}>
-              {parseInt(houseDetail.max_price)}
-            </Text>
+                <Text style={styles.rangeValue}>
+                  {numberWithCommas(parseInt(houseDetail.min_price))}
+                </Text>
+                {/* <Text style={styles.rangeValue}>{value}</Text> */}
+                <Text style={styles.rangeValue}>
+                  {numberWithCommas(parseInt(houseDetail.max_price))}
+                </Text>
           </View>
         </View>
         <View>

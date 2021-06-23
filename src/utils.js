@@ -42,3 +42,7 @@ export const toRank = value => {
 export const formatNumber = value => {
     return value.toLocaleString('en-US');
 }
+
+export const numberWithCommas = value => {
+    return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
