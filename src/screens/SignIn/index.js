@@ -28,7 +28,7 @@ export default ({ navigation }) => {
       fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
         method: "POST",
         headers: {
-          Authorization: "eyJraWQiOiJUQjFWcTZxc3NIN20rZGg1cThIazRDZk4wNUdcL1Qrdm4rTVZvZzRBWjNqMD0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIzMTEzYjRjOS05Yjc1LTQ5MzQtODgyZS1iYTUyN2UzMzEzZmUiLCJhdWQiOiIyM2syY3NiM2Q2YzR1NTFlNjZuZDJrdXM0byIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwidG9rZW5fdXNlIjoiaWQiLCJjdXN0b206bm90aWZpY2F0aW9uX3Rva2VuIjoiRXhwb25lbnRQdXNoVG9rZW5bRXFwZGJZS1JVdy1ubDNlT0hWSHVnY10iLCJhdXRoX3RpbWUiOjE2MjQxNzgyMjksImlzcyI6Imh0dHBzOlwvXC9jb2duaXRvLWlkcC5hcC1zb3V0aGVhc3QtMi5hbWF6b25hd3MuY29tXC9hcC1zb3V0aGVhc3QtMl90TUp5dzlaUHIiLCJjb2duaXRvOnVzZXJuYW1lIjoiZmVpZmFueiIsImN1c3RvbTpkaXNwbGF5X25hbWUiOiJUZWQgWmhhbmciLCJleHAiOjE2MjQyNjQ2MjksImlhdCI6MTYyNDE3ODIyOSwiZW1haWwiOiJ6ZmVpZmFuMUBnbWFpbC5jb20ifQ.ZlP4930M3qYg6RsbjO-PFK9pYBWXISdUfjASUhsn6Wgbh2Jcwc7Zcnmv2y-UlPhmqtTvL3wnKJD5VKhvklibaIxeqyE4pM3J1vfOzGmM-0i5mnomqoI6cD1lII636uhCHWZ2wIudPOcdIjoZFZNpTq6ipify1ziNo6J20Iap9ZDvXASL2EQJqI8m3NqFXkMPhAMiJLJICo40txHRv20S4_KQltspfV8IHuMqyOxL1-ZXv8PYBmWjL_XMQuu0AJup41eaTrzAloqy6sekQxnjdli5t2SfhLILBAsuXVCu3e0QyMW0ERTcpOLt0aHWIw9zZjVptuVgUwRS2stuF-1AiQ",
+          Authorization: user.signInUserSession.idToken.jwtToken,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(location),
