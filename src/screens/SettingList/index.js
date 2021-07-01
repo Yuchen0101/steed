@@ -5,6 +5,7 @@ import ScreenContainer from "../../components/ScreenContainer";
 import { ListItem, Icon, Button } from "react-native-elements";
 import { ScrollView } from "react-native";
 import { Dimensions } from "react-native";
+import { Alert } from 'react-native'
 import { AuthContext } from "../../context";
 
 export default ({ navigation }) => {
@@ -84,7 +85,23 @@ export default ({ navigation }) => {
               backgroundColor: "#ced6f3",
               height: 120,
             }}
-            onPress={()=>signOut()}
+            onPress={()=>{
+              Alert.alert(
+                  ('Logout'),
+                  ('Are you sure you want to logout?'),
+                  [
+                    {
+                      text: ('Ok'),
+                      onPress: async () => signOut()
+                    },
+                    {text: ('Cancel'), style: 'cancel'},
+                  ],
+                  {
+                    cancelable: false,
+                  },
+                );
+              }
+            }
           >
             <Icon
               name="logout"
