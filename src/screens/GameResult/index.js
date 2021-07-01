@@ -85,7 +85,9 @@ const textStyle = StyleSheet.create({
     },
     soldDate: {
         color: AppStyles.color.steedDarkGrey,
-        fontSize: 10
+        fontSize: 10, 
+        width:120, 
+        textAlign: 'center'
     },
     performance: {
         color: AppStyles.color.steedLightGrey,
@@ -149,8 +151,8 @@ export default ({ navigation, route }) => {
                     <Text style={textStyle.headerText}>Results!</Text>
                 </View>
                 <View style={styles.accuracy}>
-                    <Text style={textStyle.accuracy}>Your Accuracy</Text>
-                    <Text style={textStyle.accuracyResult}>{toPercent(accuracy)}</Text>
+                    <Text style={textStyle.accuracy}>Points You Earned</Text>
+                    <Text style={textStyle.accuracyResult}>+{points}</Text>
                 </View>
                 <View style={styles.info}>
                     <View style={{marginRight: 12}}>
@@ -159,8 +161,8 @@ export default ({ navigation, route }) => {
                         <Text style={textStyle.soldDate}>{sold_date.replace(/['"]+/g, '')}</Text>
                     </View>
                     <View>
-                        <Text style={textStyle.price}>+{points} Points</Text>
-                        <Text style={textStyle.soldDate}>Your Punt in</Text>
+                        <Text style={textStyle.price}>{toPercent(accuracy)} Accurate</Text>
+                        <Text style={textStyle.soldDate}>You punt in</Text>
                         <Text style={textStyle.soldDate}>{duration} secs</Text>
                     </View>
                 </View>

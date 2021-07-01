@@ -3,15 +3,26 @@ import { LinearProgress, Icon, ListItem,Text } from "react-native-elements";
 import { View } from "react-native";
 import AppStyles from "../../AppStyles";
 
+const badgeLevel = {
+  1: "Gold",
+  2: "Silver", 
+  3: "Bronze",
+}
+
+const badgeColor = {
+  1: AppStyles.color.badgeGold,
+  2: AppStyles.color.badgeSilver,
+  3: AppStyles.color.badgeBronze,
+}
+
 export default ({ badges }) => {
   const list = badges.map((item) => ({
     title: item.name,
     subtitle: item.description,
-    accuracy: item?.accuracy,
-    color: item.achieved
-      ? AppStyles.color.steedGreen
-      : AppStyles.color.steedWhite,
-    date: item.date,
+    progress: item?.progress,
+    total: item?.total,
+    color: badgeColor[item.level],
+    level: badgeLevel[item.level]
   }));
 
   if(list.length == 0) {
@@ -24,7 +35,8 @@ export default ({ badges }) => {
             key={i}
             containerStyle={{
               backgroundColor: AppStyles.color.steedBlue,
-              height: 100,
+              height: 120,
+              marginTop: 10,
               marginBottom: 10,
               borderRadius: 10,
             }}
@@ -35,41 +47,44 @@ export default ({ badges }) => {
               <ListItem.Title
                 style={{
                   textAlign: "left",
-                  fontSize: 15,
+                  fontSize: 17,
                   fontWeight: "bold",
-                  color: item.color,
+                  color: AppStyles.color.steedGreen,
                   marginBottom: 5,
                 }}
               >
-                {item.title}
+                {item.title} - {item.level}
               </ListItem.Title>
               <ListItem.Subtitle
                 style={{
                   textAlign: "left",
                   fontSize: 13,
-                  color: item.color,
-                  marginBottom: 5,
+                  color: AppStyles.color.steedGreen,
+                  marginBottom: 15,
                 }}
               >
                 {item.subtitle}
               </ListItem.Subtitle>
-              {item.accuracy && (
+              {item.progress && (
                 <>
-                  <ListItem.Subtitle
-                    style={{
-                      textAlign: "left",
-                      fontSize: 13,
-                      color: item.color,
-                      marginBottom: 5,
-                    }}
-                  >
-                    {`${item.accuracy} Accuracy  |  ${item.date}`}
-                  </ListItem.Subtitle>
                   <LinearProgress
                     variant="determinate"
-                    color={item.color}
-                    value={item.accuracy}
+                    color={AppStyles.color.steedGreen}
+                    value={item.progress / item.total}
                   />
+                  <ListItem.Subtitle
+                    style={{
+                      textAlign: "right",
+                      alignSelf: 'stretch',
+                      fontSize: 13,
+                      marginEnd: 20,
+                      color: AppStyles.color.steedGreen,
+                      marginBottom: 2,
+                      marginTop: 2,
+                    }}
+                  >
+                    {`${item.progress} / ${item.total}`}
+                  </ListItem.Subtitle>
                 </>
               )}
             </ListItem.Content>

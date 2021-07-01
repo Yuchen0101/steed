@@ -156,8 +156,18 @@ export default ({ navigation }) => {
               }
               onChangeText={(value) => handleOnChangeText(value, "displayName")}
             />
+            <Text
+              style={{
+                fontSize: 10,
+                textAlign: "left", 
+                alignSelf: "stretch",
+                marginLeft: 35
+              }}
+            >
+              Username cannot have spaces
+            </Text>
             <Input
-              placeholder="Enter Username... "
+              placeholder="Enter a username..."
               leftIcon={
                 <MaterialCommunityIcons
                   name="account"
@@ -174,8 +184,17 @@ export default ({ navigation }) => {
               }
               onChangeText={(value) => handleOnChangeText(value, "email")}
             />
+            <Text
+              style={{
+                fontSize: 10,
+                textAlign: "center", 
+                alignSelf: "stretch",
+              }}
+            >
+              Minimum length 8, please include at least one letter and one number
+            </Text>
             <Input
-              placeholder="Enter Password... "
+              placeholder="Enter Password"
               leftIcon={
                 <MaterialCommunityIcons name="key" color="white" size={20} />
               }
