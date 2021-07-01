@@ -23,22 +23,22 @@ const TabsScreen = () => {
       initialRouteName="GameStackScreen"      
     >
       <Tabs.Screen
+        name="DashboardStackScreen"
+        component={DashboardStackScreen}
+        options={{
+          tabBarLabel: "Stats",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="poll" color={color} size={26} />
+          )
+        }}
+      />
+      <Tabs.Screen
         name="GameStackScreen"
         component={GameStackScreen}
         options={{
           tabBarLabel: "Game",
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="rhombus" color={color} size={26} />
-          )
-        }}
-      />
-      <Tabs.Screen
-        name="DashboardStackScreen"
-        component={DashboardStackScreen}
-        options={{
-          tabBarLabel: "Dashboard",
-          tabBarIcon: ({ color }) => (
-            <MaterialCommunityIcons name="poll" color={color} size={26} />
           )
         }}
       />

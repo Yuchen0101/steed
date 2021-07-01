@@ -9,15 +9,15 @@ const CustomCarousel = () => {
   const exampleItems = [
     {
       title: "We create the challenges",
-      text: "The Steed Punt app creates challenges for you to participate in",
+      text: "The House Punt app creates challenges for you to participate in",
     },
     {
       title: "You predict the sale price",
       text: "You answer by predicting the last sold prices. The properties will be recently sold. Every challenge you pick will have a clock you play against. Submit your punt and get instant results",
     },
     {
-      title: "You get Rewarded",
-      text: "You will be given your result immediately with a consolidated score and leaderboard position vs other players. Earn mor points to win prizes.",
+      title: "You get rewarded",
+      text: "You will be given your result immediately with a consolidated score and leaderboard position vs other players. Earn more points to win prizes.",
     },
   ];
 
@@ -92,7 +92,7 @@ export default ({ navigation }) => {
         Welcome to Steed Punt
       </Text>
       <Text h4 style={{ color: AppStyles.color.steedDarkGrey }}>
-        The Game of House Value Predictions
+        The Aussie House Price Game
       </Text>
       <Text
         h5
@@ -162,7 +162,7 @@ export default ({ navigation }) => {
           marginTop: 10,
           width: 350,
         }}
-        titleStyle={{ color: AppStyles.color.steedLigthGrey }}
+        titleStyle={{ color: AppStyles.color.steedLightGrey }}
       />
       </ScrollView>
     </View>

@@ -3,7 +3,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import { Input, Button } from "react-native-elements";
 import { AuthContext } from "../../context";
 import Logo from "../../components/Logo";
-import { View } from "react-native";
+import { View, Image } from "react-native";
 import {
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
@@ -70,7 +70,7 @@ export default ({ navigation }) => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={{ alignItems: "center" }}>
           <View style={{ marginVertical: 40 }}>
-            <Logo width={200} height={200} />
+            <Image source={require('../../../assets/splash_logo.png')}/>
           </View>
           <Input
             placeholder="Enter Email or Username... "

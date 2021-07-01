@@ -48,7 +48,7 @@ export default ({currentMonth, allTime}) => {
     },
     {
       title: `${currentMonth.leaderboard_position}th`,
-      context: "Leader Board Position",
+      context: "Leaderboard Position",
     },
     {
       title: `${parseFloat(currentMonth.accuracy * 100).toFixed(2)}%`,
@@ -63,7 +63,7 @@ export default ({currentMonth, allTime}) => {
     },
     {
       title: `${allTime.leaderboard_position}th`,
-      context: "Leader Board Position",
+      context: "Leaderboard Position",
     },
     {
       title: `${parseFloat(allTime.accuracy * 100).toFixed(2)}%`,
@@ -82,6 +82,9 @@ export default ({currentMonth, allTime}) => {
           borderRadius: 10,
         }}
       >
+        <Text style={{ marginTop: 0, marginBottom: 10, fontStyle: "italic" }}>
+          Current Month
+        </Text>
         <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
           {monthScores.map((item, idx) => (
             <ScoreCard key={idx} title={item.title} context={item.context} />

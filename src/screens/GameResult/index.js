@@ -32,6 +32,7 @@ const styles = StyleSheet.create({
     info: {
         display: 'flex',
         flexDirection: 'row',
+        marginHorizontal:20,
         marginBottom: 25
     },
     performance: {
@@ -65,11 +66,11 @@ const styles = StyleSheet.create({
 
 const textStyle = StyleSheet.create({
     headerText: {
-        color: AppStyles.color.steedLigthGrey,
+        color: AppStyles.color.steedLightGrey,
         fontSize: 30,
     },
     accuracy: {
-        color: AppStyles.color.steedLigthGrey,
+        color: AppStyles.color.steedLightGrey,
         fontSize: 16,
         marginBottom: 3,
     },
@@ -87,8 +88,9 @@ const textStyle = StyleSheet.create({
         fontSize: 10
     },
     performance: {
-        color: AppStyles.color.steedLigthGrey,
-        lineHeight: 18,
+        color: AppStyles.color.steedLightGrey,
+        lineHeight: 20,
+        fontSize:20,
         textAlign: 'center'
     },
     stats: {
@@ -100,7 +102,7 @@ const textStyle = StyleSheet.create({
     },
     cardValue: {
         fontSize: 16,
-        color: AppStyles.color.steedLigthGrey,
+        color: AppStyles.color.steedLightGrey,
         marginBottom: 2
     },
     indicator: {
@@ -153,8 +155,8 @@ export default ({ navigation, route }) => {
                 <View style={styles.info}>
                     <View style={{marginRight: 12}}>
                         <Text style={textStyle.price}>${toPrice(sold_price)}</Text>
-                        <Text style={textStyle.soldDate}>House last sold price</Text>
-                        <Text style={textStyle.soldDate}>{sold_date}</Text>
+                        {/* <Text style={textStyle.soldDate}>House last sold price</Text> */}
+                        <Text style={textStyle.soldDate}>{sold_date.replace(/['"]+/g, '')}</Text>
                     </View>
                     <View>
                         <Text style={textStyle.price}>+{points} Points</Text>
@@ -177,7 +179,7 @@ export default ({ navigation, route }) => {
                         </View>
                         <View style={{...styles.card, ...styles.middleCard}}>
                             <Text style={textStyle.cardValue}>{toRank(rank)}</Text>
-                            <Text style={textStyle.indicator}>Leader board</Text>
+                            <Text style={textStyle.indicator}>Leaderboard</Text>
                             <Text style={textStyle.indicator}>Position</Text>
                         </View>
                         <View style={styles.card}>

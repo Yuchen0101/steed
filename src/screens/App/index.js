@@ -45,7 +45,7 @@ export default () => {
     },
     Text: {
       style: {
-        color: AppStyles.color.steedLigthGrey,
+        color: AppStyles.color.steedLightGrey,
         textAlign: "center",
       },
     },

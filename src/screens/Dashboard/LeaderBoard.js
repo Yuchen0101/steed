@@ -15,14 +15,22 @@ const ScoreItem = ({ rank, title, value }) => (
 export default ({leaderboard}) => {
   const rankingMonth = leaderboard.current_month
   const rankingAll = leaderboard.overall
+  const rankingAccuracy = leaderboard.accuracy
 
-  const buttons = ["Month", "All Time"];
+  const buttons = ["Monthly", "All Time", "Accuracy"];
   const [selectedIndex, setSelectedIndex] = React.useState(0);
   const [ranking, setRanking] = React.useState(rankingMonth);
   const handleOnPress = (idx) => {
     setSelectedIndex(idx);
-    setRanking(idx==0?rankingMonth:rankingAll)
+    if (idx==0){
+      setRanking(rankingMonth)
+    }else if (idx==1){
+      setRanking(rankingAll)
+    }else{
+      setRanking(rankingAccuracy)
+    }
   };
+  
 
   return (
     <ScrollView>
@@ -31,7 +39,7 @@ export default ({leaderboard}) => {
           onPress={handleOnPress}
           selectedIndex={selectedIndex}
           buttons={buttons}
-          containerStyle={{ width: 150, borderWidth: 0 }}
+          containerStyle={{ width: 250, borderWidth: 0 }}
           innerBorderStyle={{ color: AppStyles.color.steedDarkBlue, width: 10 }}
           selectedButtonStyle={{
             backgroundColor: AppStyles.color.steedDarkBlue,
@@ -41,6 +49,8 @@ export default ({leaderboard}) => {
           }}
           textStyle={{
             color: AppStyles.color.steedDarkGrey,
+            fontWeight: "bold",
+            fontSize: 15
           }}
           selectedTextStyle={{
             color: AppStyles.color.steedWhite,
@@ -48,9 +58,9 @@ export default ({leaderboard}) => {
           }}
         />
         <View style={{ width: Dimensions.get("window").width - 30, marginBottom:10}}>
-        <Text style={{textAlign:"left"}}>
-        You will be given your accuracy result immediately and a consolidated score and leader board positioning on where you stand based on your past predictions.
-        </Text>
+          <Text style={{textAlign:"left"}}>
+          Check your leaderboard position on where you stand based on your past predictions.
+          </Text>
         </View>
 
 
@@ -89,7 +99,7 @@ export default ({leaderboard}) => {
               fontWeight: "bold",
             }}
           >
-            Points Earned
+            Score
           </Text>
         </View>
 

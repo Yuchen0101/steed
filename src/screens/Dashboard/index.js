@@ -66,9 +66,9 @@ export default () => {
       <View
         style={{ height: 120, paddingHorizontal: 20, paddingVertical:10}}
       >
-        <Text h3>Dashboard </Text>
+        <Text h3>Stats </Text>
         <Text style={{ fontSize: 15, margin: 10 }}>
-          Explore your ratings and where you stand on the leader board
+          Explore your ratings and where you stand on the Leaderboard
         </Text>
       </View>
       <View style={{height:scrollHeight}}>
@@ -85,7 +85,7 @@ export default () => {
           <ButtonGroup
             onPress={setSelectedIndex}
             selectedIndex={selectedIndex}
-            buttons={[displayName, "Leader Board"]}
+            buttons={[displayName, "Leaderboard"]}
             containerStyle={{
               width: 300,
               borderWidth: 0,

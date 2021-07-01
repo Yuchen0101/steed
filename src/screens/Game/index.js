@@ -8,8 +8,8 @@ import { useHouseContext } from './houseContext';
 import CustomCarousel from './CustomCarousel';
 
 const WELCOME_TITLE = 'Welcome';
-const WELCOME_CONTENT = 'We have curated a list of properties that may be of high interest to you.'
-  + 'Swipe through the cards to see which one catches your interest and then click to predict the last sold price';
+const WELCOME_CONTENT = 'We have curated a list of properties that may be of interest to you. '
+  + 'Swipe through the cards to see which one catches your interest and pick a house you want to predict!';
 
 export default ({
   navigation,

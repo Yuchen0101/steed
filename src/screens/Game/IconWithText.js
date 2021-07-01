@@ -60,6 +60,10 @@ export const getPropertySummary = (property) => ([
       icon: null,
       text: property.propertyType
     },
+    {
+      icon: null,
+      text: property.short_sold_date, 
+    }
 ]);
 
 export const getLandSummary = (property) => ([
@@ -70,7 +74,7 @@ export const getLandSummary = (property) => ([
     },
     {
         icon: "crop-square",
-        title: "Area Size:",
+        title: "Floor Size:",
         text: property.buildingArea?property.buildingArea:"N/A",
     },
 ]);
