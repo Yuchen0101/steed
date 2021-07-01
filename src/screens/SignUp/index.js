@@ -77,13 +77,22 @@ export default ({ navigation }) => {
       if (!userInfo[filed]) throw Error(`${filed} is required...`);
     });
 
+    // username cannot contain space
+    if(userInfo.username.indexOf(' ') >= 0) throw Error(`username cannot contains space`);
+
+    // check password policy, Minimum length 8, please include at least one letter and one number
+    if(userInfo.password.length <8 )throw Error(`password minimum length is 8`);
+    if(!/[a-zA-Z]/g.test(userInfo.password))throw Error(`password include at least one letter`);
+    if(!/\d/.test(userInfo.password))throw Error(`password include at least one number`);
+
+
     if (userInfo["password"] != userInfo["confirmPassword"])
       throw Error(`password doesn't match`);
 
     return true;
   };
 
-  const handleLoginOnPress = () => {
+  const handleLoginOnPress = async () => {
     try {
       checkUserInfo(userInfo);
     } catch (error) {
@@ -91,11 +100,15 @@ export default ({ navigation }) => {
       return;
     }
 
-    setLoading(true);
-    signUp(userInfo)
-      .then(setShowConfirmMessage(true))
-      .catch((err) => setErrorMessage(err.message))
-      .finally(setLoading(false));
+    try {
+       setLoading(true);
+       await signUp(userInfo)
+       setShowConfirmMessage(true)
+    } catch (err) {
+      setErrorMessage(err.message)
+    } finally{
+      setLoading(false)
+    }
   };
 
   if (showConfirmMessage)
