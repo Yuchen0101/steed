@@ -89,7 +89,7 @@ export default ({ navigation }) => {
     <View style={{height:scrollHeight}}>
       <ScrollView contentContainerStyle={{ alignItems: "center"}}>
       <Text h3 style={{ marginTop: 10 }}>
-        Welcome to Steed Punt
+        Welcome to House Punt
       </Text>
       <Text h4 style={{ color: AppStyles.color.steedDarkGrey }}>
         The Aussie House Price Game

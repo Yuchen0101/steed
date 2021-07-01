@@ -21,7 +21,7 @@ const ScoreCard = ({ title, context }) => {
           textAlign: "left",
           alignSelf: "stretch",
           fontWeight: "bold",
-          color: AppStyles.color.steedGreen,
+          color: AppStyles.color.steedLightGrey,
         }}
       >
         {title}
@@ -31,7 +31,7 @@ const ScoreCard = ({ title, context }) => {
           textAlign: "left",
           alignSelf: "stretch",
           fontSize: 12,
-          color: AppStyles.color.steedGreen,
+          color: AppStyles.color.steedLightGrey,
         }}
       >
         {context}
