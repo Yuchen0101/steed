@@ -16,7 +16,7 @@ import { useAuthContext } from "../../context";
 import { useHouseContext } from "../Game/houseContext";
 import {
   IconWithText,
-  getPropertySummary,
+  getDetailPropertySummary,
   getLandSummary,
 } from "../Game/IconWithText";
 
@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   // header container
   infoContainer: {
-    marginBottom: 15,
+    marginBottom: 10,
     display: "flex",
     alignItems: "center",
   },
@@ -185,7 +185,7 @@ export default ({ navigation, route }) => {
   const [value, setValue] = useState(
     parseInt((houseDetail.min_price + houseDetail.max_price) / 2)
   );
-  const propertySummary = useMemo(() => getPropertySummary(houseDetail), []);
+  const propertySummary = useMemo(() => getDetailPropertySummary(houseDetail), []);
   const landSummary = useMemo(() => getLandSummary(houseDetail), []);
 
   const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
@@ -261,7 +261,7 @@ export default ({ navigation, route }) => {
         </View>
 
         <View style={styles.guessContainer}>
-          <View style={{ flexDirection:"row" }}>
+          <View style={{ flexDirection:"row", marginBottom: 0, marginTop: 0 }}>
             <View style={styles.countdown} >
               <UrgeWithPleasureComponent onComplete={onGuessPress} />
             </View>

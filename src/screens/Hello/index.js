@@ -9,15 +9,15 @@ const CustomCarousel = () => {
   const exampleItems = [
     {
       title: "We create the challenges",
-      text: "The House Punt app creates challenges for you to participate in",
+      text: "The House Punt app creates challenges for you to participate in.",
     },
     {
       title: "You predict the sale price",
-      text: "You answer by predicting the last sold prices. The properties will be recently sold. Every challenge you pick will have a clock you play against. Submit your punt and get instant results",
+      text: "You answer by predicting the last sold prices. Every challenge you pick will have a clock you play against. Submit your punt and get instant results.",
     },
     {
       title: "You get rewarded",
-      text: "You will be given your result immediately with a consolidated score and leaderboard position vs other players. Earn more points to win prizes.",
+      text: "See how you compare against other players on the leaderboard. Earn badges and achievements and redeem your points for rewards and prizes.",
     },
   ];
 

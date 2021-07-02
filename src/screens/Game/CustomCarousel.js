@@ -11,7 +11,7 @@ export default ({ carouselItems, showLoading }) => {
   const ref = React.useRef(null);
 
   return (
-    <View style={{ marginTop: 10, marginBottom: 10, height: 350 }}>
+    <View style={{ marginTop: 10, marginBottom: 10, height: 370 }}>
       <Carousel
         layout="default"
         ref={ref}

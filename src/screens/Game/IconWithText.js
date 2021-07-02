@@ -60,10 +60,30 @@ export const getPropertySummary = (property) => ([
       icon: null,
       text: property.propertyType
     },
-    {
-      icon: null,
-      text: property.short_sold_date, 
-    }
+]);
+
+
+export const getDetailPropertySummary = (property) => ([
+  {
+    icon: "king-bed",
+    text: property.bedrooms,
+  },
+  {
+    icon: "bathtub",
+    text: property.bathrooms,
+  },
+  {
+    icon: "directions-car",
+    text: property.carspaces,
+  },
+  {
+    icon: null,
+    text: property.propertyType
+  },
+  {
+    icon: null,
+    text: property.short_sold_date, 
+  }
 ]);
 
 export const getLandSummary = (property) => ([

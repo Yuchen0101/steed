@@ -162,7 +162,7 @@ export default ({ navigation, route }) => {
                     </View>
                     <View>
                         <Text style={textStyle.price}>{toPercent(accuracy)} Accurate</Text>
-                        <Text style={textStyle.soldDate}>You punt in</Text>
+                        <Text style={textStyle.soldDate}>Time taken</Text>
                         <Text style={textStyle.soldDate}>{duration} secs</Text>
                     </View>
                 </View>

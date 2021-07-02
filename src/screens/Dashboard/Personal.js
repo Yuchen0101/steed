@@ -19,10 +19,10 @@ export default ({userProfile}) => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const component1 = () => (
-    <IconButton buttontitle="Month" iconName="insights" />
+    <IconButton buttontitle="Monthly" iconName="insights" />
   );
   const component2 = () => (
-    <IconButton buttontitle="Point" iconName="emoji-events" />
+    <IconButton buttontitle="Points" iconName="emoji-events" />
   );
   const component3 = () => (
     <IconButton buttontitle="Badges" iconName="military-tech" />

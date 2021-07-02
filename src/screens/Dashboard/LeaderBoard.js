@@ -59,7 +59,7 @@ export default ({leaderboard}) => {
         />
         <View style={{ width: Dimensions.get("window").width - 30, marginBottom:10}}>
           <Text style={{textAlign:"left"}}>
-          Check your leaderboard position on where you stand based on your past predictions.
+            Check the leaderboard to see where you stand based on past predictions
           </Text>
         </View>
 

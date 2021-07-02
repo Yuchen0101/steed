@@ -8,8 +8,8 @@ import { useHouseContext } from './houseContext';
 import CustomCarousel from './CustomCarousel';
 
 const WELCOME_TITLE = 'Welcome';
-const WELCOME_CONTENT = 'We have curated a list of properties that may be of interest to you. '
-  + 'Swipe through the cards to see which one catches your interest and pick a house you want to predict!';
+const WELCOME_CONTENT = 'The following properties have been selected for you based on your user profile.'
+  + ' Tap one to start playing!';
 
 export default ({
   navigation,
@@ -41,7 +41,8 @@ export default ({
               color: AppStyles.color.steedDarkGrey,
               textAlign: "justify",
               paddingHorizontal: 20,
-              marginTop:10
+              marginTop:10, 
+              fontSize: 15
             }}
           >
             {WELCOME_CONTENT}
@@ -55,7 +56,7 @@ export default ({
             width: 120,
           }}
           titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
-          containerStyle={{ marginTop: 20 }}
+          containerStyle={{ marginTop: 30 }}
           onPress={() => fetchItems()}
         ></Button>
       </ScrollView>
