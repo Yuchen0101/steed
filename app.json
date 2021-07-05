@@ -1,5 +1,6 @@
 {
   "expo": {
+    "scheme": "steedapp",
     "name": "steedApp",
     "slug": "steedApp",
     "version": "1.0.1",

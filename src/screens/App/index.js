@@ -9,10 +9,19 @@ import AppStyles from "../../AppStyles";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../context";
 
+const oauth = {
+  domain: 'steed.auth.ap-southeast-2.amazoncognito.com',
+  scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
+  redirectSignIn: 'exp://192.168.1.3:19000', // expo go ip, need change to steedapp when deploy
+  redirectSignOut: 'exp://192.168.1.3:19000', // expo go ip, need change to steedapp when deploy
+  responseType: 'code'
+};
+
 Amplify.configure({
   region: "ap-southeast-2",
   userPoolId: "ap-southeast-2_tMJyw9ZPr",
   userPoolWebClientId: "23k2csb3d6c4u51e66nd2kus4o",
+  oauth: oauth,
 });
 
 const RootStack = createStackNavigator();
