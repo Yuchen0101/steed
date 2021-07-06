@@ -38,7 +38,7 @@ export default ({ impact }) => {
 
   if(pieData.length == 0){
 
-    return <Text style={{marginVertical:20}}>No Impact yet</Text>
+    return <Text style={{marginVertical:20}}>No Impact yet! Play games to unlock your summary!</Text>
   }
   return (
     <View>

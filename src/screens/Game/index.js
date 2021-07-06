@@ -72,12 +72,12 @@ export default ({
         ></Button> */}
       </ScrollView>
       
-      <View style={{flex:1, flexDirection:"row", backgroundColor: AppStyles.color.steedDarkBlue, marginBottom:20}}>
+      <View style={{flex:1, flexDirection:"row", backgroundColor: AppStyles.color.steedDarkBlue, marginBottom:130}}>
         {/* Rest of the app comes ABOVE the action button component !*/}
         <ActionButton buttonColor={AppStyles.color.steedGreen} icon={
           <MaterialCommunityIcons name="refresh" size={30} color={AppStyles.color.steedDarkGrey}/>
         }>
-          <ActionButton.Item buttonColor='#9b59b6' title="House" onPress={() => {fetchItems("house")}}>
+          <ActionButton.Item buttonColor='#9FC7FC' title="House" onPress={() => {fetchItems("house")}}>
             <MaterialCommunityIcons name="home-outline" style={styles.actionButtonIcon} />
           </ActionButton.Item>
           <ActionButton.Item buttonColor='#3498db' title="Apartment" onPress={() => {fetchItems("apartment")}}>

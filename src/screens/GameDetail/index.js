@@ -31,7 +31,7 @@ const styles = StyleSheet.create({
   },
   // header container
   infoContainer: {
-    marginBottom: 10,
+    marginBottom: 5,
     display: "flex",
     alignItems: "center",
   },
@@ -42,21 +42,21 @@ const styles = StyleSheet.create({
     fontWeight:"bold"
   },
   swiper: {
-    height: 180,
+    height: 220,
     width: "100%",
     marginBottom: 5,
   },
   image: {
     width: "100%",
-    height: 180,
+    height: 220,
     alignSelf: "center",
     borderRadius: 2,
     marginBottom: 25,
   },
   // description container
   descContainer: {
-    width: "80%",
-    marginBottom: 30,
+    width: "90%",
+    marginBottom: 10,
   },
   headline: {
     fontSize: 17,
@@ -85,9 +85,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   countdown: {
-    marginBottom: 25,
+    marginBottom: 10,
     justifyContent: "flex-start",
-    marginTop:15,
+    marginTop:5,
     marginHorizontal: 40
   },
   sliderContainer: {},
@@ -102,17 +102,17 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 10,
+    marginTop: 5,
   },
   button: {
-    width: 80,
-    height: 80,
-    borderRadius:40,
+    width: 70,
+    height: 70,
+    borderRadius:35,
     borderWidth:1,
     borderColor:AppStyles.color.steedGreen, 
     backgroundColor: AppStyles.color.steedGreen,
-    marginTop: 15,
-    marginBottom: 25,
+    marginTop: 5,
+    marginBottom: 10,
     marginHorizontal: 40
   },
   buttonTitle: {
@@ -128,11 +128,11 @@ const guessStyles = StyleSheet.create({
   thumb: {
     alignItems: "center",
     backgroundColor: "white",
-    height: 65,
+    height: 55,
     width: 8,
   },
   track: {
-    height: 50,
+    height: 40,
     borderColor: "#fff",
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -148,7 +148,7 @@ const UrgeWithPleasureComponent = ({ onComplete }) => {
     <CountdownCircleTimer
       isPlaying
       duration={20}
-      size={80}
+      size={70}
       strokeWidth={8}
       colors={[
         [AppStyles.color.steedGreen, 0.4],
@@ -199,7 +199,7 @@ export default ({ navigation, route }) => {
       prediction: value,
     })
       .then((res) => {
-        navigation.replace("GameResult", { ...res, duration: pre, id });
+        navigation.replace("GameResult", { ...res, duration: pre, value, id});
       })
       .catch(() => {
         Alert.alert("Error", "Make predication failed", [

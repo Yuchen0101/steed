@@ -36,7 +36,7 @@ export default ({ property }) => {
             source={{
               uri: property.media[0].url,
             }}
-            style={{ width: 200, height: 150 }}
+            style={{ width: 250, height: 200 }}
             PlaceholderContent={<ActivityIndicator />}
             containerStyle={{borderRadius:5, borderColor:AppStyles.color.steedDarkGrey}}
           />

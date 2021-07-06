@@ -9,6 +9,7 @@ export default {
     transparentGreen: "#64ffdb2f",
     badgeGold: "#FEE101",
     badgeSilver: "#D7D7D7", 
-    badgeBronze: "#A77044"
+    badgeBronze: "#A77044",
+    badgeDiamond: "#E7FFFF"
   },
 };

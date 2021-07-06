@@ -149,37 +149,7 @@ export default ({ navigation }) => {
 					title="Login"
 					onPress={() => navigation.push('SignIn')}
 				/>
-				<View
-					style={{
-						flexDirection: 'row',
-					}}
-				>
-					<Button
-						buttonStyle={{
-							width: 170,
-							margin: 5,
-							backgroundColor: '#d53035',
-							color: AppStyles.color.steedWhite,
-						}}
-						titleStyle={{ fontSize: 10 }}
-						icon={<Icon name="google" size={15} color="white" type="material-community" />}
-						title="continue with Google"
-						onPress={() => Auth.federatedSignIn({ provider: 'google' })}
-						loading={loading}
-					/>
-					<Button
-						buttonStyle={{
-							width: 170,
-							margin: 5,
-							color: AppStyles.color.steedWhite,
-						}}
-						titleStyle={{ fontSize: 10 }}
-						title="continue with Facebook"
-						icon={<Icon name="facebook" size={15} color="white" type="material-community" />}
-						loading={loading}
-					/>
-				</View>
-				<Button
+        <Button
 					type="solid"
 					title="Don't have an account? Sign Up"
 					onPress={() => navigation.push('SignUp')}
@@ -191,6 +161,38 @@ export default ({ navigation }) => {
 					}}
 					titleStyle={{ color: AppStyles.color.steedLightGrey }}
 				/>
+				<View
+					style={{
+						flexDirection: 'row',
+            marginTop:10
+					}}
+				>
+					<Button
+						buttonStyle={{
+							width: 350,
+							margin:5,
+							backgroundColor: '#4C8BF5',
+							color: AppStyles.color.steedWhite,
+						}}
+						titleStyle={{ fontSize: 10 }}
+						icon={<Icon name="google" size={15} color="white" type="material-community" />}
+						title="Continue with Google"
+						onPress={() => Auth.federatedSignIn({ provider: 'google' })}
+						loading={loading}
+					/>
+					{/* <Button
+						buttonStyle={{
+							width: 170,
+							margin: 5,
+							color: AppStyles.color.steedWhite,
+						}}
+						titleStyle={{ fontSize: 10 }}
+						title="continue with Facebook"
+						icon={<Icon name="facebook" size={15} color="white" type="material-community" />}
+						loading={loading}
+					/> */}
+				</View>
+				
 			</ScrollView>
 		</View>
 	);

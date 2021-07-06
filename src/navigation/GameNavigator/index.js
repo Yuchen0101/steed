@@ -19,11 +19,10 @@ const GameStackScreen = () => {
   const [removedList, setRemovedList] = useState([]);
   const [propType, setPropType] = useState("all")
 
-  const fetchItems = useCallback((prop_type) => {
-    console.log(prop_type);
+  const fetchItems = useCallback((propType) => {
     setIsFetching(true);
     authFetch("POST", "/api/get_properties", {
-      prop_type: prop_type
+      prop_type: propType
     }).then((res) => {
         const list = res.matched;
         const filteredList = list.filter(item => !removedList.includes(item._id));

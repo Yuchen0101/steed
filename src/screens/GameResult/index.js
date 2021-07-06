@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 import { View, ScrollView, Text, StyleSheet, Dimensions} from 'react-native';
 import { Button } from 'react-native-elements';
 import { useHouseContext } from '../Game/houseContext';
-import { toPercent, toPrice, toRank, formatNumber } from '../../utils';
+import { toPercent, toPrice, toRank, formatNumber, toPriceDiff } from '../../utils';
 
 import AppStyles from "../../AppStyles";
 
@@ -24,10 +24,21 @@ const styles = StyleSheet.create({
     header: {
         marginBottom: 40
     },
+    accuracyContainer:{
+        display: 'flex', 
+        flexDirection:"row", 
+        justifyContent: 'space-between'
+    },
     accuracy: {
         display: 'flex',
         alignItems: 'center', 
-        marginBottom: 25
+        marginBottom: 25, 
+        borderStyle: 'solid',
+        borderColor: AppStyles.color.steedGreen,
+        borderWidth: 1,
+        borderRadius: 8, 
+        padding: 10, 
+        marginHorizontal: 8
     },
     info: {
         display: 'flex',
@@ -76,12 +87,13 @@ const textStyle = StyleSheet.create({
     },
     accuracyResult: {
         color: AppStyles.color.steedGreen,
-        fontSize: 50,
+        fontSize: 40,
     },
     price: {
         color: AppStyles.color.steedGreen,
         fontSize: 20,
-        marginBottom: 2
+        marginBottom: 2,
+        textAlign: 'center'
     },
     soldDate: {
         color: AppStyles.color.steedDarkGrey,
@@ -126,6 +138,7 @@ export default ({ navigation, route }) => {
         rank,
         avg_accuracy,
         duration,
+        value,
         id
     } = route.params;
 
@@ -150,10 +163,18 @@ export default ({ navigation, route }) => {
                 <View style={styles.header}>
                     <Text style={textStyle.headerText}>Results!</Text>
                 </View>
-                <View style={styles.accuracy}>
-                    <Text style={textStyle.accuracy}>Points You Earned</Text>
-                    <Text style={textStyle.accuracyResult}>+{points}</Text>
+                <View style={styles.accuracyContainer}>
+                    <View style={styles.accuracy}>
+                        <Text style={textStyle.accuracy}>Accuracy</Text>
+                        <Text style={textStyle.accuracyResult}>{toPercent(accuracy)}</Text>
+                    </View>
+                    <View style={styles.accuracy}>
+                        <Text style={textStyle.accuracy}>Points</Text>
+                        <Text style={textStyle.accuracyResult}>+{points}</Text>
+                    </View>
+                    
                 </View>
+                
                 <View style={styles.info}>
                     <View style={{marginRight: 12}}>
                         <Text style={textStyle.price}>${toPrice(sold_price)}</Text>
@@ -161,9 +182,13 @@ export default ({ navigation, route }) => {
                         <Text style={textStyle.soldDate}>{sold_date.replace(/['"]+/g, '')}</Text>
                     </View>
                     <View>
-                        <Text style={textStyle.price}>{toPercent(accuracy)} Accurate</Text>
-                        <Text style={textStyle.soldDate}>Time taken</Text>
-                        <Text style={textStyle.soldDate}>{duration} secs</Text>
+                        {/* <Text style={textStyle.price}>{value}</Text> */}
+                        {/* <Text style={textStyle.price}>{sold_price}</Text> */}
+                        <Text style={textStyle.price}>{toPriceDiff(sold_price - value)}</Text>
+                        <Text style={textStyle.soldDate}>You predicted at</Text>
+                        <Text style={textStyle.soldDate}>${toPrice(value)} in {duration} secs</Text>
+                        {/* <Text style={textStyle.soldDate}>Time taken</Text>
+                        <Text style={textStyle.soldDate}>{duration} secs</Text> */}
                     </View>
                 </View>
                 <View style={styles.performance}>
