@@ -71,7 +71,7 @@ export default ({ badges }) => {
               >
                 {item.subtitle}
               </ListItem.Subtitle>
-              {item.progress && (
+              {item.progress != undefined&& (
                 <>
                   <LinearProgress
                     variant="determinate"
