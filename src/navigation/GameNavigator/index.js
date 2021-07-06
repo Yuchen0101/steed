@@ -19,11 +19,11 @@ const GameStackScreen = () => {
   const [removedList, setRemovedList] = useState([]);
   const [propType, setPropType] = useState("all")
 
-  const fetchItems = (prop_type) => {
-    console.log(propType);
+  const fetchItems = useCallback((prop_type) => {
+    console.log(prop_type);
     setIsFetching(true);
     authFetch("POST", "/api/get_properties", {
-      prop_type: propType
+      prop_type: prop_type
     }).then((res) => {
         const list = res.matched;
         const filteredList = list.filter(item => !removedList.includes(item._id));
@@ -34,7 +34,7 @@ const GameStackScreen = () => {
     }).finally(() => {
       setIsFetching(false);
     });
-  };
+  },[])
 
   useEffect(() => {
     setIsFetching(true);
