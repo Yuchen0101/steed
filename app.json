@@ -1,8 +1,8 @@
 {
   "expo": {
-    "scheme": "steedapp",
-    "name": "steedApp",
-    "slug": "steedApp",
+    "scheme": "housepunt",
+    "name": "HousePunt",
+    "slug": "HousePunt",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",

@@ -170,12 +170,12 @@ export default ({ navigation }) => {
 					<Button
 						buttonStyle={{
 							width: 350,
-							margin:5,
+							margin:10,
 							backgroundColor: '#4C8BF5',
 							color: AppStyles.color.steedWhite,
 						}}
-						titleStyle={{ fontSize: 10 }}
-						icon={<Icon name="google" size={15} color="white" type="material-community" />}
+						titleStyle={{ fontSize:19 }}
+						icon={<Icon name="google" size={20} color="white" type="material-community" />}
 						title="Continue with Google"
 						onPress={() => Auth.federatedSignIn({ provider: 'google' })}
 						loading={loading}
