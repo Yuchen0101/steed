@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
   },
   rangeValue: {
     fontSize: 12,
-    paddingHorizontal: 10==20
+    paddingHorizontal: 20
   },
   range: {
     width: "100%",
