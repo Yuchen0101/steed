@@ -26,29 +26,29 @@ import { numberWithCommas, toPrice } from '../../utils';
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 15,
+    paddingTop: 10,
     marginTop: 15,
   },
   // header container
   infoContainer: {
-    marginBottom: 5,
+    marginBottom: 10,
     display: "flex",
     alignItems: "center",
   },
   address: {
-    fontSize: 19,
+    fontSize: 13,
     fontWeight: null,
-    marginBottom: 15,
-    fontWeight:"bold"
+    marginBottom: 10,
+    fontWeight: "bold"
   },
   swiper: {
-    height: 220,
+    height: 250,
     width: "100%",
     marginBottom: 5,
   },
   image: {
     width: "100%",
-    height: 220,
+    height: 250,
     alignSelf: "center",
     borderRadius: 2,
     marginBottom: 25,
@@ -79,15 +79,17 @@ const styles = StyleSheet.create({
     fontWeight: "bold"
   },
   guessContainer: {
-    width: 330,
-    marginBottom: 50,
-    display: "flex",
+    marginTop:10,
+    width: "100%",
+    marginBottom: 40,
+    // display: "flex",
     alignItems: "center",
+    justifyContent: 'center'
   },
   countdown: {
     marginBottom: 10,
     justifyContent: "flex-start",
-    marginTop:5,
+    marginTop: 5,
     marginHorizontal: 40
   },
   sliderContainer: {},
@@ -96,6 +98,7 @@ const styles = StyleSheet.create({
   },
   rangeValue: {
     fontSize: 12,
+    paddingHorizontal: 10==20
   },
   range: {
     width: "100%",
@@ -107,9 +110,9 @@ const styles = StyleSheet.create({
   button: {
     width: 70,
     height: 70,
-    borderRadius:35,
-    borderWidth:1,
-    borderColor:AppStyles.color.steedGreen, 
+    borderRadius: 35,
+    borderWidth: 1,
+    borderColor: AppStyles.color.steedGreen,
     backgroundColor: AppStyles.color.steedGreen,
     marginTop: 5,
     marginBottom: 10,
@@ -128,11 +131,11 @@ const guessStyles = StyleSheet.create({
   thumb: {
     alignItems: "center",
     backgroundColor: "white",
-    height: 55,
+    height: 60,
     width: 8,
   },
   track: {
-    height: 40,
+    height: 45,
     borderColor: "#fff",
     borderTopWidth: 1,
     borderBottomWidth: 1,
@@ -167,7 +170,7 @@ const UrgeWithPleasureComponent = ({ onComplete }) => {
         <Animated.View style={{ color: animatedColor }}>
           <View>
             {/* <Text style={{marginBottom: 3}}>Remaining</Text> */}
-            <Text style={{fontSize:20}}>{remainingTime}</Text>
+            <Text style={{ fontSize: 20 }}>{remainingTime}</Text>
             {/* <Text style={{marginTop: 3}}>seconds</Text> */}
           </View>
         </Animated.View>
@@ -199,7 +202,7 @@ export default ({ navigation, route }) => {
       prediction: value,
     })
       .then((res) => {
-        navigation.replace("GameResult", { ...res, duration: pre, value, id});
+        navigation.replace("GameResult", { ...res, duration: pre, value, id });
       })
       .catch(() => {
         Alert.alert("Error", "Make predication failed", [
@@ -214,29 +217,21 @@ export default ({ navigation, route }) => {
   return (
     <View style={{ ...styles.container, height: scrollHeight }}>
       <ScrollView contentContainerStyle={{ alignItems: "center" }}>
+        <View style={styles.swiper}>
+          <Swiper loop={true}>
+            {houseDetail.media.map((item, idx) => {
+              return (
+                <View style={styles.image} key={idx}>
+                  <Image source={{ uri: item.url }} style={styles.image} PlaceholderContent={<ActivityIndicator />} />
+                </View>
+              );
+            })}
+          </Swiper>
+        </View>
         <View style={styles.infoContainer}>
 
-        <Text style={styles.address}>{houseDetail.address}</Text>
-        <View style={styles.descContainer}>
-          <Text style={styles.headline}>{houseDetail.headline}</Text>
-          <Text style={styles.description}>
-            {houseDetail.summaryDescription}
-          </Text>
-          <Text style={styles.houseFeatures}>
-            {houseDetail.features}
-          </Text>
-        </View>
-          <View style={styles.swiper}>
-            <Swiper loop={true}>
-              {houseDetail.media.map((item, idx) => {
-                return (
-                  <View style={styles.image} key={idx}>
-                    <Image source={{ uri: item.url }} style={styles.image} PlaceholderContent={<ActivityIndicator />}/>
-                  </View>
-                );
-              })}
-            </Swiper>
-          </View>
+          <Text style={styles.address}>{houseDetail.address}</Text>
+
           <View
             style={{
               flexDirection: "row",
@@ -252,68 +247,86 @@ export default ({ navigation, route }) => {
               flexDirection: "row",
               marginTop: 10,
               paddingHorizontal: 5,
+              marginBottom: 10
             }}
           >
             {landSummary.map((item, idx) => (
               <IconWithText key={idx} {...item} />
             ))}
           </View>
+
+          <View style={styles.descContainer}>
+            <Text style={styles.headline}>{houseDetail.headline}</Text>
+            <Text style={styles.description}>
+              {houseDetail.summaryDescription}
+            </Text>
+            <Text style={styles.houseFeatures}>
+              {houseDetail.features}
+            </Text>
+          </View>
+
+
         </View>
 
-        <View style={styles.guessContainer}>
-          <View style={{ flexDirection:"row", marginBottom: 0, marginTop: 0 }}>
-            <View style={styles.countdown} >
-              <UrgeWithPleasureComponent onComplete={onGuessPress} />
-            </View>
-            <View>
-              <Button
-                title="PUNT!"
-                buttonStyle={styles.button}
-                titleStyle={styles.buttonTitle}
-                onPress={onGuessPress}
-              />
-            </View>
-          </View>
-          <View>
-            <View style={{ marginBottom: 15 }}>
-              {/* <Text style={{ ...styles.tipText, fontSize: 12 }}>
-                Enter House Sold Price
-              </Text>
-              <Text
-                style={{ ...styles.tipText, fontSize: 10, fontStyle: "italic" }}
-              >
-                (slide left-right)
-              </Text> */}
-              <Text style={{fontSize:15, fontWeight:"bold"}}>${toPrice(value)}</Text>
-            </View>
-            <Slider
-              animateTransition
-              containerStyle={guessStyles.container}
-              renderThumbComponent={CustomThumb}
-              trackStyle={guessStyles.track}
-              maximumTrackTintColor={AppStyles.color.steedDarkBlue}
-              minimumTrackTintColor={AppStyles.color.transparentGreen}
-              maximumValue={parseInt(houseDetail.max_price)}
-              minimumValue={parseInt(houseDetail.min_price)}
-              step={1000}
-              value={value}
-              onValueChange={(value) => {
-                setValue(value[0]);
-              }}
-            />
-          </View>
-          <View style={styles.range}>
-                <Text style={styles.rangeValue}>
-                  ${toPrice(parseInt(houseDetail.min_price))}
-                </Text>
-                {/* <Text style={styles.rangeValue}>{value}</Text> */}
-                <Text style={styles.rangeValue}>
-                  ${toPrice(parseInt(houseDetail.max_price))}
-                </Text>
-          </View>
-        </View>
+
 
       </ScrollView>
+
+      <View style={styles.guessContainer}>
+        <View>
+          <View style={{ marginBottom: 15 }}>
+            {/* <Text style={{ ...styles.tipText, fontSize: 12 }}>
+              Enter House Sold Price
+            </Text>
+            <Text
+              style={{ ...styles.tipText, fontSize: 10, fontStyle: "italic" }}
+            >
+              (slide left-right)
+            </Text> */}
+            <Text style={{ fontSize: 15, fontWeight: "bold" }}>${toPrice(value)}</Text>
+          </View>
+          <Slider
+            animateTransition
+            containerStyle={guessStyles.container}
+            renderThumbComponent={CustomThumb}
+            trackStyle={guessStyles.track}
+            maximumTrackTintColor={AppStyles.color.steedDarkBlue}
+            minimumTrackTintColor={AppStyles.color.transparentGreen}
+            maximumValue={parseInt(houseDetail.max_price)}
+            minimumValue={parseInt(houseDetail.min_price)}
+            step={1000}
+            value={value}
+            onValueChange={(value) => {
+              setValue(value[0]);
+            }}
+          />
+        </View>
+        <View style={styles.range}>
+          <Text style={styles.rangeValue}>
+            ${toPrice(parseInt(houseDetail.min_price))}
+          </Text>
+          {/* <Text style={styles.rangeValue}>{value}</Text> */}
+          <Text style={styles.rangeValue}>
+            ${toPrice(parseInt(houseDetail.max_price))}
+          </Text>
+        </View>
+
+        <View style={{ flexDirection: "row", marginBottom: 0, marginTop: 0 }}>
+          <View style={styles.countdown} >
+            <UrgeWithPleasureComponent onComplete={onGuessPress} />
+          </View>
+          <View>
+            <Button
+              title="PUNT!"
+              buttonStyle={styles.button}
+              titleStyle={styles.buttonTitle}
+              onPress={onGuessPress}
+            />
+          </View>
+        </View>
+
+      </View>
+
     </View>
   );
 };
