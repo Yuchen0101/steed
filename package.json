@@ -37,7 +37,8 @@
     "react-native-snap-carousel": "^3.9.1",
     "react-native-svg": "12.1.0",
     "react-native-swiper": "^1.6.0",
-    "react-native-web": "~0.13.12"
+    "react-native-web": "~0.13.12",
+    "react-native-selectmultiple-button": "~0.1.105"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"

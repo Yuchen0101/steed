@@ -3,6 +3,8 @@ import { Text } from "react-native-elements";
 import { Dimensions, View } from "react-native";
 import AppStyles from "../../AppStyles";
 import { BarChart } from "react-native-chart-kit";
+//TODO: Add Days/Weeks tab
+//TODO: Add Hover information: game composition, average accuracy
 
 const ScoreItem = ({ value, title }) => (
   <View style={{ flexDirection: "row", marginBottom:10}}>

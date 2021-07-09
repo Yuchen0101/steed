@@ -17,7 +17,7 @@ export default ({ property }) => {
 
   return (
     <TouchableWithoutFeedback onPress={onPress}>
-      <View style={{ alignItems: "center", paddingTop:30 }}>
+      <View style={{ alignItems: "center", paddingTop:20 }}>
         <View
           style={{
             flexDirection: "row",
@@ -36,7 +36,7 @@ export default ({ property }) => {
             source={{
               uri: property.media[0].url,
             }}
-            style={{ width: 250, height: 200 }}
+            style={{ width: 280, height: 220 }}
             PlaceholderContent={<ActivityIndicator />}
             containerStyle={{borderRadius:5, borderColor:AppStyles.color.steedDarkGrey}}
           />

@@ -5,7 +5,7 @@ import ScreenContainer from "../../components/ScreenContainer";
 import { ListItem, Icon, Button } from "react-native-elements";
 import { ScrollView } from "react-native";
 import { Dimensions } from "react-native";
-import { Alert } from 'react-native'
+import { Alert } from 'react-native';
 import { AuthContext } from "../../context";
 
 export default ({ navigation }) => {
@@ -25,6 +25,13 @@ export default ({ navigation }) => {
       icon: "notifications-none",
       color: AppStyles.color.steedBlue,
       route: "Notification",
+    },
+    {
+      title: "Interest",
+      subtitle: "Manage your interested regions",
+      icon: "assistant",
+      color: AppStyles.color.steedLightBlue, 
+      route: "Interest",
     },
     {
       title: "Change Password",
