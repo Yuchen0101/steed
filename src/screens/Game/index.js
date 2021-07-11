@@ -9,10 +9,10 @@ import { useHouseContext } from "./houseContext";
 import CustomCarousel from "./CustomCarousel";
 // import ActionButton from 'react-native-action-button';
 import {
-  SelectMultipleButton,
   SelectMultipleGroupButton,
 } from "react-native-selectmultiple-button";
 import { AuthContext } from "../../context";
+
 
 const WELCOME_TITLE = "Welcome";
 const WELCOME_CONTENT =
@@ -35,12 +35,13 @@ export default ({ navigation, route }) => {
     }
   }, [showInterest]);
 
-  const { isFetching, carouselItems, fetchItems, setPropType } =
+  const { isFetching, carouselItems, fetchItems, setPropType, propType } =
     useHouseContext();
+
+    const multipleGroupData = [{ value: "House" }, { value: "Apartment" }];
+  const selectedIds = propType.map(el=>["House","Apartment"].indexOf(el))  
+
   const scrollHeight = useMemo(() => Dimensions.get("window").height - 290, []);
-  const selectedIds = [0, 1];
-  const [selectedValues, setSelectedValues] = useState(["House", "Apartment"]);
-  const multipleGroupData = [{ value: "House" }, { value: "Apartment" }];
   if (isFetching) {
     return (
       <View
@@ -75,41 +76,6 @@ export default ({ navigation, route }) => {
             position: "absolute",
           }}
         >
-          <ScrollView
-            horizontal={true}
-            alignItems={"center"}
-            paddingHorizontal={20}
-          >
-            <SelectMultipleGroupButton
-              defaultSelectedIndexes={selectedIds}
-              containerViewStyle={{
-                justifyContent: "center",
-                alignItems: "center",
-                paddingHorizontal: 0,
-              }}
-              buttonViewStyle={{
-                margin: 5,
-                borderRadius: 20,
-                width: 120,
-                height: 40,
-                alignItems: "center",
-                justifyContent: "center",
-                borderWidth: 1,
-              }}
-              highLightStyle={{
-                borderColor: "gray",
-                backgroundColor: "transparent",
-                textColor: "gray",
-                borderTintColor: AppStyles.color.steedGreen,
-                backgroundTintColor: "transparent",
-                textTintColor: AppStyles.color.steedGreen,
-              }}
-              onSelectedValuesChange={(selectedValues) =>
-                setSelectedValues(selectedValues)
-              }
-              group={multipleGroupData}
-            />
-          </ScrollView>
         </View>
         <Button
           title="Redeal"
@@ -124,7 +90,7 @@ export default ({ navigation, route }) => {
             alignItems: "center",
             position: "absolute",
           }}
-          onPress={() => fetchItems(selectedValues)}
+          onPress={() => fetchItems()}
         />
       </View>
     );
@@ -218,8 +184,9 @@ export default ({ navigation, route }) => {
               backgroundTintColor: "transparent",
               textTintColor: AppStyles.color.steedGreen,
             }}
-            onSelectedValuesChange={(selectedValues) =>
-              setSelectedValues(selectedValues)
+            onSelectedValuesChange={(selectedValues) =>{  
+              console.log(selectedValues)
+              setPropType(selectedValues)}
             }
             group={multipleGroupData}
           />
@@ -238,7 +205,7 @@ export default ({ navigation, route }) => {
           alignItems: "center",
           position: "absolute",
         }}
-        onPress={() => fetchItems(selectedValues)}
+        onPress={() => fetchItems()}
       />
       <Button
         title="set Interest"
@@ -248,7 +215,7 @@ export default ({ navigation, route }) => {
         titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
         containerStyle={{
           marginTop: 5,
-          left:250,
+          left: 250,
           bottom: 35,
           alignItems: "center",
           position: "absolute",

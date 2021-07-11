@@ -18,10 +18,10 @@ const GameStackScreen = () => {
   const [isFetching, setIsFetching] = useState(false);
   const [carouselItems, setCarouselItems] = useState([]);
   const [removedList, setRemovedList] = useState([]);
-  const [propType, setPropType] = useState("all")
+  const [propType, setPropType] = useState(["House", "Apartment"])
 
-  const fetchItems = useCallback((propType) => {
-    console.log('fetching items ...')
+  const fetchItems = useCallback(() => {
+    console.log(`fetching items for ${propType}...`)
     setIsFetching(true);
     authFetch("POST", "/api/get_properties", {
       prop_type: propType
@@ -35,7 +35,7 @@ const GameStackScreen = () => {
     }).finally(() => {
       setIsFetching(false);
     });
-  },[])
+  },[propType])
 
   useEffect(() => {
     setIsFetching(true);
@@ -59,9 +59,10 @@ const GameStackScreen = () => {
     carouselItems,
     fetchItems,
     setPropType,
+    propType,
     removedList,
     setRemovedList,
-  }), [isFetching, carouselItems, fetchItems, setPropType, removedList, setRemovedList]);
+  }), [isFetching, carouselItems, fetchItems, setPropType,propType, removedList, setRemovedList]);
 
   return (
     <HouseContext.Provider value={houseContext}>
