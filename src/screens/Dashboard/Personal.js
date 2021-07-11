@@ -27,7 +27,7 @@ export default ({userProfile}) => {
   const component3 = () => (
     <IconButton buttontitle="Badges" iconName="military-tech" />
   );
-  const component4 = () => <IconButton buttontitle="Impact" iconName="star" />;
+  const component4 = () => <IconButton buttontitle="Reports" iconName="star" />;
 
   const buttons = [
     { element: component1 },

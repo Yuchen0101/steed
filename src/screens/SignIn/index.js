@@ -22,38 +22,22 @@ export default ({ navigation }) => {
   const [errorMessage, setErrorMessage] = React.useState("");
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const signIn = (username, password,location) => {
+  const signIn = (username, password) => {
     return Auth.signIn(username, password).then((user) => {
       // update user detail
-      fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
-        method: "POST",
-        headers: {
-          Authorization: user.signInUserSession.idToken.jwtToken,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(location),
-      }).then(
-        // set user to jump to hello page
-        setUser(user)
-      )
+      // set user to jump to hello page
+      setUser(user);
     });
   };
 
   const handleLoginOnPress = async () => {
     // get location
     setLoading(true);
- 
-    let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert("Error", "Permission to access location was denied, we need this to setup your account.")
-      return;
-    }
-    const position = await Location.getCurrentPositionAsync({});
-    const location = { latitude: position.coords.latitude, longitude: position.coords.longitude }
 
     //login
     try {
-      await signIn(username, password, location);
+      await signIn(username, password);
+      navigation.navigate('Interest');
     } catch (err) {
       if (err?.message) {
         setErrorMessage(err?.message);

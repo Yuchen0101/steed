@@ -99,6 +99,7 @@ const textStyle = StyleSheet.create({
         color: AppStyles.color.steedDarkGrey,
         fontSize: 10, 
         width:120, 
+        flex:1,
         textAlign: 'center'
     },
     performance: {
@@ -158,7 +159,7 @@ export default ({ navigation, route }) => {
     const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
 
     return (
-        <View style={{...styles.container, height: scrollHeight}}>
+        <View style={{...styles.container, height: scrollHeight, width: "100%"}}>
             <ScrollView contentContainerStyle={{alignItems: 'center'}}>
                 <View style={styles.header}>
                     <Text style={textStyle.headerText}>Results!</Text>
@@ -184,7 +185,7 @@ export default ({ navigation, route }) => {
                     <View>
                         {/* <Text style={textStyle.price}>{value}</Text> */}
                         {/* <Text style={textStyle.price}>{sold_price}</Text> */}
-                        <Text style={textStyle.price}>{toPriceDiff(sold_price - value)}</Text>
+                        <Text style={textStyle.price}>{toPriceDiff(value - sold_price)}</Text>
                         <Text style={textStyle.soldDate}>You predicted at</Text>
                         <Text style={textStyle.soldDate}>${toPrice(value)} in {duration} secs</Text>
                         {/* <Text style={textStyle.soldDate}>Time taken</Text>

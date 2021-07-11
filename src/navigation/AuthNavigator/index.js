@@ -5,6 +5,7 @@ import SignUp from "../../screens/SignUp";
 import Hello from "../../screens/Hello";
 import Logo from "../../components/Logo";
 import ForgetPassword from "../../screens/ForgetPassword";
+import Interest from "../../screens/Interest";
 
 
 const AuthStack = createStackNavigator();
@@ -25,6 +26,7 @@ const AuthStackScreen = () => {
       <AuthStack.Screen name="SignIn" component={SignIn} />
       <AuthStack.Screen name="SignUp" component={SignUp} />
       <AuthStack.Screen name="ForgetPassword" component={ForgetPassword} />
+      <AuthStack.Screen name="Interest" component={Interest} />
     </AuthStack.Navigator>
   );
 };

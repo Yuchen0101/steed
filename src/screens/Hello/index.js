@@ -86,41 +86,43 @@ export default ({ navigation }) => {
 	const { setUser } = React.useContext(AuthContext);
 	const [loading, setLoading] = React.useState(false);
 
-	const getLocation = async () => {
-		let { status } = await Location.requestForegroundPermissionsAsync();
-		if (status !== 'granted') {
-			Alert.alert('Error', 'Permission to access location was denied, we need this to setup your account.');
-			return;
-		}
-		const position = await Location.getCurrentPositionAsync({});
-		const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
-		return location;
-	};
+
 	React.useEffect(() => {
 		Hub.listen('auth', ({ payload: { event, data } }) => {
 			switch (event) {
 				case 'signIn':
 					setLoading(true);
-					getLocation().then((location) => {
-						// update user detail
-						fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
-							method: 'POST',
-							headers: {
-								Authorization: data.signInUserSession.idToken.jwtToken,
-								'Content-Type': 'application/json',
-							},
-							body: JSON.stringify(location),
-						}).then(()=>{
-              setUser(data)
-
-            }).finally(setLoading(false))
-					});
-					break;
+					setUser(data).finally(setLoading(false));
+					break; 
 				case 'signOut':
 					setUser(null);
 					break;
 			}
 		});
+		// Hub.listen('auth', ({ payload: { event, data } }) => {
+		// 	switch (event) {
+		// 		case 'signIn':
+		// 			setLoading(true);
+		// 			getLocation().then((location) => {
+		// 				// update user detail
+		// 				fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
+		// 					method: 'POST',
+		// 					headers: {
+		// 						Authorization: data.signInUserSession.idToken.jwtToken,
+		// 						'Content-Type': 'application/json',
+		// 					},
+		// 					body: JSON.stringify(location),
+		// 				}).then(() => {
+		// 					setUser(data)
+
+		// 				}).finally(setLoading(false))
+		// 			});
+		// 			break;
+		// 		case 'signOut':
+		// 			setUser(null);
+		// 			break;
+		// 	}
+		// });
 	}, []);
 
 	return (
@@ -149,7 +151,7 @@ export default ({ navigation }) => {
 					title="Login"
 					onPress={() => navigation.push('SignIn')}
 				/>
-        <Button
+				<Button
 					type="solid"
 					title="Don't have an account? Sign Up"
 					onPress={() => navigation.push('SignUp')}
@@ -164,17 +166,17 @@ export default ({ navigation }) => {
 				<View
 					style={{
 						flexDirection: 'row',
-            marginTop:10
+						marginTop: 10
 					}}
 				>
 					<Button
 						buttonStyle={{
 							width: 350,
-							margin:10,
+							margin: 10,
 							backgroundColor: '#4C8BF5',
 							color: AppStyles.color.steedWhite,
 						}}
-						titleStyle={{ fontSize:19 }}
+						titleStyle={{ fontSize: 19 }}
 						icon={<Icon name="google" size={20} color="white" type="material-community" />}
 						title="Continue with Google"
 						onPress={() => Auth.federatedSignIn({ provider: 'google' })}
@@ -192,7 +194,7 @@ export default ({ navigation }) => {
 						loading={loading}
 					/> */}
 				</View>
-				
+
 			</ScrollView>
 		</View>
 	);

@@ -33,7 +33,7 @@ export default ({
     fetchItems,
     setPropType
   } = useHouseContext();
-  const scrollHeight = useMemo(() => Dimensions.get("window").height - 140, []);
+  const scrollHeight = useMemo(() => Dimensions.get("window").height - 290, []);
   const selectedIds = [0, 1];
   const [selectedValues, setSelectedValues] = useState(["House", "Apartment"]);
   const multipleGroupData = [
@@ -42,10 +42,24 @@ export default ({
   ];
   if (isFetching) {
     return (
-      <View style={{ height: scrollHeight, justifyContent: "center" }}>
+      <View style={{ height: scrollHeight + 140, justifyContent: "center", alignItems: "center"}}>
+        <View style={{ top: 0, position:"absolute", marginVertical: 20 }}>
+          <Text h3>{WELCOME_TITLE}</Text>
+          <Text
+            style={{
+              color: AppStyles.color.steedDarkGrey,
+              textAlign: "justify",
+              paddingHorizontal: 20,
+              marginTop: 10,
+              fontSize: 15
+            }}
+          >
+            {WELCOME_CONTENT}
+          </Text>
+        </View>
         <ActivityIndicator
         />
-        <View style={{ flexDirection: "row", backgroundColor: AppStyles.color.steedDarkBlue, marginTop: 10, bottom: 90, alignItems: "center", position: "absolute" }}>
+        <View style={{ flexDirection: "row", backgroundColor: AppStyles.color.steedDarkBlue, marginTop: 10, bottom: 85, alignItems: "center", position: "absolute" }}>
 
           <ScrollView
             horizontal={true}
@@ -84,25 +98,24 @@ export default ({
           </ScrollView>
 
         </View>
-        <View style={{ alignItems: "center" }}>
-          <Button
-            title="Redeal"
-            buttonStyle={{
-              backgroundColor: AppStyles.color.steedGreen,
-              width: 120,
-            }}
-            titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
-            containerStyle={{ marginTop: 5, bottom: 40, position: "absolute" }}
-            onPress={() => fetchItems(selectedValues)}
-          />
-        </View>
+        <Button
+          title="Redeal"
+          buttonStyle={{
+            backgroundColor: AppStyles.color.steedGreen,
+            width: 120,
+          }}
+          titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
+          containerStyle={{ marginTop: 5, bottom: 35, alignItems: "center", position: "absolute" }}
+          onPress={() => fetchItems(selectedValues)}
+        />
       </View>
     );
   }
 
   return (
-    <View style={{ height: scrollHeight, }}>
-      <ScrollView contentContainerStyle={{ alignItems: 'center' }}>
+    <View style={{ height: scrollHeight+ 140, alignItems: "center"}}>
+      <View style={{ height: scrollHeight}}>
+      <ScrollView contentContainerStyle={{ alignItems: 'center'}}>
         <View style={{ marginVertical: 20 }}>
           <Text h3>{WELCOME_TITLE}</Text>
           <Text
@@ -129,8 +142,10 @@ export default ({
           onPress={() => fetchItems()}
         ></Button> */}
       </ScrollView>
+      </View>
 
-      <View style={{ flexDirection: "row", backgroundColor: AppStyles.color.steedDarkBlue, marginTop: 10, bottom: 90, alignItems: "center", position: "absolute" }}>
+
+      <View style={{ flexDirection: "row", backgroundColor: AppStyles.color.steedDarkBlue, marginTop: 10, bottom: 85, alignItems: "center", position: "absolute" }}>
         {/* Rest of the app comes ABOVE the action button component !*/}
         {/* <ActionButton buttonColor={AppStyles.color.steedGreen} icon={
           <MaterialCommunityIcons name="refresh" size={30} color={AppStyles.color.steedDarkGrey}/>
@@ -182,18 +197,16 @@ export default ({
         </ScrollView>
 
       </View>
-      <View style={{ alignItems: "center" }}>
-        <Button
-          title="Redeal"
-          buttonStyle={{
-            backgroundColor: AppStyles.color.steedGreen,
-            width: 120,
-          }}
-          titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
-          containerStyle={{ marginTop: 5, bottom: 40, position: "absolute" }}
-          onPress={() => fetchItems(selectedValues)}
-        />
-      </View>
+      <Button
+        title="Redeal"
+        buttonStyle={{
+          backgroundColor: AppStyles.color.steedGreen,
+          width: 120,
+        }}
+        titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
+        containerStyle={{ marginTop: 5, bottom: 35, alignItems: "center", position: "absolute" }}
+        onPress={() => fetchItems(selectedValues)}
+      />
 
     </View>
   );
