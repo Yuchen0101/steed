@@ -240,6 +240,21 @@ export default ({ navigation, route }) => {
         }}
         onPress={() => fetchItems(selectedValues)}
       />
+      <Button
+        title="set Interest"
+        buttonStyle={{
+          width: 120,
+        }}
+        titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
+        containerStyle={{
+          marginTop: 5,
+          left:250,
+          bottom: 35,
+          alignItems: "center",
+          position: "absolute",
+        }}
+        onPress={() => navigation.push("GameInterest")}
+      />
     </View>
   );
 };

@@ -21,7 +21,7 @@ const GameStackScreen = () => {
   const [propType, setPropType] = useState("all")
 
   const fetchItems = useCallback((propType) => {
-    console.log('aaaaaa')
+    console.log('fetching items ...')
     setIsFetching(true);
     authFetch("POST", "/api/get_properties", {
       prop_type: propType

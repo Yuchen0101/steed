@@ -109,30 +109,19 @@ export default ({ navigation }) => {
       latitude: position.coords.latitude,
       longitude: position.coords.longitude,
     };
-    try {
-      await Auth.currentAuthenticatedUser().then((user) => {
-        fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
-          method: "POST",
-          headers: {
-            Authorization: user.signInUserSession.idToken.jwtToken,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(location),
-        });
-      });
-    } catch (err) {
-      if (err?.message) {
-        console.log(err.message);
-        setErrorMessage(err?.message);
-      } else {
-        setErrorMessage("Error in getting your location.");
-      }
-    } finally {
-      setLoadingNearMe(false);
-      // TODO: After upload position, navigate to main screen and refresh
-      // fetchItems();
-      navigation.navigate("Game");
-    }
+
+    authFetch("POST", "/api/submit_user_details", location)
+      .then((res) => {
+        console.log(res)
+        fetchItems()
+        navigation.navigate("Game")
+      })
+      .catch((err) => {
+        err?.message
+          ? setErrorMessage(err?.message)
+          : setErrorMessage("Error in getting your location.");
+      })
+      .finally(() => setLoadingNearMe(false));
   };
 
   const saveChangesOnPress = () => {
@@ -140,7 +129,8 @@ export default ({ navigation }) => {
     authFetch("POST", "/api/update_interests", {
       interests_ls: selectedValues,
     })
-      .then(() => {
+      .then((res) => {
+        console.log(res)
         fetchItems()
         navigation.navigate("Game")
       })
@@ -150,29 +140,6 @@ export default ({ navigation }) => {
           : setErrorMessage("Error in updating your interests.");
       })
       .finally(() => setLoadingSaveChanges(false));
-    // try {
-    //   await Auth.currentAuthenticatedUser()
-    //   .then((user) => {fetch(`https://steed-api.steed-intel.com/api/update_interests`, {
-    //     method: "POST",
-    //     headers: {
-    //       Authorization: user.signInUserSession.idToken.jwtToken,
-    //       'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify({ interests_ls: selectedValues }),
-    //   })
-    // })} catch (err) {
-    //   if (err?.message) {
-    //     console.log(err?.message);
-    //     setErrorMessage(err?.message);
-    //   } else {
-    //     setErrorMessage("Error in updating your interests.");
-    //   }
-    // } finally {
-    //   setLoadingSaveChanges(false);
-    //   // TODO: After upload position, navigate to main screen and refresh
-    //   // fetchItems();
-    //   navigation.navigate("Game");
-    // }
   };
 
   const selectedIds = [0, 1, 2, 3, 4];
