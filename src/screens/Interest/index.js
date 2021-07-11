@@ -1,35 +1,45 @@
-import React, { useCallback, useState, useMemo } from "react";
-import { View, ScrollView, StyleSheet, Alert, Dimensions, Image } from "react-native";
-import { Button, Text } from 'react-native-elements';
+import React, { useCallback, useState, useMemo, useContext } from "react";
+import {
+  View,
+  ScrollView,
+  StyleSheet,
+  Alert,
+  Dimensions,
+  Image,
+} from "react-native";
+import { Button, Text } from "react-native-elements";
 import ScreenContainer from "../../components/ScreenContainer";
 import AppStyles from "../../AppStyles";
-import { SelectMultipleButton, SelectMultipleGroupButton } from "react-native-selectmultiple-button";
-import * as Location from 'expo-location';
-import { useHouseContext } from '../Game/houseContext';
+import {
+  SelectMultipleButton,
+  SelectMultipleGroupButton,
+} from "react-native-selectmultiple-button";
+import * as Location from "expo-location";
+import { useHouseContext } from "../Game/houseContext";
 import { Auth } from "aws-amplify";
-
+import { AuthContext } from "../../context";
 
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
     marginTop: 15,
-    alignItems: "center"
+    alignItems: "center",
   },
   scrollContainer: {
     alignItems: "center",
     marginTop: 10,
     marginBottom: 30,
-    width: "95%"
+    width: "95%",
   },
   header: {
     height: 90,
     paddingHorizontal: 20,
-    paddingVertical: 10
+    paddingVertical: 10,
   },
   image: {
     resizeMode: "contain",
     height: 330,
-    width: 330
+    width: 330,
   },
   buttonContainer: {
     marginTop: 10,
@@ -44,46 +54,42 @@ const styles = StyleSheet.create({
     borderColor: AppStyles.color.steedGreen,
     backgroundColor: AppStyles.color.steedGreen,
     marginBottom: 5,
-    marginHorizontal: 10
-  }
-})
+    marginHorizontal: 10,
+  },
+});
 
 const textStyle = StyleSheet.create({
   intro: {
     marginTop: 10,
     color: AppStyles.color.steedDarkGrey,
-    fontSize: 14
+    fontSize: 14,
   },
   state: {
     padding: 10,
     textAlign: "left",
     fontSize: 19,
     color: AppStyles.color.steedGreen,
-    fontWeight: "bold"
+    fontWeight: "bold",
   },
   buttonTitle: {
     color: AppStyles.color.steedDarkBlue,
     textAlign: "center",
-    fontSize: 17
+    fontSize: 17,
   },
   buttonText: {
     color: AppStyles.color.steedLightGrey,
     padding: 3,
     textAlign: "right",
     alignSelf: "stretch",
-    paddingHorizontal: 40
-  }
-})
-
-
+    paddingHorizontal: 40,
+  },
+});
 
 export default ({ navigation }) => {
-  const {
-    isFetching,
-    carouselItems,
-    fetchItems,
-    setPropType
-  } = useHouseContext();
+  const { authFetch } = useContext(AuthContext);
+  const { isFetching, carouselItems, fetchItems, setPropType } =
+    useHouseContext();
+
   const [loadingNearMe, setLoadingNearMe] = React.useState(false);
   const [loadingSaveChanges, setLoadingSaveChanges] = React.useState(false);
   const [errorMessage, setErrorMessage] = React.useState("");
@@ -91,147 +97,159 @@ export default ({ navigation }) => {
   const nearMeOnPress = async () => {
     setLoadingNearMe(true);
     let { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== 'granted') {
-      Alert.alert("Error", "Permission to access location was denied, we need this to setup your account.")
+    if (status !== "granted") {
+      Alert.alert(
+        "Error",
+        "Permission to access location was denied, we need this to setup your account."
+      );
       return;
     }
     const position = await Location.getCurrentPositionAsync({});
-    const location = { latitude: position.coords.latitude, longitude: position.coords.longitude };
-    try {
-      await Auth.currentAuthenticatedUser()
-        .then((user) => {
-          fetch(
-            `https://steed-api.steed-intel.com/api/submit_user_details`, 
-            {
-              method: "POST",
-              headers: {
-                Authorization: user.signInUserSession.idToken.jwtToken,
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify(location),
-            }
-          )
-        })} catch (err) {
-          if (err?.message) {
-            console.log(err.message);
-            setErrorMessage(err?.message);
-          } else {
-            setErrorMessage("Error in getting your location.");
-          }
-        } finally {
-        setLoadingNearMe(false);
-        // TODO: After upload position, navigate to main screen and refresh
-        // fetchItems();
-        navigation.navigate("Game");
-      };
+    const location = {
+      latitude: position.coords.latitude,
+      longitude: position.coords.longitude,
     };
-
-    const saveChangesOnPress = async () => {
-      console.log(selectedValues);
-      setLoadingSaveChanges(true);
-      try {
-        await Auth.currentAuthenticatedUser()
-        .then((user) => {fetch(`https://steed-api.steed-intel.com/api/update_interests`, {
+    try {
+      await Auth.currentAuthenticatedUser().then((user) => {
+        fetch(`https://steed-api.steed-intel.com/api/submit_user_details`, {
           method: "POST",
           headers: {
             Authorization: user.signInUserSession.idToken.jwtToken,
-            'Content-Type': 'application/json'
+            "Content-Type": "application/json",
           },
-          body: JSON.stringify({ interests_ls: selectedValues }),
-        })
-      })} catch (err) {
-        if (err?.message) {
-          console.log(err?.message);
-          setErrorMessage(err?.message);
-        } else {
-          setErrorMessage("Error in updating your interests.");
-        }
-      } finally {
-        setLoadingSaveChanges(false);
-        // TODO: After upload position, navigate to main screen and refresh
-        // fetchItems();
-        navigation.navigate("Game");
+          body: JSON.stringify(location),
+        });
+      });
+    } catch (err) {
+      if (err?.message) {
+        console.log(err.message);
+        setErrorMessage(err?.message);
+      } else {
+        setErrorMessage("Error in getting your location.");
       }
-    };
-
-
-    const selectedIds = [0, 1, 2, 3, 4];
-
-
-    const [selectedValues, setSelectedValues] = useState(["Southern Metro", "Western Metro", "Northern Metro", "South Eastern Metro", "Eastern Metro"]);
-    const multipleGroupData = [
-      { value: "Southern Metro" },
-      { value: "Western Metro" },
-      { value: "Northern Metro" },
-      { value: "South Eastern Metro" },
-      { value: "Eastern Metro" },
-      { value: "Regional" },
-    ];
-
-    const scrollHeight = Dimensions.get("window").height - 340;
-
-    return (
-      <ScreenContainer>
-        <View style={styles.header}>
-          <Text h3>Select Interests</Text>
-          <Text style={textStyle.intro}>
-            Select Property areas that is of interest to you.
-          </Text>
-        </View>
-        <View style={{ height: scrollHeight }}>
-          <ScrollView
-            contentContainerStyle={styles.scrollContainer}
-          >
-            <Text style={textStyle.state}>Victoria, Melbourne Region</Text>
-            <SelectMultipleGroupButton
-              defaultSelectedIndexes={selectedIds}
-              containerViewStyle={{ justifyContent: "center" }}
-              highLightStyle={{
-                borderColor: "gray",
-                backgroundColor: "transparent",
-                textColor: "gray",
-                borderTintColor: AppStyles.color.steedGreen,
-                backgroundTintColor: "transparent",
-                textTintColor: AppStyles.color.steedGreen
-              }}
-              onSelectedValuesChange={selectedValues =>
-                setSelectedValues(selectedValues)
-              }
-              group={multipleGroupData}
-            />
-            <View style={{ alignItems: "center" }}>
-              <Image
-                style={styles.image}
-                source={require('../../../assets/vic_regions.png')}
-              />
-            </View>
-
-          </ScrollView>
-        </View>
-        <Text style={textStyle.buttonText}>Or check properties: </Text>
-        <View style={styles.buttonContainer}>
-          <Button
-            title="Save Changes"
-            titleStyle={textStyle.buttonTitle}
-            type="outline"
-            buttonStyle={styles.backButton}
-            onPress={saveChangesOnPress}
-            loading={loadingSaveChanges}
-          />
-          
-          <Button
-            title='Near me'
-            titleStyle={textStyle.buttonTitle}
-            type='outline'
-            buttonStyle={styles.backButton}
-            onPress={nearMeOnPress}
-            loading={loadingNearMe}
-          />
-          
-          
-        </View>
-      </ScreenContainer>
-
-
-    );
+    } finally {
+      setLoadingNearMe(false);
+      // TODO: After upload position, navigate to main screen and refresh
+      // fetchItems();
+      navigation.navigate("Game");
+    }
   };
+
+  const saveChangesOnPress = () => {
+    setLoadingSaveChanges(true);
+    authFetch("POST", "/api/update_interests", {
+      interests_ls: selectedValues,
+    })
+      .then(() => {
+        fetchItems()
+        navigation.navigate("Game")
+      })
+      .catch((err) => {
+        err?.message
+          ? setErrorMessage(err?.message)
+          : setErrorMessage("Error in updating your interests.");
+      })
+      .finally(() => setLoadingSaveChanges(false));
+    // try {
+    //   await Auth.currentAuthenticatedUser()
+    //   .then((user) => {fetch(`https://steed-api.steed-intel.com/api/update_interests`, {
+    //     method: "POST",
+    //     headers: {
+    //       Authorization: user.signInUserSession.idToken.jwtToken,
+    //       'Content-Type': 'application/json'
+    //     },
+    //     body: JSON.stringify({ interests_ls: selectedValues }),
+    //   })
+    // })} catch (err) {
+    //   if (err?.message) {
+    //     console.log(err?.message);
+    //     setErrorMessage(err?.message);
+    //   } else {
+    //     setErrorMessage("Error in updating your interests.");
+    //   }
+    // } finally {
+    //   setLoadingSaveChanges(false);
+    //   // TODO: After upload position, navigate to main screen and refresh
+    //   // fetchItems();
+    //   navigation.navigate("Game");
+    // }
+  };
+
+  const selectedIds = [0, 1, 2, 3, 4];
+
+  const [selectedValues, setSelectedValues] = useState([
+    "Southern Metro",
+    "Western Metro",
+    "Northern Metro",
+    "South Eastern Metro",
+    "Eastern Metro",
+  ]);
+  const multipleGroupData = [
+    { value: "Southern Metro" },
+    { value: "Western Metro" },
+    { value: "Northern Metro" },
+    { value: "South Eastern Metro" },
+    { value: "Eastern Metro" },
+    { value: "Regional" },
+  ];
+
+  const scrollHeight = Dimensions.get("window").height - 340;
+
+  return (
+    <ScreenContainer>
+      <View style={styles.header}>
+        <Text h3>Select Interests</Text>
+        <Text style={textStyle.intro}>
+          Select Property areas that is of interest to you.
+        </Text>
+      </View>
+      <View style={{ height: scrollHeight }}>
+        <ScrollView contentContainerStyle={styles.scrollContainer}>
+          <Text style={textStyle.state}>Victoria, Melbourne Region</Text>
+          <SelectMultipleGroupButton
+            defaultSelectedIndexes={selectedIds}
+            containerViewStyle={{ justifyContent: "center" }}
+            highLightStyle={{
+              borderColor: "gray",
+              backgroundColor: "transparent",
+              textColor: "gray",
+              borderTintColor: AppStyles.color.steedGreen,
+              backgroundTintColor: "transparent",
+              textTintColor: AppStyles.color.steedGreen,
+            }}
+            onSelectedValuesChange={(selectedValues) =>
+              setSelectedValues(selectedValues)
+            }
+            group={multipleGroupData}
+          />
+          <View style={{ alignItems: "center" }}>
+            <Image
+              style={styles.image}
+              source={require("../../../assets/vic_regions.png")}
+            />
+          </View>
+        </ScrollView>
+      </View>
+      <Text style={textStyle.buttonText}>Or check properties: </Text>
+      <View style={styles.buttonContainer}>
+        <Button
+          title="Save Changes"
+          titleStyle={textStyle.buttonTitle}
+          type="outline"
+          buttonStyle={styles.backButton}
+          onPress={saveChangesOnPress}
+          loading={loadingSaveChanges}
+        />
+
+        <Button
+          title="Near me"
+          titleStyle={textStyle.buttonTitle}
+          type="outline"
+          buttonStyle={styles.backButton}
+          onPress={nearMeOnPress}
+          loading={loadingNearMe}
+        />
+      </View>
+    </ScreenContainer>
+  );
+};

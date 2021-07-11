@@ -15,7 +15,7 @@ import { Platform } from 'react-native';
 import { Alert } from "react-native";
 
 export default ({ navigation }) => {
-  const { setUser } = React.useContext(AuthContext);
+  const { setUser, setShowInterest } = React.useContext(AuthContext);
   const [username, setUsername] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [loading, setLoading] = React.useState(false);
@@ -26,6 +26,7 @@ export default ({ navigation }) => {
     return Auth.signIn(username, password).then((user) => {
       // update user detail
       // set user to jump to hello page
+      setShowInterest(true);
       setUser(user);
     });
   };

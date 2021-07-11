@@ -7,6 +7,7 @@ import GameResult from '../../screens/GameResult';
 import { AuthContext } from "../../context";
 import { HouseContext } from '../../screens/Game/houseContext';
 import { exampleItems } from '../../screens/Game/mockData'
+import Interest from "../../screens/Interest";
 
 const GameStack = createStackNavigator();
 
@@ -20,6 +21,7 @@ const GameStackScreen = () => {
   const [propType, setPropType] = useState("all")
 
   const fetchItems = useCallback((propType) => {
+    console.log('aaaaaa')
     setIsFetching(true);
     authFetch("POST", "/api/get_properties", {
       prop_type: propType
@@ -73,6 +75,7 @@ const GameStackScreen = () => {
         <GameStack.Screen name="Game" component={Game} />
         <GameStack.Screen name="GameDetail" component={GameDetail} />
         <GameStack.Screen name="GameResult" component={GameResult} />
+        <GameStack.Screen name="GameInterest" component={Interest} />
       </GameStack.Navigator>
     </HouseContext.Provider>
   );

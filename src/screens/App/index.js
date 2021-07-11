@@ -65,10 +65,13 @@ export default () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [user, setUser] = React.useState(null);
+  const [showInterest, setShowInterest] = React.useState(true);
 
   const authContext = React.useMemo(() => {
 
     return {
+      showInterest,
+      setShowInterest,
       setUser: (user)=>setUser(user),
       signOut: () =>
         Auth.signOut().then((data) => {
@@ -102,11 +105,12 @@ export default () => {
               .catch((error) => console.log(error))
           ),
     };
-  }, []);
+  }, [showInterest]);
 
   React.useEffect(() => {
     Auth.currentAuthenticatedUser()
       .then((user) => {
+        setShowInterest(false)
         setUser({ user });
       })
       .catch(() => {
