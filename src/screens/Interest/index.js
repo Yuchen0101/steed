@@ -127,12 +127,12 @@ export default ({ navigation }) => {
 
   const saveChangesOnPress = () => {
     setLoadingSaveChanges(true);
-    setUseGeo(false);
     authFetch("POST", "/api/update_interests", {
       interests_ls: selectedValues,
     })
       .then((res) => {
         console.log(res);
+        setUseGeo(false);
         // fetchItems();
         navigation.navigate("Game");
       })
