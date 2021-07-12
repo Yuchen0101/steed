@@ -96,7 +96,6 @@ export default ({ navigation }) => {
 
   const nearMeOnPress = async () => {
     setLoadingNearMe(true);
-    setUseGeo(true);
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       Alert.alert(
@@ -114,7 +113,8 @@ export default ({ navigation }) => {
     authFetch("POST", "/api/submit_user_details", location)
       .then((res) => {
         console.log(res);
-        fetchItems();
+        setUseGeo(true);
+        // fetchItems();
         navigation.navigate("Game");
       })
       .catch((err) => {
@@ -133,7 +133,7 @@ export default ({ navigation }) => {
     })
       .then((res) => {
         console.log(res);
-        fetchItems();
+        // fetchItems();
         navigation.navigate("Game");
       })
       .catch((err) => {

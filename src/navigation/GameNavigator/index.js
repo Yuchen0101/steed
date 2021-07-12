@@ -38,7 +38,7 @@ const GameStackScreen = () => {
     }).finally(() => {
       setIsFetching(false);
     });
-  },[propType])
+  },[propType,useGeo])
 
   useEffect(() => {
     setIsFetching(true);
@@ -49,7 +49,7 @@ const GameStackScreen = () => {
 
   useEffect(() => {
     fetchItems();
-  }, []);
+  }, [useGeo]);
 
   useEffect(() => {
     if (carouselItems.length === 0) {
