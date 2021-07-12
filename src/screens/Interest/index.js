@@ -125,7 +125,7 @@ export default ({ navigation }) => {
       .finally(() => setLoadingNearMe(false));
   };
 
-  const saveChangesOnPress = () => {
+  const saveChangesOnPress = async () => {
     setLoadingSaveChanges(true);
     authFetch("POST", "/api/update_interests", {
       interests_ls: selectedValues,
