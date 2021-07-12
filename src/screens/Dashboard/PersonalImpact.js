@@ -52,7 +52,7 @@ export default ({ impact }) => {
         <Text>Your Challenges</Text>
         <PieChart
           data={pieData}
-          width={Dimensions.get("window").width - 16}
+          width={Dimensions.get("window").width - 20}
           height={220}
           chartConfig={{
             decimalPlaces: 0,

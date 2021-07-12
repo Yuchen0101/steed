@@ -87,7 +87,7 @@ const textStyle = StyleSheet.create({
 
 export default ({ navigation }) => {
   const { authFetch } = useContext(AuthContext);
-  const { isFetching, carouselItems, fetchItems, setPropType } =
+  const { isFetching, carouselItems, fetchItems, setPropType, setUseGeo } =
     useHouseContext();
 
   const [loadingNearMe, setLoadingNearMe] = React.useState(false);
@@ -96,6 +96,7 @@ export default ({ navigation }) => {
 
   const nearMeOnPress = async () => {
     setLoadingNearMe(true);
+    setUseGeo(true);
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       Alert.alert(
@@ -112,9 +113,9 @@ export default ({ navigation }) => {
 
     authFetch("POST", "/api/submit_user_details", location)
       .then((res) => {
-        console.log(res)
-        fetchItems()
-        navigation.navigate("Game")
+        console.log(res);
+        fetchItems();
+        navigation.navigate("Game");
       })
       .catch((err) => {
         err?.message
@@ -126,13 +127,14 @@ export default ({ navigation }) => {
 
   const saveChangesOnPress = () => {
     setLoadingSaveChanges(true);
+    setUseGeo(false);
     authFetch("POST", "/api/update_interests", {
       interests_ls: selectedValues,
     })
       .then((res) => {
-        console.log(res)
-        fetchItems()
-        navigation.navigate("Game")
+        console.log(res);
+        fetchItems();
+        navigation.navigate("Game");
       })
       .catch((err) => {
         err?.message

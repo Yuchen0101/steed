@@ -38,8 +38,8 @@ export default ({ navigation, route }) => {
   const { isFetching, carouselItems, fetchItems, setPropType, propType } =
     useHouseContext();
 
-    const multipleGroupData = [{ value: "House" }, { value: "Apartment" }];
-  const selectedIds = propType.map(el=>["House","Apartment"].indexOf(el))  
+  const multipleGroupData = [{ value: "House" }, { value: "Apartment" }];
+  const selectedIds = propType.map(el => ["House", "Apartment"].indexOf(el))
 
   const scrollHeight = useMemo(() => Dimensions.get("window").height - 290, []);
   if (isFetching) {
@@ -81,16 +81,34 @@ export default ({ navigation, route }) => {
           title="Redeal"
           buttonStyle={{
             backgroundColor: AppStyles.color.steedGreen,
-            width: 120,
+            width: 150,
           }}
           titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
           containerStyle={{
             marginTop: 5,
             bottom: 35,
-            alignItems: "center",
+            right: 210,
+            alignItems: "left",
             position: "absolute",
           }}
           onPress={() => fetchItems()}
+        />
+        <Button
+          title="Change Interests"
+          buttonStyle={{
+            width: 150,
+            backgroundColor: AppStyles.color.steedGreen
+
+          }}
+          titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
+          containerStyle={{
+            marginTop: 5,
+            left: 210,
+            bottom: 35,
+            alignItems: "right",
+            position: "absolute",
+          }}
+          onPress={() => navigation.push("GameInterest")}
         />
       </View>
     );
@@ -184,9 +202,10 @@ export default ({ navigation, route }) => {
               backgroundTintColor: "transparent",
               textTintColor: AppStyles.color.steedGreen,
             }}
-            onSelectedValuesChange={(selectedValues) =>{  
+            onSelectedValuesChange={(selectedValues) => {
               console.log(selectedValues)
-              setPropType(selectedValues)}
+              setPropType(selectedValues)
+            }
             }
             group={multipleGroupData}
           />
@@ -196,28 +215,31 @@ export default ({ navigation, route }) => {
         title="Redeal"
         buttonStyle={{
           backgroundColor: AppStyles.color.steedGreen,
-          width: 120,
+          width: 150,
         }}
         titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
         containerStyle={{
           marginTop: 5,
           bottom: 35,
-          alignItems: "center",
+          right: 210,
+          alignItems: "left",
           position: "absolute",
         }}
         onPress={() => fetchItems()}
       />
       <Button
-        title="set Interest"
+        title="Change Interests"
         buttonStyle={{
-          width: 120,
+          width: 150,
+          backgroundColor: AppStyles.color.steedGreen
+
         }}
         titleStyle={{ color: AppStyles.color.steedDarkBlue, fontSize: 15 }}
         containerStyle={{
           marginTop: 5,
-          left: 250,
+          left: 210,
           bottom: 35,
-          alignItems: "center",
+          alignItems: "right",
           position: "absolute",
         }}
         onPress={() => navigation.push("GameInterest")}
