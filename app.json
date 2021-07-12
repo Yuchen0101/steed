@@ -20,7 +20,7 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "steed-intel.com",
-      "buildNumber":"3"
+      "buildNumber":"5"
     },
     "android": {
       "adaptiveIcon": {
