@@ -26,13 +26,13 @@ export default ({ navigation }) => {
       color: AppStyles.color.steedBlue,
       route: "Notification",
     },
-    {
-      title: "Interest",
-      subtitle: "Manage your interested regions",
-      icon: "assistant",
-      color: AppStyles.color.steedLightBlue, 
-      route: "Interest",
-    },
+    // {
+    //   title: "Interest",
+    //   subtitle: "Manage your interested regions",
+    //   icon: "assistant",
+    //   color: AppStyles.color.steedLightBlue, 
+    //   route: "Interest",
+    // },
     {
       title: "Change Password",
       subtitle: "Change you password",

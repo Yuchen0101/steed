@@ -12,12 +12,7 @@ import {
   SelectMultipleGroupButton,
 } from "react-native-selectmultiple-button";
 import { AuthContext } from "../../context";
-
-
-const WELCOME_TITLE = "Welcome";
-const WELCOME_CONTENT =
-  "The following properties have been selected for you based on your user profile." +
-  " Tap one to start playing!";
+import Auth from "@aws-amplify/auth";
 
 const styles = StyleSheet.create({
   actionButtonIcon: {
@@ -28,6 +23,18 @@ const styles = StyleSheet.create({
 });
 
 export default ({ navigation, route }) => {
+  const [displayName, setDisplayName] = React.useState("PropHero");
+  const p3 = Auth.currentUserInfo().then(user=>{
+    if (user?.attributes["custom:display_name"]) {
+      setDisplayName(user?.attributes["custom:display_name"].substring(0, 12));
+    }
+  })
+  const WELCOME_TITLE = "Welcome, " + displayName;
+  const WELCOME_CONTENT =
+    "The following properties have been selected for you based on your user profile." +
+    " Tap one to start playing!";
+
+
   const { showInterest } = useContext(AuthContext);
   useEffect(() => {
     if (showInterest) {
@@ -87,13 +94,13 @@ export default ({ navigation, route }) => {
           containerStyle={{
             marginTop: 5,
             bottom: 35,
-            right: 210,
-            alignItems: "left",
+            // right: 210,
+            alignItems: "center",
             position: "absolute",
           }}
           onPress={() => fetchItems()}
         />
-        <Button
+        {/* <Button
           title="Change Interests"
           buttonStyle={{
             width: 150,
@@ -109,7 +116,7 @@ export default ({ navigation, route }) => {
             position: "absolute",
           }}
           onPress={() => navigation.push("GameInterest")}
-        />
+        /> */}
       </View>
     );
   }
@@ -221,13 +228,13 @@ export default ({ navigation, route }) => {
         containerStyle={{
           marginTop: 5,
           bottom: 35,
-          right: 210,
-          alignItems: "left",
+          // right: 210,
+          alignItems: "center",
           position: "absolute",
         }}
         onPress={() => fetchItems()}
       />
-      <Button
+      {/* <Button
         title="Change Interests"
         buttonStyle={{
           width: 150,
@@ -243,7 +250,7 @@ export default ({ navigation, route }) => {
           position: "absolute",
         }}
         onPress={() => navigation.push("GameInterest")}
-      />
+      /> */}
     </View>
   );
 };

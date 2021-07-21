@@ -11,12 +11,10 @@ import { Button, Text } from "react-native-elements";
 import ScreenContainer from "../../components/ScreenContainer";
 import AppStyles from "../../AppStyles";
 import {
-  SelectMultipleButton,
   SelectMultipleGroupButton,
 } from "react-native-selectmultiple-button";
 import * as Location from "expo-location";
 import { useHouseContext } from "../Game/houseContext";
-import { Auth } from "aws-amplify";
 import { AuthContext } from "../../context";
 
 const styles = StyleSheet.create({
@@ -114,34 +112,65 @@ export default ({ navigation }) => {
       .then((res) => {
         console.log(res);
         setUseGeo(true);
-        // fetchItems();
-        navigation.navigate("Game");
+        fetchItems();
       })
       .catch((err) => {
         err?.message
           ? setErrorMessage(err?.message)
           : setErrorMessage("Error in getting your location.");
       })
-      .finally(() => setLoadingNearMe(false));
+      .finally(() => {
+        
+        setLoadingNearMe(false);
+        Alert.alert(
+          ("Location updated successfully!"),
+          ("Redeal and keep playing, Hero!"),
+          [
+            {
+              text: ('ok'), 
+              onPress: async () => navigation.navigate("GameStackScreen")
+            }
+          ],
+          {
+            cancelable: false,
+          },
+        );
+        
+      });
   };
 
   const saveChangesOnPress = async () => {
     setLoadingSaveChanges(true);
-    authFetch("POST", "/api/update_interests", {
+    await authFetch("POST", "/api/update_interests", {
       interests_ls: selectedValues,
     })
       .then((res) => {
         console.log(res);
         setUseGeo(false);
-        // fetchItems();
-        navigation.navigate("Game");
+        fetchItems();
       })
       .catch((err) => {
         err?.message
           ? setErrorMessage(err?.message)
           : setErrorMessage("Error in updating your interests.");
       })
-      .finally(() => setLoadingSaveChanges(false));
+      .finally(() => {
+        // fetchItems();
+        setLoadingSaveChanges(false);
+        Alert.alert(
+          ("Interests updated successfully!"),
+          ("Redeal and keep playing, Hero!"),
+          [
+            {
+              text: ('ok'), 
+              onPress: async () => navigation.navigate("GameStackScreen")
+            }
+          ],
+          {
+            cancelable: false,
+          },
+        );
+      });
   };
 
   const selectedIds = [0, 1, 2, 3, 4];

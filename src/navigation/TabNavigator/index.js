@@ -4,6 +4,7 @@ import AppStyles from "../../AppStyles";
 import GameStackScreen from "../../navigation/GameNavigator";
 import DashboardStackScreen from "../DashboardNavigator";
 import SettingStackScreen from "../SettingNavigator";
+import InterestStackScreen from "../InterestNavigator";
 import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
 
 const Tabs = createMaterialBottomTabNavigator();
@@ -40,6 +41,16 @@ const TabsScreen = () => {
           tabBarIcon: ({ color }) => (
             <MaterialCommunityIcons name="rhombus" color={color} size={26} />
           )
+        }}
+      />
+      <Tabs.Screen
+        name="InterestStackScreen"
+        component={InterestStackScreen}
+        options={{
+          tabBarLabel: "Interest",
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="map-marker-radius" color={color} size={26} />
+          ),
         }}
       />
       <Tabs.Screen

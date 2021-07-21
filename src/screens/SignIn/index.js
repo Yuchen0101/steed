@@ -26,7 +26,7 @@ export default ({ navigation }) => {
     return Auth.signIn(username, password).then((user) => {
       // update user detail
       // set user to jump to hello page
-      setShowInterest(true);
+      // setShowInterest(true);
       setUser(user);
     });
   };
