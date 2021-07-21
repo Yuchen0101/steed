@@ -52,30 +52,34 @@ export default ({userProfile}) => {
   };
 
   return (
-    <View style={{ marginTop: 10 }}>
-      <ButtonGroup
-        onPress={setSelectedIndex}
-        selectedIndex={selectedIndex}
-        buttons={buttons}
-        containerStyle={{
-          height: 60,
-          width: 350,
-          borderWidth: 0,
-          backgroundColor: AppStyles.color.steedDarkBlue,
-        }}
-        innerBorderStyle={{ color: AppStyles.color.steedDarkBlue, width: 10 }}
-        selectedButtonStyle={{
-          backgroundColor: AppStyles.color.steedDarkBlue,
-          borderWidth: 2,
-          borderColor: AppStyles.color.steedGreen,
-          color: AppStyles.color.steedGreen,
-        }}
-        buttonStyle={{
-          backgroundColor: AppStyles.color.steedDarkGrey,
-          borderRadius: 10,
-        }}
-        textStyle={{ color: AppStyles.color.steedGreen }}
-      />
+    <View style={{ marginTop: 10}}>
+      <View style={{ alignItems: 'center'}}>
+        <ButtonGroup
+          onPress={setSelectedIndex}
+          selectedIndex={selectedIndex}
+          buttons={buttons}
+          containerStyle={{
+            height: 60,
+            width: 350,
+            borderWidth: 0,
+            backgroundColor: AppStyles.color.steedDarkBlue,
+            alignItems: 'center'
+          }}
+          innerBorderStyle={{ color: AppStyles.color.steedDarkBlue, width: 10 }}
+          selectedButtonStyle={{
+            backgroundColor: AppStyles.color.steedDarkBlue,
+            borderWidth: 2,
+            borderColor: AppStyles.color.steedGreen,
+            color: AppStyles.color.steedGreen,
+          }}
+          buttonStyle={{
+            backgroundColor: AppStyles.color.steedDarkGrey,
+            borderRadius: 10,
+          }}
+          textStyle={{ color: AppStyles.color.steedGreen }}
+        />
+      </View>
+
 
       <View style={{ marginTop: 10 }}>{renderPersonal(selectedIndex)}</View>
     </View>

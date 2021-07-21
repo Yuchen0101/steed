@@ -65,7 +65,7 @@ export default () => {
 
   const [isLoading, setIsLoading] = React.useState(true);
   const [user, setUser] = React.useState(null);
-  const [showInterest, setShowInterest] = React.useState(true);
+  const [showInterest, setShowInterest] = React.useState(false);
 
   const authContext = React.useMemo(() => {
 
