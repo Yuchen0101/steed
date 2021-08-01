@@ -170,6 +170,28 @@ export default ({ navigation }) => {
           <Button
             buttonStyle={{
               width: 350,
+              margin: 5,
+              backgroundColor: "#1f1f1f",
+              color: AppStyles.color.steedWhite,
+            }}
+            titleStyle={{ fontSize: 19 }}
+            icon={
+              <Icon
+                name="apple"
+                size={20}
+                color="white"
+                type="material-community"
+              />
+            }
+            title="Continue with Apple"
+            onPress={() => Auth.federatedSignIn({ provider: "google" })}
+            loading={loading}
+          />
+        </View>
+        <View>
+          <Button
+            buttonStyle={{
+              width: 350,
 			  margin: 5,
               backgroundColor: "#4C8BF5",
               color: AppStyles.color.steedWhite,
@@ -188,28 +210,7 @@ export default ({ navigation }) => {
             loading={loading}
           />
         </View>
-        <View>
-          <Button
-            buttonStyle={{
-              width: 350,
-              margin: 5,
-              backgroundColor: "#ce0c2f",
-              color: AppStyles.color.steedWhite,
-            }}
-            titleStyle={{ fontSize: 19 }}
-            icon={
-              <Icon
-                name="apple"
-                size={20}
-                color="white"
-                type="material-community"
-              />
-            }
-            title="Continue with Apple"
-            onPress={() => Auth.federatedSignIn({ provider: "google" })}
-            loading={loading}
-          />
-        </View>
+
       </ScrollView>
     </View>
   );

@@ -7,3 +7,4 @@ use Amplify for AWS cognitio integration: https://docs.amplify.aws/lib/auth/emai
 use Icon Library: https://github.com/oblador/react-native-vector-icons, https://materialdesignicons.com/
 
 # Node version >= 16.0.0
+fyshuz-ryzvE3-difxeh
