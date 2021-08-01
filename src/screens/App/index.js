@@ -8,13 +8,30 @@ import { ThemeProvider } from "react-native-elements";
 import AppStyles from "../../AppStyles";
 import Loading from "../../components/Loading";
 import { AuthContext } from "../../context";
+import * as WebBrowser from 'expo-web-browser';
+// import config from 'aws-exports';
+import { Linking } from 'react-native';
+
+
 
 const oauth = {
   domain: 'steed.auth.ap-southeast-2.amazoncognito.com',
   scope: ['phone', 'email', 'profile', 'openid', 'aws.cognito.signin.user.admin'],
   redirectSignIn: 'housepunt://', // expo go ip, need change to steedapp when deploy
   redirectSignOut: 'housepunt://', // expo go ip, need change to steedapp when deploy
-  responseType: 'code'
+  responseType: 'code',
+  urlOpener: async (url, redirectUrl) => {
+    const { type, url: newUrl } = await WebBrowser.openAuthSessionAsync(url, redirectUrl, {
+        showTitle: false,
+        enableUrlBarHiding: true,
+        enableDefaultShare: false,
+        ephemeralWebSession: false,
+    });
+    if (type === 'success') {
+        Linking.openURL(newUrl);
+    }
+}
+
 };
 
 Amplify.configure({
