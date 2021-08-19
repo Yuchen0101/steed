@@ -20,10 +20,11 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "steed-intel.com",
-      "buildNumber":"8",
+      "buildNumber":"11",
       "infoPlist": {
         "NSLocationUsageDescription": "Turn on location services allows us to show nearby properties to your current location.",
-        "NSPhotoLibraryUsageDescription": "Allow access to photos to upload photos from library."
+        "NSLocationWhenInUseUsageDescription": "Turn on location services allows us to show nearby properties to your current location.",
+        "NSPhotoLibraryUsageDescription": "Allow access to photos to upload a photo from library as your avatar."
       }
     },
     "android": {
