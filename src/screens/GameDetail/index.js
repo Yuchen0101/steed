@@ -7,7 +7,8 @@ import {
   Dimensions,
   ScrollView,
 } from "react-native";
-import Swiper from "react-native-swiper";
+// import Swiper from "react-native-swiper";
+import Swiper from 'react-native-swiper/src';
 import { Button, Text, Image } from "react-native-elements";
 import { CountdownCircleTimer } from "react-native-countdown-circle-timer";
 import { Slider } from "@miblanchard/react-native-slider";

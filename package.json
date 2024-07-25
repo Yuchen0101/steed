@@ -1,7 +1,8 @@
 {
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "start": "expo start",
+    "start": "set NODE_OPTIONS=--openssl-legacy-provider && expo start",
+    "postinstall": "patch-package",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
@@ -16,7 +17,9 @@
     "@react-navigation/material-bottom-tabs": "^5.3.15",
     "@react-navigation/native": "^5.9.4",
     "@react-navigation/stack": "^5.14.5",
+    "@types/react-native-snap-carousel": "^3.8.11",
     "aws-amplify": "^4.0.3",
+    "deprecated-react-native-prop-types": "^5.0.0",
     "expo": "~41.0.1",
     "expo-facebook": "~11.0.5",
     "expo-image-picker": "~10.1.4",
@@ -24,6 +27,7 @@
     "expo-notifications": "~0.11.6",
     "expo-status-bar": "~1.0.4",
     "expo-web-browser": "~9.1.0",
+    "patch-package": "^8.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
@@ -42,7 +46,8 @@
     "react-native-web": "~0.13.12"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0"
+    "@babel/core": "^7.9.0",
+    "metro": "^0.80.9"
   },
   "private": true
 }
